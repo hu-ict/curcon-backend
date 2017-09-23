@@ -1,0 +1,33 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="entityManager">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>nl.hu.curcon.domain.BeoordelingsElement</class>
+		<class>nl.hu.curcon.domain.BeroepsTaak</class>
+		<class>nl.hu.curcon.domain.BloomNiveau</class>
+		<class>nl.hu.curcon.domain.Cohort</class>
+		<class>nl.hu.curcon.domain.Cursus</class>
+		<class>nl.hu.curcon.domain.Docent</class>
+		<class>nl.hu.curcon.domain.Leerdoel</class>
+		<class>nl.hu.curcon.domain.Leerlijn</class>
+		<class>nl.hu.curcon.domain.OpleidingsProfiel</class>
+		<class>nl.hu.curcon.domain.Organisatie</class>
+		<class>nl.hu.curcon.domain.OsirisResultaatType</class>
+		<class>nl.hu.curcon.domain.ProfessionalSkill</class>
+		<class>nl.hu.curcon.domain.Toets</class>
+		<class>nl.hu.curcon.domain.ToetsElement</class>
+		<class>nl.hu.curcon.domain.ToetsPlanning</class>
+		<class>nl.hu.curcon.domain.Trefwoord</class>
+		<properties>
+			<property name="hibernate.connection.charSet" value="UTF-8" />
+<!-- 			<property name="hibernate.url" value="jdbc:mysql://localhost:3306/curcon" /> -->
+<!-- 			<property name="hibernate.username" value="root" /> -->
+<!-- 			<property name="hibernate.password" value="" /> -->
+			<property name="hibernate.url" value="jdbc:mysql://127.4.113.2:3306/curcon"/>
+			<property name="hibernate.username" value="adminWRnwBWG" />
+			<property name="hibernate.password" value="VpT4X5U9RFj7" />
+		</properties>
+	</persistence-unit>
+</persistence>
