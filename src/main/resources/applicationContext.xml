@@ -38,8 +38,6 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://127.4.113.2:3306/curcon" />
-		<property name="username" value="adminWRnwBWG" />
-		<property name="password" value="VpT4X5U9RFj7" />
 	</bean>
 
 	<bean id="dataSourceLocal"
