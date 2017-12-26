@@ -5,6 +5,12 @@ INSERT INTO bloomniveau (id, niveau, omschrijving) VALUES (4, 'Analyseren', '');
 INSERT INTO bloomniveau (id, niveau, omschrijving) VALUES (5, 'Evalueren', '');
 INSERT INTO bloomniveau (id, niveau, omschrijving) VALUES (6, 'Creëren', '');
 
+INSERT INTO millerniveau (id, niveau, omschrijving) VALUES (1, 'Weten', 'Kennistoets');
+INSERT INTO millerniveau (id, niveau, omschrijving) VALUES (2, 'Toepassen', 'Toepassen van kennis in schriftelijke casus / opdracht');
+INSERT INTO millerniveau (id, niveau, omschrijving) VALUES (3, 'Tonen', 'Beoordeling in realistische voorspelbare situatie (simulatie/project)');
+INSERT INTO millerniveau (id, niveau, omschrijving) VALUES (4, 'Doen', 'Beoordeling in echte beroepssituaties');
+
+
 INSERT INTO activiteit (id, naam, omschrijving) VALUES (1, 'Beheren', 'Het beheersbaar laten verlopen van alle activiteiten gericht op het proces van ontwikkeling, ingebruikname en gebruik van ict-systemen.');
 INSERT INTO activiteit (id, naam, omschrijving) VALUES (2, 'Analyseren', 'Het analyseren van processen, producten en informatiestromen  in hun onderlinge samenhang en de context van de omgeving.');
 INSERT INTO activiteit (id, naam, omschrijving) VALUES (3, 'Adviseren', 'Het adviseren over de herinrichting van processen en/of informatiestromen  en voor een nieuw te ontwikkelen of aan te schaffen ict-systeem op basis van een analyse en in overleg met stakeholders.');
@@ -208,8 +214,8 @@ INSERT INTO cursus_beroepstaak VALUES (7, 60);
 INSERT INTO cursus_professionalskill values (1, 1) ;
 INSERT INTO osirisresultaattype (id, naam, omschrijving) values (1, '1,0-10,0', 'Numeriek met een decimaal');
 INSERT INTO osirisresultaattype (id, naam, omschrijving) values (2, 'VD/NVD', 'Voldaan/Niet voldaan');
-INSERT INTO toets (id, gewicht, osirisresultaattype_id, naam, cursus_id) values (1, 50, 1, 'Theorietentamen', 5);
-INSERT INTO toets (id, gewicht, osirisresultaattype_id, naam, cursus_id) values (2, 50, 2, 'Praktijkopdracht', 5);
+INSERT INTO toets (id, gewicht, millerniveau_id, naam, cursus_id) values (1, 50, 1, 'Theorietentamen', 5);
+INSERT INTO toets (id, gewicht, millerniveau_id, naam, cursus_id) values (2, 50, 2, 'Praktijkopdracht', 5);
 INSERT INTO beoordelingselement (id, gewicht, naam, omschrijving, toets_id)  values (1, 10, 'Vraag 1', '', 1);
 INSERT INTO beoordelingselement (id, gewicht, naam, omschrijving, toets_id)  values (2, 10, 'Vraag 2', '', 1);
 INSERT INTO beoordelingselement (id, gewicht, naam, omschrijving, toets_id)  values (3, 10, 'Vraag 3', '', 1);

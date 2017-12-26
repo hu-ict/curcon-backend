@@ -11,27 +11,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.swagger.annotations.Api;
-import nl.hu.curcon.dto.BloomNiveauDto;
-import nl.hu.curcon.service.BloomNiveauService;
+import nl.hu.curcon.dto.MillerNiveauDto;
+import nl.hu.curcon.service.MillerNiveauService;
 
 @Component
-@Path("/bloomniveaus")
-@Api(hidden = false, value="[BloomNiveau] Raadplegen van de Bloomniveaus")
-public class BloomNiveauRestService {
+@Path("/millerniveaus")
+@Api(hidden = false, value="[MillerNiveau] Raadplegen van de Millerniveaus")
+public class MillerNiveauRestService {
     @Autowired
-    BloomNiveauService bloomNiveauService;
+    MillerNiveauService millerNiveauService;
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public List<BloomNiveauDto> findAll() {
-		return bloomNiveauService.findAll();
+	public List<MillerNiveauDto> findAll() {
+		return millerNiveauService.findAll();
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public BloomNiveauDto find(@PathParam("id") int id) {
-		return bloomNiveauService.find(id);
+	public MillerNiveauDto find(@PathParam("id") int id) {
+		return millerNiveauService.find(id);
 	}
 
 }
