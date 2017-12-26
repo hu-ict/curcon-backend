@@ -6,7 +6,7 @@ package nl.hu.curcon.dto.post;
 public class ToetsPostDto {
     private String naam;
     private double gewicht;
-    private int osirisResultaatType;
+    private int millerNiveau;
 	public String getNaam() {
 		return naam;
 	}
@@ -19,11 +19,10 @@ public class ToetsPostDto {
 	public void setGewicht(double gewicht) {
 		this.gewicht = gewicht;
 	}
-	public int getOsirisResultaatType() {
-		return osirisResultaatType;
+	public int getMillerNiveau() {
+		return millerNiveau;
 	}
-	public void setOsirisResultaatType(int osirisResultaatType) {
-		this.osirisResultaatType = osirisResultaatType;
+	public void setMillerNiveau(int millerNiveau) {
+		this.millerNiveau = millerNiveau;
 	}
-
 }

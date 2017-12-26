@@ -9,6 +9,7 @@ import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Docent;
 import nl.hu.curcon.domain.Leerdoel;
+import nl.hu.curcon.domain.MillerNiveau;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.OsirisResultaatType;
 import nl.hu.curcon.domain.ProfessionalSkill;
@@ -85,6 +86,15 @@ public class Domain2DtoMapperLink {
 		return dto;
 	}
 
+	public static LinkDto mapLink(MillerNiveau domain) {
+		if (domain == null) {return null;}
+		LinkDto dto = new LinkDto();
+		dto.setId(domain.getId());
+		dto.setNaam(domain.getNiveau());
+		dto.setHRef(Domain2DtoMapperHRef.mapHRef(domain));
+		return dto;
+	}
+
 	public static LinkDto mapLink(OpleidingsProfiel domain) {
 		if (domain == null) {return null;}
 		LinkDto dto = new LinkDto();
@@ -128,7 +138,4 @@ public class Domain2DtoMapperLink {
 		dto.setHRef(Domain2DtoMapperHRef.mapHRef(domain));
 		return dto;
 	}
-
-
-
 }

@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
  * @author berend.wilkens, 16 jun. 2017
  */
 public class MyApplication extends ResourceConfig {
-	public static String BASE_URL = "http://curcon-huict.rhcloud.com/rest/";
-//	public static String BASE_URL = "http://localhost:8080/curcon/rest/";
+//	public static String BASE_URL = "http://curcon-huict.rhcloud.com/rest/";
+	public static String BASE_URL = "http://localhost:8080/curcon/rest/";
 	private static String baseUrl = null;
 
 	public static String getBaseUrl() {

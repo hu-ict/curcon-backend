@@ -20,4 +20,6 @@ public interface LeerplanSchemaService {
 	Map<Integer, Map<Integer, EctsGewichtNiveauDto>> calcEctsGewichtByCohortAndBeroepsTaak(int cohortId, int activiteitId, int architectuurlaagId);
 
 	ProfielDto getCalcProfile(int cohortId);
+
+	List<String> checkProfiel(int cohortId);
 }

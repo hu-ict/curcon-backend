@@ -8,6 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -61,6 +62,22 @@ public class LeerplanSchemaRestService {
 	public Map<Integer, Map<Integer, EctsGewichtNiveauDto>> calcEctsGewichtByCohortAndBeroepsTaak(@PathParam("cohortId") int cohortId, @PathParam("activiteitId") int activiteitId, @PathParam("architectuurlaagId") int architectuurlaagId) {
 		return leerplanSchemaService.calcEctsGewichtByCohortAndBeroepsTaak(cohortId, activiteitId, architectuurlaagId);
 	}
+	
+	@GET
+	@Path("/{cohortId}/check")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Transactional
+	@ApiOperation(hidden = false, value = "Geeft eventuele inconsistenties in het leerplanschema.")
+	public Response checkProfiel(@PathParam("cohortId") int cohortId) {
+		List<String> list = leerplanSchemaService.checkProfiel(cohortId);
+		if (list != null) {
+			return Response.ok(list).build();
+		} else {
+			return Response.status(404).build();
+		}
+	}
+	
+
 	
 
 }

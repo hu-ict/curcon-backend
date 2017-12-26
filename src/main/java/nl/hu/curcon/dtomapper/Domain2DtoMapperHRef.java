@@ -10,6 +10,7 @@ import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Docent;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.Leerlijn;
+import nl.hu.curcon.domain.MillerNiveau;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
 import nl.hu.curcon.domain.OsirisResultaatType;
@@ -59,6 +60,10 @@ public class Domain2DtoMapperHRef {
 	public static String mapHRef(Leerdoel domain) {
 		if (domain == null) {return null;}
 		return MyApplication.getBaseUrl() + "leerdoelen/" + domain.getId();
+	}
+
+	public static String mapHRef(MillerNiveau millerNiveau) {
+		return MyApplication.BASE_URL + "millerniveaus/" + millerNiveau.getId();
 	}
 
 	public static String mapHRef(OpleidingsProfiel domain) {

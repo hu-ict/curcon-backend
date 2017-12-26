@@ -8,11 +8,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import nl.hu.curcon.dao.OsirisResultaatTypeDao;
+import nl.hu.curcon.dao.MillerNiveauDao;
 import nl.hu.curcon.dao.ToetsDao;
 import nl.hu.curcon.domain.BeoordelingsElement;
 import nl.hu.curcon.domain.Cursus;
-import nl.hu.curcon.domain.OsirisResultaatType;
+import nl.hu.curcon.domain.MillerNiveau;
 import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.dto.BeoordelingsElementDto;
 import nl.hu.curcon.dto.ToetsDto;
@@ -30,19 +30,19 @@ public class ToetsServiceImpl extends GenericService implements ToetsService {
 	@Autowired
 	private ToetsDao toetsDao;
 	@Autowired
-	private OsirisResultaatTypeDao osirisResultaatTypeDao;
+	private MillerNiveauDao millerNiveauDao;
 	@Autowired
 	private BeoordelingsElementService beoordelingsElementService;
 
 	@Override
 	@Transactional
 	public int create(Cursus cursus, ToetsPostDto toetsDto) {
-		OsirisResultaatType osirisResultaatType = osirisResultaatTypeDao.find(toetsDto.getOsirisResultaatType());
-		if (osirisResultaatType == null)
+		MillerNiveau millerNiveau = millerNiveauDao.find(toetsDto.getMillerNiveau());
+		if (millerNiveau == null)
 			return 0;
 		Toets toets = dto2DomainMapper.map(toetsDto);
 		toets.setCursus(cursus);
-		toets.setOsirisResultaatType(osirisResultaatType);
+		toets.setMillerNiveau(millerNiveau);
 		toetsDao.save(toets);
 		return toets.getId();
 	}
@@ -58,12 +58,12 @@ public class ToetsServiceImpl extends GenericService implements ToetsService {
 		Toets toets = toetsDao.find(toetsId);
 		if (toets == null)
 			return false;
+		MillerNiveau millerNiveau = millerNiveauDao.find(toetsDto.getMillerNiveau());
+		if (millerNiveau == null)
+			return false;
 		toets.setGewicht(toetsDto.getGewicht());
 		toets.setNaam(toetsDto.getNaam());
-		OsirisResultaatType osirisResultaatType = osirisResultaatTypeDao.find(toetsDto.getOsirisResultaatType());
-		if (osirisResultaatType == null)
-			return false;
-		toets.setOsirisResultaatType(osirisResultaatType);
+		toets.setMillerNiveau(millerNiveau);
 		return true;
 	}
 

@@ -22,12 +22,12 @@
 		<class>nl.hu.curcon.domain.Trefwoord</class>
 		<properties>
 			<property name="hibernate.connection.charSet" value="UTF-8" />
-<!-- 			<property name="hibernate.url" value="jdbc:mysql://localhost:3306/curcon" /> -->
-<!-- 			<property name="hibernate.username" value="root" /> -->
-<!-- 			<property name="hibernate.password" value="" /> -->
-			<property name="hibernate.url" value="jdbc:mysql://127.4.113.2:3306/curcon"/>
-			<property name="hibernate.username" value="adminWRnwBWG" />
-			<property name="hibernate.password" value="VpT4X5U9RFj7" />
+			<property name="hibernate.url" value="jdbc:mysql://localhost:3306/curcon" />
+			<property name="hibernate.username" value="root" />
+			<property name="hibernate.password" value="" />
+<!-- 			<property name="hibernate.url" value="jdbc:mysql://127.4.113.2:3306/curcon"/> -->
+<!-- 			<property name="hibernate.username" value="adminWRnwBWG" /> -->
+<!-- 			<property name="hibernate.password" value="VpT4X5U9RFj7" /> -->
 		</properties>
 	</persistence-unit>
 </persistence>

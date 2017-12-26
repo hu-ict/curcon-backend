@@ -47,4 +47,6 @@ public interface CursusService {
 	boolean addProfessionalSkillToCursus(int cursusId, int id);
 
 	List<ProfessionalSkillDto> getProfessionalSkillsByCursus(int id);
+
+	List<String> check(int cursusId);
 }

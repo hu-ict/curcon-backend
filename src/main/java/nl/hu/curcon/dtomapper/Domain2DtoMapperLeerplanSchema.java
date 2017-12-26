@@ -50,7 +50,6 @@ public class Domain2DtoMapperLeerplanSchema {
 		dto.setHRef(Domain2DtoMapperHRef.mapHRef(leerdoel));
 		dto.setId(leerdoel.getId());
 		dto.setOmschrijving(leerdoel.getOmschrijving());
-		dto.setNiveauBeroepsTaak(leerdoel.getBeroepsTaak().getNiveau());
 		dto.setPeriodeCursus(leerdoel.getCursus().getPeriode());
 		dto.setEctsGewicht(leerdoel.getCursus().getEuropeanCredits()*leerdoel.getGewicht()/100);
 		dto.setBloomniveau(Domain2DtoMapperLink.mapLink(leerdoel.getBloomNiveau()));

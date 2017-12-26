@@ -65,8 +65,7 @@ public class Domain2DtoMapperToetsMatrijs {
 		dto.setHRef(Domain2DtoMapperHRef.mapHRef(toets));
 		dto.setNaam(toets.getNaam());
 		dto.setGewicht(toets.getGewicht());
-		dto.setOsirisResultaatType(Domain2DtoMapperLink.mapLink(toets.getOsirisResultaatType()));
-
+		dto.setMillerNiveau(Domain2DtoMapperLink.mapLink(toets.getMillerNiveau()));
 		dto.setBeoordelingsElementen(new ArrayList<ToetsMatrijsBeoordelingsElementDto>());
 		for (BeoordelingsElement beoordelingsElement : toets.getBeoordelingsElementen()) {
 			dto.getBeoordelingsElementen().add(map(beoordelingsElement));

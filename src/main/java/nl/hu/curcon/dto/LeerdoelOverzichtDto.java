@@ -6,13 +6,12 @@ package nl.hu.curcon.dto;
 public class LeerdoelOverzichtDto extends HRefDto {
 	private int id;
 	private int periodeCursus;
-	private int niveauBeroepsTaak;
 	private double ectsGewicht;
 	private String omschrijving;
-	private LinkDto cursus;
 	private LinkDto beroepsTaak;
 	private LinkDto professionalSkill;
 	private LinkDto bloomniveau;
+	private LinkDto cursus;
 	private LinkDto trefwoord;
 
 	public int getId() {
@@ -53,14 +52,6 @@ public class LeerdoelOverzichtDto extends HRefDto {
 
 	public void setPeriodeCursus(int periodeCursus) {
 		this.periodeCursus = periodeCursus;
-	}
-
-	public int getNiveauBeroepsTaak() {
-		return niveauBeroepsTaak;
-	}
-
-	public void setNiveauBeroepsTaak(int niveauBeroepsTaak) {
-		this.niveauBeroepsTaak = niveauBeroepsTaak;
 	}
 
 	public LinkDto getCursus() {

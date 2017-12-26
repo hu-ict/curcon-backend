@@ -231,5 +231,21 @@ public class CursusRestService {
 			return Response.status(404).build();
 		}
 	}
+	
+	@GET
+	@Path("/{cursusId}/checks")
+	@Transactional
+	@Produces({ MediaType.APPLICATION_JSON })
+	@ApiOperation(value = "Geeft de resultaten van de check van een cursus.")
+	public Response checkCursus(@PathParam("cursusId") int cursusId) {
+		List<String> list = cursusService.check(cursusId);
+		if (list != null) {
+			return Response.ok(list).build();
+		} else {
+			return Response.status(404).build();
+		}
+	}
+
+
 
 }

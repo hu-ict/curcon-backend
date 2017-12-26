@@ -30,8 +30,8 @@ public class Toets implements Serializable {
 	@Column
 	private double gewicht;
 	@ManyToOne
-	@JoinColumn(name = "osirisresultaattype_id")
-	private OsirisResultaatType osirisResultaatType;
+	@JoinColumn(name = "millerniveau_id")
+	private MillerNiveau millerNiveau;
 	@ManyToOne
 	@JoinColumn(name = "cursus_id")
 	private Cursus cursus;
@@ -52,14 +52,6 @@ public class Toets implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public OsirisResultaatType getOsirisResultaatType() {
-		return osirisResultaatType;
-	}
-
-	public void setOsirisResultaatType(OsirisResultaatType osirisResultaatType) {
-		this.osirisResultaatType = osirisResultaatType;
 	}
 
 	public double getGewicht() {
@@ -84,6 +76,14 @@ public class Toets implements Serializable {
 
 	public void setNaam(String naam) {
 		this.naam = naam;
+	}
+
+	public MillerNiveau getMillerNiveau() {
+		return millerNiveau;
+	}
+
+	public void setMillerNiveau(MillerNiveau millerNiveau) {
+		this.millerNiveau = millerNiveau;
 	}
 
 }

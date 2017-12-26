@@ -12,6 +12,7 @@ import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Docent;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.Leerlijn;
+import nl.hu.curcon.domain.MillerNiveau;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
 import nl.hu.curcon.domain.OsirisResultaatType;
@@ -30,6 +31,7 @@ import nl.hu.curcon.dto.DocentDto;
 import nl.hu.curcon.dto.HRefDto;
 import nl.hu.curcon.dto.LeerdoelDto;
 import nl.hu.curcon.dto.LeerlijnDto;
+import nl.hu.curcon.dto.MillerNiveauDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
 import nl.hu.curcon.dto.OrganisatieDto;
 import nl.hu.curcon.dto.OsirisResultaatTypeDto;
@@ -165,6 +167,15 @@ public class Domain2DtoMapper {
 		return dto;
 	}
 
+	public static MillerNiveauDto map(MillerNiveau millerNiveau) {
+		MillerNiveauDto dto = new MillerNiveauDto();
+		dto.setId(millerNiveau.getId());
+		dto.setNiveau(millerNiveau.getNiveau());
+		dto.setOmschrijving(millerNiveau.getOmschrijving());
+		dto.setHRef(Domain2DtoMapperHRef.mapHRef(millerNiveau));
+		return dto;
+	}
+
 	public static TrefwoordDto map(Trefwoord trefwoord) {
 		if (trefwoord == null) { return null; }
 		TrefwoordDto dto = new TrefwoordDto();
@@ -253,9 +264,8 @@ public class Domain2DtoMapper {
 		dto.setId(toets.getId());
 		dto.setNaam(toets.getNaam());
 		dto.setGewicht(toets.getGewicht());
-		dto.setOsirisResultaatType(Domain2DtoMapperLink.mapLink(toets.getOsirisResultaatType()));
+		dto.setMillerNiveau(Domain2DtoMapperLink.mapLink(toets.getMillerNiveau()));
 		dto.setHRef(Domain2DtoMapperHRef.mapHRef(toets));
-
 		dto.setBeoordelingsElementen(new ArrayList<BeoordelingsElementDto>());
 		for (BeoordelingsElement beoordelingsElement : toets.getBeoordelingsElementen()) {
 			dto.getBeoordelingsElementen().add(map(beoordelingsElement));

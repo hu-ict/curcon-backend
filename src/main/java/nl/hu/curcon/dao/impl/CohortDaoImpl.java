@@ -22,7 +22,7 @@ public class CohortDaoImpl extends GenericDaoImpl<Cohort> implements CohortDao {
 				+ "inner join cohort.cursussen as cursus "
 				+ "inner join cursus.leerdoelen as leerdoel "
 				+ "where cohort.id = " + cohortId + " "
-				+ "";
+				+ "order by cursus.periode";
 //				+ "and co.cursussen.leerdoelen.beroepstaak.activiteit.id = " + activiteitId + " "
 //				+ "and co.cursussen.leerdoelen.beroepstaak.architectuurlaag.id = " + architectuurlaagId;
 		List<Leerdoel> leerdoelen = this.em.createQuery(query).getResultList();

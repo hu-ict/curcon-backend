@@ -12,12 +12,14 @@ import nl.hu.curcon.dao.BeroepsTaakDao;
 import nl.hu.curcon.dao.CursusDao;
 import nl.hu.curcon.dao.DocentDao;
 import nl.hu.curcon.dao.ProfessionalSkillDao;
+import nl.hu.curcon.domain.BeoordelingsElement;
 import nl.hu.curcon.domain.BeroepsTaak;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Docent;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.ProfessionalSkill;
 import nl.hu.curcon.domain.Toets;
+import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.dto.BeroepsTaakDto;
 import nl.hu.curcon.dto.CursusDto;
 import nl.hu.curcon.dto.LeerdoelDto;
@@ -52,11 +54,11 @@ public class CursusServiceImpl extends GenericService implements CursusService {
 	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(CursusServiceImpl.class);
 
-//	@Override
-//	public CursusDto create(CursusDto cursusDto) {
-//		Cursus cursus = dto2DomainMapper.map(cursusDto);
-//		return Domain2DtoMapper.map(cursusDao.save(cursus));
-//	}
+	// @Override
+	// public CursusDto create(CursusDto cursusDto) {
+	// Cursus cursus = dto2DomainMapper.map(cursusDto);
+	// return Domain2DtoMapper.map(cursusDao.save(cursus));
+	// }
 
 	@Override
 	public void delete(int id) {
@@ -136,10 +138,13 @@ public class CursusServiceImpl extends GenericService implements CursusService {
 	@Override
 	public boolean setDocentToCursus(int cursusId, int docentId) {
 		Cursus cursus = cursusDao.find(cursusId);
-		if (cursus == null) return false;
+		if (cursus == null)
+			return false;
 		Docent docent = docentDao.find(docentId);
-		if (!cursus.getOrganisatie().getDocenten().contains(docent)) return false;
-		if (docent == null)	return false;
+		if (!cursus.getOrganisatie().getDocenten().contains(docent))
+			return false;
+		if (docent == null)
+			return false;
 		cursus.setCursuscoordinator(docent);
 		cursusDao.save(cursus);
 		return true;
@@ -228,5 +233,92 @@ public class CursusServiceImpl extends GenericService implements CursusService {
 			professionalSkills.add(Domain2DtoMapper.map(professionalSkill));
 		}
 		return professionalSkills;
+	}
+
+	@Override
+	public List<String> check(int cursusId) {
+		List<String> opmerkingen = new ArrayList<>();
+		Cursus cursus = cursusDao.find(cursusId);
+
+		if (cursus.getEindBTs().size() == 0) {
+			opmerkingen.add("[" + cursus.getCursusCode() + "] Cursus heeft geen beroepstaken gekoppeld");
+		}
+
+		if (cursus.getLeerdoelen().size() == 0) {
+			opmerkingen.add("[" + cursus.getCursusCode() + "] Cursus heeft geen leerdoelen");
+		} else {
+			if (cursus.getEindBTs().size() != 0) {
+				for (BeroepsTaak beroepsTaak : cursus.getEindBTs()) {
+					boolean found = false;
+					for (Leerdoel leerdoel : cursus.getLeerdoelen()) {
+						if (beroepsTaak.equals(leerdoel.getBeroepsTaak())) {
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						opmerkingen.add("[" + cursus.getCursusCode() + "] Beroepstaak (" + beroepsTaak
+								+ ") is niet gekoppeld aan een leerdoel");
+					}
+				}
+			}
+			double cursusGewicht = 0.0;
+			for (Leerdoel leerdoel : cursus.getLeerdoelen()) {
+				cursusGewicht += leerdoel.getGewicht();
+				double toetsElementGewicht = 0.0;
+				for (ToetsElement toetsElement : leerdoel.getToetsElementen()) {
+					toetsElementGewicht += toetsElement.getGewicht();
+				}
+				if (toetsElementGewicht != leerdoel.getGewicht())
+					opmerkingen.add("[" + cursus.getCursusCode() + "] Het gewicht (" + toetsElementGewicht
+							+ ") van het leerdoel (" + leerdoel.getNaam() + ") is ongelijk het beoogde gewicht "
+							+ leerdoel.getGewicht());
+			}
+			if (cursusGewicht != 100.0) {
+				opmerkingen.add("[" + cursus.getCursusCode() + "] Het totale gewicht (" + cursusGewicht
+						+ ") van de leerdoelen is ongelijk 100");
+			}
+
+		}
+
+		if (cursus.getToetsen().size() == 0) {
+			opmerkingen.add("[" + cursus.getCursusCode() + "] Cursus heeft geen toetsen");
+		} else {
+			double toetsGewicht = 0.0;
+			for (Toets toets : cursus.getToetsen()) {
+				toetsGewicht += toets.getGewicht();
+				if (toets.getBeoordelingsElementen().size() == 0) {
+					opmerkingen.add("[" + cursus.getCursusCode() + "] Cursus heeft toets (" + toets.getNaam()
+							+ ") zonder beoordelingselementen");
+				} else {
+					double elementGewicht = 0.0;
+					for (BeoordelingsElement element : toets.getBeoordelingsElementen()) {
+						elementGewicht += element.getGewicht();
+						double toetsElementGewicht = 0.0;
+						for (ToetsElement toetsElement : element.getToetsElementen()) {
+							toetsElementGewicht += toetsElement.getGewicht();
+						}
+						if (toetsElementGewicht != element.getGewicht())
+							opmerkingen.add("[" + cursus.getCursusCode() + "] Het gewicht (" + toetsElementGewicht
+									+ ") van het beoordelingselement (" + element.getNaam() + ") binnen de toets ["
+									+ toets.getNaam() + "] is ongelijk het beoogde gewicht " + element.getGewicht());
+					}
+					if (elementGewicht != 100.0) {
+						opmerkingen.add("[" + cursus.getCursusCode() + "] Het totale gewicht (" + elementGewicht
+								+ ") van de beoordelingselementen binnen de toets [" + toets.getNaam()
+								+ "] is ongelijk 100");
+					}
+				}
+
+			}
+			if (toetsGewicht != 100.0) {
+				opmerkingen.add("[" + cursus.getCursusCode() + "] Het totale gewicht (" + toetsGewicht
+						+ ") van de toetsen is ongelijk 100");
+			}
+		}
+
+
+		return opmerkingen;
+
 	}
 }
