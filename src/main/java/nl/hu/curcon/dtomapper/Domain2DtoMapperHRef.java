@@ -13,7 +13,6 @@ import nl.hu.curcon.domain.Leerlijn;
 import nl.hu.curcon.domain.MillerNiveau;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
-import nl.hu.curcon.domain.OsirisResultaatType;
 import nl.hu.curcon.domain.ProfessionalSkill;
 import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.domain.ToetsElement;
@@ -74,11 +73,6 @@ public class Domain2DtoMapperHRef {
 	public static String mapHRef(Organisatie domain) {
 		if (domain == null) {return null;}
 		return MyApplication.getBaseUrl() + "organisaties/" + domain.getId();
-	}
-
-	public static String mapHRef(OsirisResultaatType domain) {
-		if (domain == null) {return null;}
-		return MyApplication.getBaseUrl() + "osirisresultaattypen/" + domain.getId();
 	}
 
 	public static String mapHRef(ProfessionalSkill domain) {

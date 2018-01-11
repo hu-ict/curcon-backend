@@ -15,6 +15,7 @@ public class EctsGewichtNiveauDto {
 	public void setCumulatiefEctsGewicht(double cumulatiefEctsGewicht) {
 		this.cumulatiefEctsGewicht = cumulatiefEctsGewicht;
 	}
+	
 	public void addEctsGewicht(double ectsGewicht) {
 		cumulatiefEctsGewicht = cumulatiefEctsGewicht + ectsGewicht;
 	}

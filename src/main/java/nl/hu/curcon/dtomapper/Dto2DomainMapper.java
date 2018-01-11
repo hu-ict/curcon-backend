@@ -11,7 +11,6 @@ import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.Leerlijn;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
-import nl.hu.curcon.domain.OsirisResultaatType;
 import nl.hu.curcon.domain.Periode;
 import nl.hu.curcon.domain.ProfessionalSkill;
 import nl.hu.curcon.domain.Toets;
@@ -19,7 +18,6 @@ import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.domain.ToetsPlanning;
 import nl.hu.curcon.domain.Trefwoord;
 import nl.hu.curcon.dto.BloomNiveauDto;
-import nl.hu.curcon.dto.OsirisResultaatTypeDto;
 import nl.hu.curcon.dto.PeriodeDto;
 import nl.hu.curcon.dto.ProfessionalSkillDto;
 import nl.hu.curcon.dto.ToetsPlanningDto;
@@ -116,10 +114,6 @@ public class Dto2DomainMapper {
 		return domain;
 	}
 
-	public OsirisResultaatType map(OsirisResultaatTypeDto dto) {
-		return null;
-	}
-
 	public Periode map(PeriodeDto dto) {
 		return null;
 	}
@@ -142,6 +136,7 @@ public class Dto2DomainMapper {
 		Toets domain = new Toets();
 		domain.setNaam(dto.getNaam());
 		domain.setGewicht(dto.getGewicht());
+		domain.setOmschrijving(dto.getOmschrijving());
 		return domain;
 	}
 }

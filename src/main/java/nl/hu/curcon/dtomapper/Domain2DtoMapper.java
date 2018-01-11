@@ -15,7 +15,6 @@ import nl.hu.curcon.domain.Leerlijn;
 import nl.hu.curcon.domain.MillerNiveau;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
-import nl.hu.curcon.domain.OsirisResultaatType;
 import nl.hu.curcon.domain.Periode;
 import nl.hu.curcon.domain.ProfessionalSkill;
 import nl.hu.curcon.domain.Toets;
@@ -34,7 +33,6 @@ import nl.hu.curcon.dto.LeerlijnDto;
 import nl.hu.curcon.dto.MillerNiveauDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
 import nl.hu.curcon.dto.OrganisatieDto;
-import nl.hu.curcon.dto.OsirisResultaatTypeDto;
 import nl.hu.curcon.dto.PeriodeDto;
 import nl.hu.curcon.dto.ProfessionalSkillDto;
 import nl.hu.curcon.dto.ToetsDto;
@@ -230,15 +228,6 @@ public class Domain2DtoMapper {
 		return dto;
 	}
 
-	public static OsirisResultaatTypeDto map(OsirisResultaatType osirisResultaatType) {
-		if (osirisResultaatType == null) { return null; }
-		OsirisResultaatTypeDto dto = new OsirisResultaatTypeDto();
-		dto.setId(osirisResultaatType.getId());
-		dto.setNaam(osirisResultaatType.getNaam());
-		dto.setOmschrijving(osirisResultaatType.getOmschrijving());
-		return dto;
-	}
-
 	public static PeriodeDto map(Periode periode) {
 		if (periode == null) { return null; }
 		PeriodeDto dto = new PeriodeDto();
@@ -264,6 +253,8 @@ public class Domain2DtoMapper {
 		dto.setId(toets.getId());
 		dto.setNaam(toets.getNaam());
 		dto.setGewicht(toets.getGewicht());
+		dto.setOmschrijving(toets.getOmschrijving());
+
 		dto.setMillerNiveau(Domain2DtoMapperLink.mapLink(toets.getMillerNiveau()));
 		dto.setHRef(Domain2DtoMapperHRef.mapHRef(toets));
 		dto.setBeoordelingsElementen(new ArrayList<BeoordelingsElementDto>());

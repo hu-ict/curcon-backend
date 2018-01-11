@@ -29,6 +29,8 @@ public class Toets implements Serializable {
 	private String naam;
 	@Column
 	private double gewicht;
+	@Column
+	private String omschrijving;
 	@ManyToOne
 	@JoinColumn(name = "millerniveau_id")
 	private MillerNiveau millerNiveau;
@@ -84,6 +86,14 @@ public class Toets implements Serializable {
 
 	public void setMillerNiveau(MillerNiveau millerNiveau) {
 		this.millerNiveau = millerNiveau;
+	}
+
+	public String getOmschrijving() {
+		return omschrijving;
+	}
+
+	public void setOmschrijving(String omschrijving) {
+		this.omschrijving = omschrijving;
 	}
 
 }

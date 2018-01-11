@@ -10,6 +10,7 @@ public class ToetsDto extends HRefDto {
     private int id;
     private String naam;
     private double gewicht;
+    private String omschrijving;
     private LinkDto millerNiveau;
     private List<BeoordelingsElementDto> beoordelingsElementen;
 	public int getId() {
@@ -42,5 +43,10 @@ public class ToetsDto extends HRefDto {
 	public void setMillerNiveau(LinkDto millerNiveau) {
 		this.millerNiveau = millerNiveau;
 	}
-
+	public String getOmschrijving() {
+		return omschrijving;
+	}
+	public void setOmschrijving(String omschrijving) {
+		this.omschrijving = omschrijving;
+	}
 }

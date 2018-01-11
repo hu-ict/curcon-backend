@@ -5,7 +5,8 @@ import java.util.List;
 import nl.hu.curcon.dto.ToetsPlanningDto;
 
 /**
- * Created by Vidjinder on 22-6-2015.
+ * @author berend.wilkens
+ *
  */
 public interface ToetsPlanningService {
 	ToetsPlanningDto create(ToetsPlanningDto toetsPlanningDto);

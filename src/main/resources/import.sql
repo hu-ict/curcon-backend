@@ -212,8 +212,6 @@ INSERT INTO cursus_beroepstaak VALUES (6, 51);
 INSERT INTO cursus_beroepstaak VALUES (7, 57);
 INSERT INTO cursus_beroepstaak VALUES (7, 60);
 INSERT INTO cursus_professionalskill values (1, 1) ;
-INSERT INTO osirisresultaattype (id, naam, omschrijving) values (1, '1,0-10,0', 'Numeriek met een decimaal');
-INSERT INTO osirisresultaattype (id, naam, omschrijving) values (2, 'VD/NVD', 'Voldaan/Niet voldaan');
 INSERT INTO toets (id, gewicht, millerniveau_id, naam, cursus_id) values (1, 50, 1, 'Theorietentamen', 5);
 INSERT INTO toets (id, gewicht, millerniveau_id, naam, cursus_id) values (2, 50, 2, 'Praktijkopdracht', 5);
 INSERT INTO beoordelingselement (id, gewicht, naam, omschrijving, toets_id)  values (1, 10, 'Vraag 1', '', 1);

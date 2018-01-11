@@ -12,9 +12,9 @@
 		<class>nl.hu.curcon.domain.Docent</class>
 		<class>nl.hu.curcon.domain.Leerdoel</class>
 		<class>nl.hu.curcon.domain.Leerlijn</class>
+		<class>nl.hu.curcon.domain.MillerNiveau</class>
 		<class>nl.hu.curcon.domain.OpleidingsProfiel</class>
 		<class>nl.hu.curcon.domain.Organisatie</class>
-		<class>nl.hu.curcon.domain.OsirisResultaatType</class>
 		<class>nl.hu.curcon.domain.ProfessionalSkill</class>
 		<class>nl.hu.curcon.domain.Toets</class>
 		<class>nl.hu.curcon.domain.ToetsElement</class>

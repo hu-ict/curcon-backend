@@ -5,6 +5,7 @@ package nl.hu.curcon.dto.post;
  */
 public class ToetsPostDto {
     private String naam;
+    private String omschrijving;
     private double gewicht;
     private int millerNiveau;
 	public String getNaam() {
@@ -24,5 +25,11 @@ public class ToetsPostDto {
 	}
 	public void setMillerNiveau(int millerNiveau) {
 		this.millerNiveau = millerNiveau;
+	}
+	public String getOmschrijving() {
+		return omschrijving;
+	}
+	public void setOmschrijving(String omschrijving) {
+		this.omschrijving = omschrijving;
 	}
 }
