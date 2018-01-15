@@ -122,5 +122,11 @@ public class BeroepsTaak implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "BeroepsTaak [id=" + id + ", architectuurlaag=" + architectuurlaag + ", activiteit=" + activiteit
+				+ ", niveau=" + niveau + "]";
+	}
+
 
 }

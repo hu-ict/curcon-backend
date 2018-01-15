@@ -44,5 +44,9 @@ public class Architectuurlaag implements Serializable {
 	public void setOmschrijving(String omschrijving) {
 		this.omschrijving = omschrijving;
 	}
+	@Override
+	public String toString() {
+		return "Architectuurlaag [id=" + id + ", naam=" + naam + "]";
+	}
 
 }

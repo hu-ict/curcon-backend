@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import nl.hu.curcon.dto.BeroepsTaakDto;
 import nl.hu.curcon.dto.EctsBeroepsTaakDto;
 import nl.hu.curcon.dto.EctsToetsVormDto;
 import nl.hu.curcon.service.ToetsProgrammaService;
@@ -41,6 +42,15 @@ public class ToetsProgrammaRest {
 	@ApiOperation(hidden = false, value = "Geeft de ects per tussen- en eindcompetentie voor een opleidingsprofiel voor een cohort.")
 	public List<EctsBeroepsTaakDto> getEcts(@PathParam("cohortId") int cohortId) {
 		return toetsProgrammaService.getEctsBroepsTaak(cohortId);
+	}
+	
+	@GET
+	@Path("/{cohortId}/profiel")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Transactional
+	@ApiOperation(hidden = false, value = "Geeft een berekend opleidingsprofiel voor een cohort.")
+	public List<BeroepsTaakDto> calcProfiel(@PathParam("cohortId") int cohortId) {
+		return toetsProgrammaService.calcProfile(cohortId);
 	}
 	
 

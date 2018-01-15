@@ -40,4 +40,8 @@ public class Activiteit implements Serializable {
 	public void setOmschrijving(String omschrijving) {
 		this.omschrijving = omschrijving;
 	}
+	@Override
+	public String toString() {
+		return "Activiteit [id=" + id + ", naam=" + naam + "]";
+	}
 }

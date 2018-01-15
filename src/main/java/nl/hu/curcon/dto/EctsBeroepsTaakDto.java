@@ -4,8 +4,8 @@ public class EctsBeroepsTaakDto extends HRefDto {
 	private BeroepsTaakDto beroepsTaak;
 	private double ects = 0.0;
 
-	public void addEcts(double d) {
-		ects += d;		
+	public void addEcts(double ects) {
+		this.ects += ects;
 	}
 
 	public BeroepsTaakDto getBeroepsTaak() {
@@ -23,6 +23,5 @@ public class EctsBeroepsTaakDto extends HRefDto {
 	public void setEcts(double ects) {
 		this.ects = ects;
 	}
-
 
 }

@@ -57,6 +57,6 @@ public class MyApplication extends ResourceConfig {
 	 */
 	public MyApplication() {
 	    Logger logger = LoggerFactory.getLogger(MyApplication.class);
-	    logger.info("Hello World");
+	    logger.info("Start of MyApplication");
 	}
 }
