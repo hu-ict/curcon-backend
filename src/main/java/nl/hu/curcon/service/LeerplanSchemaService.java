@@ -3,10 +3,10 @@ package nl.hu.curcon.service;
 import java.util.List;
 import java.util.Map;
 
-import nl.hu.curcon.dto.EctsGewichtNiveauDto;
 import nl.hu.curcon.dto.LeerdoelOverzichtDto;
 import nl.hu.curcon.dto.LeerplanSchemaDto;
 import nl.hu.curcon.dto.ProfielDto;
+import nl.hu.curcon.dto.check.EctsGewichtNiveauDto;
 
 /**
  * @author berend.wilkens

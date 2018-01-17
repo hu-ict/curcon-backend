@@ -17,19 +17,21 @@ import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.ProfessionalSkill;
-import nl.hu.curcon.dto.BeroepsTaakDto;
-import nl.hu.curcon.dto.EctsGewichtNiveauDto;
 import nl.hu.curcon.dto.LeerdoelOverzichtDto;
 import nl.hu.curcon.dto.LeerplanSchemaDto;
 import nl.hu.curcon.dto.ProfessionalSkillDto;
 import nl.hu.curcon.dto.ProfielDto;
+import nl.hu.curcon.dto.check.EctsGewichtNiveauDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Domain2DtoMapperLeerplanSchema;
 import nl.hu.curcon.service.LeerplanSchemaService;
+import nl.hu.curcon.service.ToetsProgrammaService;
 
 @Component
 public class LeerplanSchemaServiceImpl implements LeerplanSchemaService {
 
+	@Autowired
+	ToetsProgrammaService toetsProgrammaService;
 	@Autowired
 	CohortDao cohortDao;
 	@Autowired
@@ -107,10 +109,7 @@ public class LeerplanSchemaServiceImpl implements LeerplanSchemaService {
 		profileDto.setNaam(cohort.getOpleidingsProfiel().getNaam() + " (" + cohort.getJaar() + ")");
 		profileDto.setEcts(ects);
 
-		profileDto.setEindBT(new ArrayList<BeroepsTaakDto>());
-		for (BeroepsTaak beroepsTaak : beroepsTaken) {
-			profileDto.getEindBT().add(Domain2DtoMapper.map(beroepsTaak));
-		}
+		profileDto.setConformiteitBeroepsTaken(toetsProgrammaService.calcProfile(cohortId));
 
 		profileDto.setEindPS(new ArrayList<ProfessionalSkillDto>());
 		for (ProfessionalSkill professionalSkill : professionalSkills) {

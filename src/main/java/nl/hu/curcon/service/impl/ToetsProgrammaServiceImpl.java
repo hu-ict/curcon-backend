@@ -21,9 +21,9 @@ import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.ToetsElement;
-import nl.hu.curcon.dto.BeroepsTaakDto;
-import nl.hu.curcon.dto.EctsBeroepsTaakDto;
-import nl.hu.curcon.dto.EctsToetsVormDto;
+import nl.hu.curcon.dto.check.ConformiteitBeroepsTaakDto;
+import nl.hu.curcon.dto.check.EctsBeroepsTaakDto;
+import nl.hu.curcon.dto.check.EctsToetsVormDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.service.ToetsProgrammaService;
 
@@ -122,7 +122,7 @@ public class ToetsProgrammaServiceImpl implements ToetsProgrammaService {
 	}
 
 	@Override
-	public List<BeroepsTaakDto> calcProfile(int cohortId) {
+	public List<ConformiteitBeroepsTaakDto> calcProfile(int cohortId) {
 		EctsBeroepsTaakDto ectsBeroepsTaakDto = null;
 		Cohort cohort = cohortDao.find(cohortId);
 //		cohort.getOpleidingsProfiel().getEindBTs();
@@ -139,25 +139,30 @@ public class ToetsProgrammaServiceImpl implements ToetsProgrammaService {
 				ectsBeroepsTaakDto.addEcts(leerdoel.getGewicht() / 100 * cursus.getEuropeanCredits());
 			}
 		}
-		Map<BeroepsTaak,BeroepsTaakDto> beroepsTakenResult = new HashMap<>();
+		List<ConformiteitBeroepsTaakDto> conformiteitBeroepsTaken = new ArrayList<>();
 		for (BeroepsTaak beroepsTaak : cohort.getOpleidingsProfiel().getEindBTs()) {
+			ConformiteitBeroepsTaakDto conformiteitBeroepsTaakDto = new ConformiteitBeroepsTaakDto();
+			conformiteitBeroepsTaakDto.setBeroepsTaak(Domain2DtoMapper.map(beroepsTaak));
 			int resultaat1 = NIET_AANGEWERKT;
 			int resultaat2 = NIET_AANGEWERKT;
 			int resultaat3 = NIET_AANGEWERKT;
 			int resultaat = NIET_AANGEWERKT;
 			logger.info("beroepsTaak " + beroepsTaak);
 			
-			BeroepsTaak  beroepsTaakLoop = beroepsTaakDao.find(beroepsTaak.getActiviteit().getId(), beroepsTaak.getArchitectuurlaag().getId(), 3);
+			BeroepsTaak  beroepsTaakLoop = beroepsTaakDao.find(beroepsTaak.getActiviteit().getId(), beroepsTaak.getArchitectuurlaag().getId(), beroepsTaak.getNiveau());
 			if (beroepsTaakLoop.getNiveau() == 3) {
 				resultaat3 = analyseerBeroepsTaak(beroepsTaken, beroepsTaakLoop);
+				beroepsTaken.remove(beroepsTaakLoop);
 				beroepsTaakLoop = beroepsTaakDao.find(beroepsTaak.getActiviteit().getId(), beroepsTaak.getArchitectuurlaag().getId(), 2);
 			}
 			if (beroepsTaakLoop.getNiveau() == 2) {
 				resultaat2 = analyseerBeroepsTaak(beroepsTaken, beroepsTaakLoop);
+				beroepsTaken.remove(beroepsTaakLoop);
 				beroepsTaakLoop = beroepsTaakDao.find(beroepsTaak.getActiviteit().getId(), beroepsTaak.getArchitectuurlaag().getId(), 1);
 			}
 			if (beroepsTaakLoop.getNiveau() == 1) {
 				resultaat1 = analyseerBeroepsTaak(beroepsTaken, beroepsTaakLoop);
+				beroepsTaken.remove(beroepsTaakLoop);
 			}
 			if (beroepsTaak.getNiveau() == 3){
 				if (resultaat3 == NIET_AANGEWERKT && resultaat2 == NIET_AANGEWERKT && resultaat1 == NIET_AANGEWERKT) {
@@ -191,25 +196,50 @@ public class ToetsProgrammaServiceImpl implements ToetsProgrammaService {
 				resultaat = resultaat1;				
 			}
 			
-			beroepsTaak.setNiveau(resultaat);
-			beroepsTakenResult.put(beroepsTaak, Domain2DtoMapper.map(beroepsTaak));
-
+			conformiteitBeroepsTaakDto.setConformiteit(resultaat);
+			conformiteitBeroepsTaken.add(conformiteitBeroepsTaakDto);
 		};
-
-		return new ArrayList<BeroepsTaakDto>(beroepsTakenResult.values());
+		for (BeroepsTaak beroepsTaak : beroepsTaken.keySet()) {
+			ConformiteitBeroepsTaakDto conformiteitBeroepsTaakDto = new ConformiteitBeroepsTaakDto();
+			conformiteitBeroepsTaakDto.setBeroepsTaak(Domain2DtoMapper.map(beroepsTaak));
+			conformiteitBeroepsTaakDto.setConformiteit(BOVEN_NIVEAU);
+			conformiteitBeroepsTaken.add(conformiteitBeroepsTaakDto);
+		}
+		
+		return conformiteitBeroepsTaken;
 	}
 
 	private int analyseerBeroepsTaak(Map<BeroepsTaak, EctsBeroepsTaakDto> beroepsTaken, BeroepsTaak beroepsTaak) 
 	{
 		if (beroepsTaken.containsKey(beroepsTaak)) {
 			EctsBeroepsTaakDto ectsBeroepsTaakDto = beroepsTaken.get(beroepsTaak);
-			if (ectsBeroepsTaakDto.getEcts() < (ECTS_INSPANNING_NIVEAU_3 - ECTS_INSPANNING_NIVEAU_3_DIV)) {
-				return ONDER_NIVEAU;
-			} else if (ectsBeroepsTaakDto.getEcts() < (ECTS_INSPANNING_NIVEAU_3 - ECTS_INSPANNING_NIVEAU_3_DIV)) {
-				return BOVEN_NIVEAU;
-			} else {
-				return OP_NIVEAU;
+			switch (beroepsTaak.getNiveau()) {
+			case 1:
+				if (ectsBeroepsTaakDto.getEcts() < (ECTS_INSPANNING_NIVEAU_1 - ECTS_INSPANNING_NIVEAU_1_DIV)) {
+					return ONDER_NIVEAU;
+				} else if (ectsBeroepsTaakDto.getEcts() > (ECTS_INSPANNING_NIVEAU_1 + ECTS_INSPANNING_NIVEAU_1_DIV)) {
+					return BOVEN_NIVEAU;
+				} else {
+					return OP_NIVEAU;
+				}
+			case 2:
+				if (ectsBeroepsTaakDto.getEcts() < (ECTS_INSPANNING_NIVEAU_2 - ECTS_INSPANNING_NIVEAU_2_DIV)) {
+					return ONDER_NIVEAU;
+				} else if (ectsBeroepsTaakDto.getEcts() > (ECTS_INSPANNING_NIVEAU_2 + ECTS_INSPANNING_NIVEAU_2_DIV)) {
+					return BOVEN_NIVEAU;
+				} else {
+					return OP_NIVEAU;
+				}
+			case 3:
+				if (ectsBeroepsTaakDto.getEcts() < (ECTS_INSPANNING_NIVEAU_3 - ECTS_INSPANNING_NIVEAU_3_DIV)) {
+					return ONDER_NIVEAU;
+				} else if (ectsBeroepsTaakDto.getEcts() > (ECTS_INSPANNING_NIVEAU_3 + ECTS_INSPANNING_NIVEAU_3_DIV)) {
+					return BOVEN_NIVEAU;
+				} else {
+					return OP_NIVEAU;
+				}
 			}
+			return NIET_AANGEWERKT;
 		} else {
 			return NIET_AANGEWERKT;
 		}

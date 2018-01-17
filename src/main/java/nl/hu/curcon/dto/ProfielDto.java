@@ -2,10 +2,12 @@ package nl.hu.curcon.dto;
 
 import java.util.List;
 
+import nl.hu.curcon.dto.check.ConformiteitBeroepsTaakDto;
+
 public class ProfielDto extends HRefDto {
 	private String naam;
 	private int ects;
-	private List<BeroepsTaakDto> eindBT;
+	private List<ConformiteitBeroepsTaakDto> conformiteitBeroepsTaken;
 	private List<ProfessionalSkillDto> eindPS;
 	private List<LinkDto> leerlijnen;
 	
@@ -27,16 +29,16 @@ public class ProfielDto extends HRefDto {
 	public void setLeerlijnen(List<LinkDto> leerlijnen) {
 		this.leerlijnen = leerlijnen;
 	}
-	public List<BeroepsTaakDto> getEindBT() {
-		return eindBT;
-	}
-	public void setEindBT(List<BeroepsTaakDto> eindBT) {
-		this.eindBT = eindBT;
-	}
 	public List<ProfessionalSkillDto> getEindPS() {
 		return eindPS;
 	}
 	public void setEindPS(List<ProfessionalSkillDto> eindPS) {
 		this.eindPS = eindPS;
+	}
+	public List<ConformiteitBeroepsTaakDto> getConformiteitBeroepsTaken() {
+		return conformiteitBeroepsTaken;
+	}
+	public void setConformiteitBeroepsTaken(List<ConformiteitBeroepsTaakDto> conformiteitBeroepsTaken) {
+		this.conformiteitBeroepsTaken = conformiteitBeroepsTaken;
 	}
 }

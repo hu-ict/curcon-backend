@@ -1,4 +1,7 @@
-package nl.hu.curcon.dto;
+package nl.hu.curcon.dto.check;
+
+import nl.hu.curcon.dto.BeroepsTaakDto;
+import nl.hu.curcon.dto.HRefDto;
 
 public class EctsToetsVormDto extends HRefDto {
 	private BeroepsTaakDto beroepsTaak;

@@ -12,8 +12,9 @@
 <!--     <logger name="org.springframework" level="debug"/> -->
 <!--     <logger name="org.springframework.orm.jpa.JpaTransactionManager" level="trace"/> -->
 <!--     <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="debug"/> -->
-    <logger name="org.hibernate.SQL" level="trace"/>
-    <logger name="org.hibernate.type" level="trace"/>
+<!--     <logger name="org.hibernate.SQL" level="trace"/>-->
+<!--     <logger name="org.hibernate.type" level="trace"/>-->
+	<logger name="nl.hu.curcon.service.impl" level="info"/>
 
     <root level="info">
         <appender-ref ref="STDOUT"/>

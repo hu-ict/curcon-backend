@@ -2,9 +2,9 @@ package nl.hu.curcon.service;
 
 import java.util.List;
 
-import nl.hu.curcon.dto.BeroepsTaakDto;
-import nl.hu.curcon.dto.EctsBeroepsTaakDto;
-import nl.hu.curcon.dto.EctsToetsVormDto;
+import nl.hu.curcon.dto.check.ConformiteitBeroepsTaakDto;
+import nl.hu.curcon.dto.check.EctsBeroepsTaakDto;
+import nl.hu.curcon.dto.check.EctsToetsVormDto;
 
 public interface ToetsProgrammaService {
 
@@ -12,6 +12,6 @@ public interface ToetsProgrammaService {
 
 	List<EctsBeroepsTaakDto> getEctsBroepsTaak(int cohortId);
 
-	List<BeroepsTaakDto> calcProfile(int cohortId);
+	List<ConformiteitBeroepsTaakDto> calcProfile(int cohortId);
 
 }

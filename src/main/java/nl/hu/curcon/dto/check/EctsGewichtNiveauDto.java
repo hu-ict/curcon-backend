@@ -1,4 +1,4 @@
-package nl.hu.curcon.dto;
+package nl.hu.curcon.dto.check;
 
 public class EctsGewichtNiveauDto {
 	private int niveau;
