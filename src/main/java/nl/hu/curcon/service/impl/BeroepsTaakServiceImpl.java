@@ -10,8 +10,8 @@ import nl.hu.curcon.dao.BeroepsTaakDao;
 import nl.hu.curcon.domain.BeroepsTaak;
 import nl.hu.curcon.dto.ActiviteitDto;
 import nl.hu.curcon.dto.ArchitectuurLaagDto;
-import nl.hu.curcon.dto.BeroepsTaakDto;
-import nl.hu.curcon.dto.BeroepsTaakTypesDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakTypesDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.service.BeroepsTaakService;
 

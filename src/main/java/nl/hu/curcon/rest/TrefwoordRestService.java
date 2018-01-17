@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.swagger.annotations.Api;
-import nl.hu.curcon.dto.TrefwoordDto;
+import nl.hu.curcon.dto.competence.TrefwoordDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;

@@ -22,7 +22,6 @@ import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.domain.ToetsPlanning;
 import nl.hu.curcon.domain.Trefwoord;
 import nl.hu.curcon.dto.BeoordelingsElementDto;
-import nl.hu.curcon.dto.BeroepsTaakDto;
 import nl.hu.curcon.dto.BloomNiveauDto;
 import nl.hu.curcon.dto.CohortDto;
 import nl.hu.curcon.dto.CursusDto;
@@ -34,11 +33,12 @@ import nl.hu.curcon.dto.MillerNiveauDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
 import nl.hu.curcon.dto.OrganisatieDto;
 import nl.hu.curcon.dto.PeriodeDto;
-import nl.hu.curcon.dto.ProfessionalSkillDto;
 import nl.hu.curcon.dto.ToetsDto;
 import nl.hu.curcon.dto.ToetsElementDto;
 import nl.hu.curcon.dto.ToetsPlanningDto;
-import nl.hu.curcon.dto.TrefwoordDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakDto;
+import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
+import nl.hu.curcon.dto.competence.TrefwoordDto;
 import nl.hu.curcon.rest.MyApplication;
 
 /**

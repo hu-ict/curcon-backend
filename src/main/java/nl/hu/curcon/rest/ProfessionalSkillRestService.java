@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.swagger.annotations.Api;
-import nl.hu.curcon.dto.ProfessionalSkillDto;
-import nl.hu.curcon.dto.ProfessionalSkillTypesDto;
+import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
+import nl.hu.curcon.dto.competence.ProfessionalSkillTypesDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.ProfessionalSkillService;

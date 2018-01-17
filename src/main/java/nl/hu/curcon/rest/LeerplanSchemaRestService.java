@@ -18,8 +18,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.LeerdoelOverzichtDto;
 import nl.hu.curcon.dto.LeerplanSchemaDto;
-import nl.hu.curcon.dto.ProfielDto;
 import nl.hu.curcon.dto.check.EctsGewichtNiveauDto;
+import nl.hu.curcon.dto.check.ProfielDto;
 import nl.hu.curcon.service.LeerplanSchemaService;
 
 @Component

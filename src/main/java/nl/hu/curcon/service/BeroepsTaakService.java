@@ -2,8 +2,8 @@ package nl.hu.curcon.service;
 
 import java.util.List;
 
-import nl.hu.curcon.dto.BeroepsTaakDto;
-import nl.hu.curcon.dto.BeroepsTaakTypesDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakTypesDto;
 
 /**
  * Created by Niels on 13-6-2015.

@@ -2,8 +2,8 @@ package nl.hu.curcon.service;
 
 import java.util.List;
 
-import nl.hu.curcon.dto.ProfessionalSkillDto;
-import nl.hu.curcon.dto.ProfessionalSkillTypesDto;
+import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
+import nl.hu.curcon.dto.competence.ProfessionalSkillTypesDto;
 
 /**
  * @author berend.wilkens, 19 jun. 2017

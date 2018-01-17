@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.swagger.annotations.Api;
-import nl.hu.curcon.dto.BeroepsTaakDto;
-import nl.hu.curcon.dto.BeroepsTaakTypesDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakTypesDto;
 import nl.hu.curcon.service.BeroepsTaakService;
 
 /**

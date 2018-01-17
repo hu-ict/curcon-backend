@@ -2,6 +2,8 @@ package nl.hu.curcon.dto;
 
 import java.util.List;
 
+import nl.hu.curcon.dto.competence.BeroepsTaakDto;
+
 /**
  * @author berend.wilkens
  *

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import nl.hu.curcon.dao.ProfessionalSkillDao;
 import nl.hu.curcon.domain.ProfessionalSkill;
 import nl.hu.curcon.dto.ActiviteitDto;
-import nl.hu.curcon.dto.ProfessionalSkillDto;
-import nl.hu.curcon.dto.ProfessionalSkillTypesDto;
+import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
+import nl.hu.curcon.dto.competence.ProfessionalSkillTypesDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.service.ProfessionalSkillService;
 

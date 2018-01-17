@@ -5,8 +5,8 @@ import java.util.Map;
 
 import nl.hu.curcon.dto.LeerdoelOverzichtDto;
 import nl.hu.curcon.dto.LeerplanSchemaDto;
-import nl.hu.curcon.dto.ProfielDto;
 import nl.hu.curcon.dto.check.EctsGewichtNiveauDto;
+import nl.hu.curcon.dto.check.ProfielDto;
 
 /**
  * @author berend.wilkens

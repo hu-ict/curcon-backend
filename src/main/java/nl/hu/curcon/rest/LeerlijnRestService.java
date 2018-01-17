@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.LeerlijnDto;
-import nl.hu.curcon.dto.TrefwoordDto;
+import nl.hu.curcon.dto.competence.TrefwoordDto;
 import nl.hu.curcon.dto.post.LeerlijnPostDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
 import nl.hu.curcon.service.LeerlijnService;

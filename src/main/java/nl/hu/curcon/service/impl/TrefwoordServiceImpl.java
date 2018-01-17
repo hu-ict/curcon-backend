@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import nl.hu.curcon.dao.TrefwoordDao;
 import nl.hu.curcon.domain.Leerlijn;
 import nl.hu.curcon.domain.Trefwoord;
-import nl.hu.curcon.dto.TrefwoordDto;
+import nl.hu.curcon.dto.competence.TrefwoordDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.service.TrefwoordService;

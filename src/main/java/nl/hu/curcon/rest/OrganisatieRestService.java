@@ -21,11 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import nl.hu.curcon.dto.BeroepsTaakDto;
 import nl.hu.curcon.dto.CursusDto;
 import nl.hu.curcon.dto.DocentDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
 import nl.hu.curcon.dto.OrganisatieDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 import nl.hu.curcon.dto.post.CursusPostDto;
 import nl.hu.curcon.dto.post.DocentPostDto;
 import nl.hu.curcon.dto.post.OpleidingsProfielPostDto;

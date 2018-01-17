@@ -2,11 +2,11 @@ package nl.hu.curcon.service;
 
 import java.util.List;
 
-import nl.hu.curcon.dto.BeroepsTaakDto;
 import nl.hu.curcon.dto.CursusDto;
 import nl.hu.curcon.dto.DocentDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
 import nl.hu.curcon.dto.OrganisatieDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 import nl.hu.curcon.dto.post.CursusPostDto;
 import nl.hu.curcon.dto.post.DocentPostDto;
 import nl.hu.curcon.dto.post.OpleidingsProfielPostDto;

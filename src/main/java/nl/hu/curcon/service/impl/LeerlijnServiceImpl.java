@@ -10,7 +10,7 @@ import nl.hu.curcon.dao.LeerlijnDao;
 import nl.hu.curcon.domain.Leerlijn;
 import nl.hu.curcon.domain.Trefwoord;
 import nl.hu.curcon.dto.LeerlijnDto;
-import nl.hu.curcon.dto.TrefwoordDto;
+import nl.hu.curcon.dto.competence.TrefwoordDto;
 import nl.hu.curcon.dto.post.LeerlijnPostDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;

@@ -9,11 +9,11 @@ import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.ProfessionalSkill;
-import nl.hu.curcon.dto.BeroepsTaakDto;
 import nl.hu.curcon.dto.CursusLeerplanSchemaDto;
 import nl.hu.curcon.dto.LeerdoelOverzichtDto;
 import nl.hu.curcon.dto.LeerplanSchemaDto;
 import nl.hu.curcon.dto.LinkDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 
 /**
  * @author berend.wilkens

@@ -3,7 +3,7 @@ package nl.hu.curcon.service;
 import java.util.List;
 
 import nl.hu.curcon.dto.LeerlijnDto;
-import nl.hu.curcon.dto.TrefwoordDto;
+import nl.hu.curcon.dto.competence.TrefwoordDto;
 import nl.hu.curcon.dto.post.LeerlijnPostDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
 

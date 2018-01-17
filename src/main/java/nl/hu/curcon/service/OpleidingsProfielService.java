@@ -3,11 +3,11 @@ package nl.hu.curcon.service;
 import java.util.List;
 
 import nl.hu.curcon.domain.Organisatie;
-import nl.hu.curcon.dto.BeroepsTaakDto;
 import nl.hu.curcon.dto.CohortDto;
 import nl.hu.curcon.dto.LeerlijnDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
-import nl.hu.curcon.dto.ProfessionalSkillDto;
+import nl.hu.curcon.dto.competence.BeroepsTaakDto;
+import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
 import nl.hu.curcon.dto.post.CohortPostDto;
 import nl.hu.curcon.dto.post.OpleidingsProfielPostDto;
 

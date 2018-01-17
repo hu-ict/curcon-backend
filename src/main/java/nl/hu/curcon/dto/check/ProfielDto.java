@@ -1,8 +1,10 @@
-package nl.hu.curcon.dto;
+package nl.hu.curcon.dto.check;
 
 import java.util.List;
 
-import nl.hu.curcon.dto.check.ConformiteitBeroepsTaakDto;
+import nl.hu.curcon.dto.HRefDto;
+import nl.hu.curcon.dto.LinkDto;
+import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
 
 public class ProfielDto extends HRefDto {
 	private String naam;

@@ -1,7 +1,7 @@
 package nl.hu.curcon.service;
 
 import nl.hu.curcon.domain.Leerlijn;
-import nl.hu.curcon.dto.TrefwoordDto;
+import nl.hu.curcon.dto.competence.TrefwoordDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
 
 /**
