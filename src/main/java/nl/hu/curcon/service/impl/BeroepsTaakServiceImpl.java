@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import nl.hu.curcon.dao.BeroepsTaakDao;
 import nl.hu.curcon.domain.BeroepsTaak;
-import nl.hu.curcon.dto.ActiviteitDto;
-import nl.hu.curcon.dto.ArchitectuurLaagDto;
+import nl.hu.curcon.dto.competence.ActiviteitDto;
+import nl.hu.curcon.dto.competence.ArchitectuurLaagDto;
 import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 import nl.hu.curcon.dto.competence.BeroepsTaakTypesDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;

@@ -3,8 +3,6 @@ package nl.hu.curcon.dto.competence;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.hu.curcon.dto.ActiviteitDto;
-
 public class ProfessionalSkillTypesDto {
 	private List<ActiviteitDto> activiteiten = new ArrayList<>();
 	private List<String> niveaus = new ArrayList<>();

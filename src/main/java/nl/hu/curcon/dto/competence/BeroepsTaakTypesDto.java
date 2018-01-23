@@ -3,9 +3,6 @@ package nl.hu.curcon.dto.competence;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.hu.curcon.dto.ActiviteitDto;
-import nl.hu.curcon.dto.ArchitectuurLaagDto;
-
 public class BeroepsTaakTypesDto {
 	private List<ArchitectuurLaagDto> architectuurLagen = new ArrayList<>();
 	private List<ActiviteitDto> activiteiten = new ArrayList<>();
