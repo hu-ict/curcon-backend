@@ -3,7 +3,7 @@ package nl.hu.curcon.dao.impl;
 import org.springframework.stereotype.Repository;
 
 import nl.hu.curcon.dao.BeroepsTaakDao;
-import nl.hu.curcon.domain.BeroepsTaak;
+import nl.hu.curcon.domain.hboi.BeroepsTaak;
 
 /**
  * @author berend.wilkens, 1 jun. 2017

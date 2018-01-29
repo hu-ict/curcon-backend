@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Component;
 
 import nl.hu.curcon.domain.BeoordelingsElement;
-import nl.hu.curcon.domain.BeroepsTaak;
 import nl.hu.curcon.domain.BloomNiveau;
 import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
@@ -21,6 +20,7 @@ import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.domain.ToetsPlanning;
 import nl.hu.curcon.domain.Trefwoord;
+import nl.hu.curcon.domain.hboi.BeroepsTaak;
 import nl.hu.curcon.dto.BeoordelingsElementDto;
 import nl.hu.curcon.dto.BloomNiveauDto;
 import nl.hu.curcon.dto.CohortDto;

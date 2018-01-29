@@ -1,4 +1,4 @@
-package nl.hu.curcon.domain;
+package nl.hu.curcon.domain.hboi;
 
 import javax.persistence.*;
 

@@ -23,7 +23,7 @@ public class Bootstrap extends HttpServlet {
         beanConfig.setDescription("Swagger description of the CurCon API.");
         beanConfig.setVersion("0.1.0");
         beanConfig.setResourcePackage("nl.hu.curcon.rest");
-        beanConfig.setLicense("Copyright University of applied sciences Utrecht, Netherlands, 2017.");
+        beanConfig.setLicense("Copyright University of applied sciences Utrecht, Netherlands, 2018.");
         beanConfig.setScan(true);
     }
 }

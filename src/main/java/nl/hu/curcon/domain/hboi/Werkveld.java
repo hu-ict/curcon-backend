@@ -1,16 +1,14 @@
-package nl.hu.curcon.domain;
+package nl.hu.curcon.domain.hboi;
 
 import javax.persistence.*;
 
-import java.io.Serializable;
-
 /**
- * @author berend.wilkens, 31 mei 2017
+ * @author berend.wilkens
+ *
  */
-@SuppressWarnings("serial")
-@Table(name="beroepstaak")
+@Table(name = "werkveld")
 @Entity
-public class BeroepsTaak implements Serializable {
+public class Werkveld {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -20,9 +18,6 @@ public class BeroepsTaak implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "activiteit_id", nullable = false)
 	private Activiteit activiteit;
-	private int niveau;
-	@Column(length = 1024)
-	private String beschrijving;
 
 	public static int detActiviteitId(String activiteit) {
 		switch (activiteit) {
@@ -56,32 +51,12 @@ public class BeroepsTaak implements Serializable {
 		return -1;
 	}
 
-	public int getNiveau() {
-		return niveau;
-	}
-
-	public void setNiveau(int niveau) {
-		this.niveau = niveau;
-	}
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getVerkort() {
-		return activiteit.getNaam() + " - "	+ architectuurlaag.getNaam() + " - " + getNiveau();
-	}
-
-	public String getBeschrijving() {
-		return beschrijving;
-	}
-
-	public void setBeschrijving(String beschrijving) {
-		this.beschrijving = beschrijving;
 	}
 
 	public Architectuurlaag getArchitectuurlaag() {
@@ -116,17 +91,10 @@ public class BeroepsTaak implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BeroepsTaak other = (BeroepsTaak) obj;
+		Werkveld other = (Werkveld) obj;
 		if (id != other.id)
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "BeroepsTaak [id=" + id + ", architectuurlaag=" + architectuurlaag + ", activiteit=" + activiteit
-				+ ", niveau=" + niveau + "]";
-	}
-
 
 }

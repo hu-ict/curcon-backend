@@ -9,15 +9,16 @@ import org.springframework.stereotype.Service;
 import nl.hu.curcon.dao.BeroepsTaakDao;
 import nl.hu.curcon.dao.OpleidingsProfielDao;
 import nl.hu.curcon.dao.ProfessionalSkillDao;
-import nl.hu.curcon.domain.BeroepsTaak;
 import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Leerlijn;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
 import nl.hu.curcon.domain.ProfessionalSkill;
+import nl.hu.curcon.domain.hboi.BeroepsTaak;
 import nl.hu.curcon.dto.CohortDto;
 import nl.hu.curcon.dto.LeerlijnDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
+import nl.hu.curcon.dto.check.OpleidingBeroepsTaakValidatieDto;
 import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
 import nl.hu.curcon.dto.post.CohortPostDto;
@@ -30,11 +31,11 @@ import nl.hu.curcon.service.OpleidingsProfielService;
  * @author berend.wilkens, 1 mei 2017
  */
 @Service
-public class OpleidingsProfielServiceImpl extends GenericService implements OpleidingsProfielService{
-    @Autowired
-    private OpleidingsProfielDao opleidingsProfielDao;
+public class OpleidingsProfielServiceImpl extends GenericService implements OpleidingsProfielService {
 	@Autowired
-    private CohortService cohortService;
+	private OpleidingsProfielDao opleidingsProfielDao;
+	@Autowired
+	private CohortService cohortService;
 	@Autowired
 	private BeroepsTaakDao beroepsTaakDao;
 	@Autowired
@@ -42,19 +43,19 @@ public class OpleidingsProfielServiceImpl extends GenericService implements Ople
 
 	@Override
 	public OpleidingsProfielDto find(int id) {
-        OpleidingsProfiel d = opleidingsProfielDao.find(id);
-        return Domain2DtoMapper.map(d);
+		OpleidingsProfiel d = opleidingsProfielDao.find(id);
+		return Domain2DtoMapper.map(d);
 	}
 
 	@Override
-    public List<OpleidingsProfielDto> findAll() {
-        List<OpleidingsProfielDto> dtos = new ArrayList<OpleidingsProfielDto>();
-        List<OpleidingsProfiel> opleidingsProfielen = opleidingsProfielDao.findAll();
-        for (OpleidingsProfiel d: opleidingsProfielen){
-            dtos.add(Domain2DtoMapper.map(d));
-        }
-        return dtos;
-    }
+	public List<OpleidingsProfielDto> findAll() {
+		List<OpleidingsProfielDto> dtos = new ArrayList<OpleidingsProfielDto>();
+		List<OpleidingsProfiel> opleidingsProfielen = opleidingsProfielDao.findAll();
+		for (OpleidingsProfiel d : opleidingsProfielen) {
+			dtos.add(Domain2DtoMapper.map(d));
+		}
+		return dtos;
+	}
 
 	@Override
 	public int create(Organisatie organisatie, OpleidingsProfielPostDto opleidingsProfielDto) {
@@ -64,23 +65,24 @@ public class OpleidingsProfielServiceImpl extends GenericService implements Ople
 		return opleidingsProfiel.getId();
 	}
 
-    @Override
-    public void delete(int opleidingsProfielId) {
-    	opleidingsProfielDao.delete(opleidingsProfielId);
-    }
+	@Override
+	public void delete(int opleidingsProfielId) {
+		opleidingsProfielDao.delete(opleidingsProfielId);
+	}
 
-    @Override
+	@Override
 	public boolean update(int opleidingsProfielId, OpleidingsProfielPostDto opleidingsProfielDto) {
-    	OpleidingsProfiel opleidingsProfiel = opleidingsProfielDao.find(opleidingsProfielId);
-    	opleidingsProfiel.setNaam(opleidingsProfielDto.getNaam());
-    	opleidingsProfielDao.update(opleidingsProfiel);
+		OpleidingsProfiel opleidingsProfiel = opleidingsProfielDao.find(opleidingsProfielId);
+		opleidingsProfiel.setNaam(opleidingsProfielDto.getNaam());
+		opleidingsProfielDao.update(opleidingsProfiel);
 		return true;
-    }
+	}
 
 	@Override
 	public int createCohortByOpleidingsProfiel(int opleidingsProfielId, CohortPostDto cohortDto) {
 		OpleidingsProfiel opleidingsProfiel = opleidingsProfielDao.find(opleidingsProfielId);
-		if (opleidingsProfiel == null) return 0;
+		if (opleidingsProfiel == null)
+			return 0;
 		return cohortService.create(opleidingsProfiel, cohortDto);
 	}
 
@@ -192,5 +194,22 @@ public class OpleidingsProfielServiceImpl extends GenericService implements Ople
 		return true;
 	}
 
+	@Override
+	public OpleidingBeroepsTaakValidatieDto validateBeroepsTakenByOpleidingsProfiel(int opleidingsProfielId) {
+		OpleidingsProfiel opleidingsProfiel = opleidingsProfielDao.find(opleidingsProfielId);
+		if (opleidingsProfiel == null)
+			return null;
+		for (BeroepsTaak beroepsTaak : opleidingsProfiel.getEindBTs()) {
+			switch (beroepsTaak.getNiveau()) {
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			}
+		}
+		return null;
+	}
 
 }

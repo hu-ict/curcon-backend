@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nl.hu.curcon.dao.BeroepsTaakDao;
-import nl.hu.curcon.domain.BeroepsTaak;
+import nl.hu.curcon.domain.hboi.BeroepsTaak;
 import nl.hu.curcon.dto.competence.ActiviteitDto;
 import nl.hu.curcon.dto.competence.ArchitectuurLaagDto;
 import nl.hu.curcon.dto.competence.BeroepsTaakDto;

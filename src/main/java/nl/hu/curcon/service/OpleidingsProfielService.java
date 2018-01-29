@@ -6,6 +6,7 @@ import nl.hu.curcon.domain.Organisatie;
 import nl.hu.curcon.dto.CohortDto;
 import nl.hu.curcon.dto.LeerlijnDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
+import nl.hu.curcon.dto.check.OpleidingBeroepsTaakValidatieDto;
 import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
 import nl.hu.curcon.dto.post.CohortPostDto;
@@ -43,4 +44,6 @@ public interface OpleidingsProfielService {
 	boolean addProfessionalSkillsToOpleidingsProfiel(int opleidingsProfielId, int professionalskillId);
 
 	boolean removeProfessionalSkillsFromOpleidingsProfiel(int opleidingsProfielId, int professionalskillId);
+
+	OpleidingBeroepsTaakValidatieDto validateBeroepsTakenByOpleidingsProfiel(int opleidingsProfielId);
 }

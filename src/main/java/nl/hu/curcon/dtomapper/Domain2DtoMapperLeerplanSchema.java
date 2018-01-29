@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
 
-import nl.hu.curcon.domain.BeroepsTaak;
 import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.ProfessionalSkill;
+import nl.hu.curcon.domain.hboi.BeroepsTaak;
 import nl.hu.curcon.dto.CursusLeerplanSchemaDto;
 import nl.hu.curcon.dto.LeerdoelOverzichtDto;
 import nl.hu.curcon.dto.LeerplanSchemaDto;

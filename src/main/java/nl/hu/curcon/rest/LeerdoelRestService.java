@@ -29,7 +29,7 @@ import nl.hu.curcon.service.LeerdoelService;
 
 @Component
 @Path("/leerdoelen")
-@Api(hidden = false, value="[Leerdoel] Beheer van de leerdoelen bij cursussen.")
+@Api(hidden = false, value="[Leerdoel] Beheer van de leerdoelen.")
 public class LeerdoelRestService {
 	@Autowired
 	LeerdoelService leerdoelService;
@@ -51,6 +51,7 @@ public class LeerdoelRestService {
 	@Path("/{leerdoelId}")
 	@Transactional
 	@Consumes({ MediaType.APPLICATION_JSON })
+	@ApiOperation(value = "Wijzigt een leerdoel op basis van Id.")
 	public Response update(@PathParam("leerdoelId") int leerdoelId, LeerdoelPostDto leerdoelDto) {
 		if (leerdoelService.update(leerdoelId, leerdoelDto)) {
 			return Response.status(200).build();

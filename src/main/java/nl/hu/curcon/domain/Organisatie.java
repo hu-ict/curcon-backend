@@ -2,6 +2,8 @@ package nl.hu.curcon.domain;
 
 import javax.persistence.*;
 
+import nl.hu.curcon.domain.hboi.BeroepsTaak;
+
 import java.io.Serializable;
 import java.util.List;
 

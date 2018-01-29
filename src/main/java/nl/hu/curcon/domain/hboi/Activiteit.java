@@ -1,6 +1,4 @@
-package nl.hu.curcon.domain;
-
-import java.io.Serializable;
+package nl.hu.curcon.domain.hboi;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @author berend.wilkens, 31 mei 2017
+ * @author berend.wilkens, 29 jan. 2018
+ *
  */
-@SuppressWarnings("serial")
 @Table(name="activiteit")
 @Entity
-public class Activiteit implements Serializable {
+public class Activiteit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;

@@ -24,6 +24,7 @@ import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.CohortDto;
 import nl.hu.curcon.dto.LeerlijnDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
+import nl.hu.curcon.dto.check.OpleidingBeroepsTaakValidatieDto;
 import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
 import nl.hu.curcon.dto.post.CohortPostDto;
@@ -97,6 +98,20 @@ public class OpleidingsProfielRestService {
 		List<BeroepsTaakDto> list = opleidingsProfielService.findBeroepsTakenByOpleidingsProfiel(opleidingsProfielId);
 		if (list != null) {
 			return Response.ok(list).build();
+		} else {
+			return Response.status(404).build();
+		}
+	}
+
+	@GET
+	@Path("/{opleidingsProfielId}/beroepstaken/validatie")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Transactional
+	@ApiOperation(value = "Geeft de validatie van eindkwalificaties op het gebied van de HBO-i beroepstaken voor een opleidingsprofiel.")
+	public Response validateBeroepsTakenByOpleidingsProfiel(@PathParam("opleidingsProfielId") int opleidingsProfielId) {
+		OpleidingBeroepsTaakValidatieDto opleidingBeroepsTaakValidatieDto = opleidingsProfielService.validateBeroepsTakenByOpleidingsProfiel(opleidingsProfielId);
+		if (opleidingBeroepsTaakValidatieDto != null) {
+			return Response.ok(opleidingBeroepsTaakValidatieDto).build();
 		} else {
 			return Response.status(404).build();
 		}

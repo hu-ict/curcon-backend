@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import nl.hu.curcon.domain.hboi.BeroepsTaak;
+
 /**
  * @author berend.wilkens, 20 aug. 2017
  */

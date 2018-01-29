@@ -106,7 +106,7 @@ public class CursusRestService {
 	@Path("/{cursusId}/leerdoelen")
 	@Transactional
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@ApiOperation(value = "Maakt een nieuw leerdoelen bij een cursus.")
+	@ApiOperation(value = "Maakt een nieuw leerdoel bij een cursus.")
 	public Response createLeerdoelByCursus(@PathParam("cursusId") int cursusId, LeerdoelPostDto leerdoelDto) {
 		LOG.info("createLeerdoelByCursus");
 		LOG.info("cursusId: " + cursusId);
