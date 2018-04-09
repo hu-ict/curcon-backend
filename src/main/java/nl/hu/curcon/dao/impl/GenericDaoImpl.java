@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import nl.hu.curcon.dao.GenericDao;
+import nl.hu.curcon.domain.User;
 
 
 /**

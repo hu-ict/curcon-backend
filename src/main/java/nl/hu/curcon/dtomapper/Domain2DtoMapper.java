@@ -20,6 +20,7 @@ import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.domain.ToetsPlanning;
 import nl.hu.curcon.domain.Trefwoord;
+import nl.hu.curcon.domain.User;
 import nl.hu.curcon.domain.hboi.BeroepsTaak;
 import nl.hu.curcon.dto.BeoordelingsElementDto;
 import nl.hu.curcon.dto.BloomNiveauDto;
@@ -36,6 +37,7 @@ import nl.hu.curcon.dto.PeriodeDto;
 import nl.hu.curcon.dto.ToetsDto;
 import nl.hu.curcon.dto.ToetsElementDto;
 import nl.hu.curcon.dto.ToetsPlanningDto;
+import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
 import nl.hu.curcon.dto.competence.TrefwoordDto;
@@ -280,6 +282,17 @@ public class Domain2DtoMapper {
 		ToetsPlanningDto dto = new ToetsPlanningDto();
 		dto.setId(toetsPlanning.getId());
 		return dto;
+	}
+	
+	public static UserDto map(User user) {
+		if (user == null) { 
+			return null;
+		}
+		UserDto uto = new UserDto();
+		uto.setUsername(user.getUsername());
+		uto.setPassword(user.getPassword());
+		uto.setRole(user.getRole());
+		return uto;
 	}
 
 }
