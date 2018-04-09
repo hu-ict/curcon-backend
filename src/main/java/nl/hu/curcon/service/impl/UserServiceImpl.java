@@ -10,8 +10,8 @@ public class UserServiceImpl extends GenericService implements UserService {
 	private UserDao userDao; 
 	
 	@Override
-	public UserDto find(String username, String password, String role) {
-		User user = userDao.findRoleForUsernameAndPassword(username, password, role);
+	public UserDto find(String username, String password) {
+		User user = userDao.findRoleForUsernameAndPassword(username, password);
 		return Domain2DtoMapper.map(user);
 	}
 }

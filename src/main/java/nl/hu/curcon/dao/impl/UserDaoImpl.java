@@ -13,8 +13,8 @@ import nl.hu.curcon.domain.User;
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	
 	@Override
-	public User findRoleForUsernameAndPassword(String username, String password, String role) {
-		String query = "SELECT " + role + " FROM user WHERE username = " + username + " AND password = " + password;
+	public User findRoleForUsernameAndPassword(String username, String password) {
+		String query = "SELECT role FROM user WHERE username = " + username + " AND password = " + password;
 		return (User) this.em.createQuery(query).getSingleResult();
 	}
 }

@@ -32,7 +32,7 @@ public class AuthenticationResource {
 		 try {       
 			 // Authenticate the user against the database       
 			 UserDaoImpl dao = new UserDaoImpl();       
-			 User role = dao.findRoleForUsernameAndPassword(username, password, role);              
+			 User role = dao.findRoleForUsernameAndPassword(username, password);              
 			 	
 			 if (role == null) { 
 				 throw new IllegalArgumentException("No user found!");  
