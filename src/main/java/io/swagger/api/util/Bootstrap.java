@@ -13,10 +13,10 @@ public class Bootstrap extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         BeanConfig beanConfig = new BeanConfig();
-//        beanConfig.setHost("localhost:8080");
-//        beanConfig.setBasePath("/curcon/rest/");
+//      beanConfig.setHost("localhost:8080");
+//      beanConfig.setBasePath("/curcon/rest/");
         beanConfig.setHost("localhost:8080");
-        beanConfig.setBasePath("/curcon/rest/");
+        beanConfig.setBasePath("/rest/");
         beanConfig.setContact("berend.wilkens@hu.nl");
         beanConfig.setSchemes(new String[]{"http"});
         beanConfig.setTitle("CurCon API");

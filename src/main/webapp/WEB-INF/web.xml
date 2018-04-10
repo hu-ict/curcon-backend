@@ -96,10 +96,10 @@
 	
 
 	<servlet>
-		<servlet-name>SwaggerConfig</servlet-name>
-		<servlet-class>io.swagger.api.util.Bootstrap</servlet-class>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
+        <servlet-name>SwaggerBootstrap</servlet-name>
+        <servlet-class>io.swagger.api.util.Bootstrap</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
 
 	<servlet-mapping>
 		<servlet-name>Jersey Servlet</servlet-name>
