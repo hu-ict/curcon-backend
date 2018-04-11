@@ -16,7 +16,7 @@ public class Bootstrap extends HttpServlet {
 //      beanConfig.setHost("localhost:8080");
 //      beanConfig.setBasePath("/curcon/rest/");
         beanConfig.setHost("localhost:8080");
-        beanConfig.setBasePath("/rest/");
+        beanConfig.setBasePath("/curcon/rest/");
         beanConfig.setContact("berend.wilkens@hu.nl");
         beanConfig.setSchemes(new String[]{"http"});
         beanConfig.setTitle("CurCon API");
