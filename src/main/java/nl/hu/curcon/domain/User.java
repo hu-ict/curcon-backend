@@ -1,14 +1,29 @@
 package nl.hu.curcon.domain;
 
-public class User {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user")
+public class User{
 	private String username;
 	private String password;
 	private String role;
 	
-	public User(String role) {
+	public User() {
+	}
+	
+	public User(String username, String password, String role) {
+		this.username = username;
+		this.password = password;
 		this.role = role;
 	}
 	
+	@Id
+	@Column(name = "username",unique = true, 
+			nullable = false)
 	public String getUsername() {
 		return username;
 	}
@@ -16,7 +31,8 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
+	@Column(name = "password")
 	public String getPassword() {
 		return password;
 	}
@@ -25,6 +41,7 @@ public class User {
 		this.password = password;
 	}
 
+	@Column(name = "role")
 	public String getRole() {
 		return role;
 	}
