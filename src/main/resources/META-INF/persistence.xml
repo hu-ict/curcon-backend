@@ -20,6 +20,7 @@
 		<class>nl.hu.curcon.domain.ToetsElement</class>
 		<class>nl.hu.curcon.domain.ToetsPlanning</class>
 		<class>nl.hu.curcon.domain.Trefwoord</class>
+		<class>nl.hu.curcon.domain.User</class>
 		<properties>
 			<property name="hibernate.connection.charSet" value="UTF-8" />
 			<property name="hibernate.url" value="jdbc:mysql://localhost:3306/curcon" />
