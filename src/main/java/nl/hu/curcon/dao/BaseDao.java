@@ -15,7 +15,7 @@ public class BaseDao {
  
 			if (DATABASE_URL_PROP != null) {         
 				URI dbUri = new URI(DATABASE_URL_PROP);         
-				String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();         
+				String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();         
 				BasicDataSource pool = new BasicDataSource(); 
  
 				if (dbUri.getUserInfo() != null) {           
@@ -23,7 +23,7 @@ public class BaseDao {
 					pool.setPassword(dbUri.getUserInfo().split(":")[1]);         
 				}         
 				
-				pool.setDriverClassName("org.postgresql.Driver");         
+				pool.setDriverClassName("com.mysql.jdbc.Driver");         
 				pool.setUrl(dbUrl);         
 				pool.setInitialSize(1);                  
 				connectionPool = pool;       

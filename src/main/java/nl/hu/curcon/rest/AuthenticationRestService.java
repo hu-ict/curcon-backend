@@ -22,7 +22,7 @@ import java.security.Key;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 
 @Path("/authentication")
-public class AuthenticationResource {
+public class AuthenticationRestService {
 	public static final Key key = MacProvider.generateKey(); 
 	
 	 @POST   

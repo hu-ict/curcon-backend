@@ -5,6 +5,10 @@ public class User {
 	private String password;
 	private String role;
 	
+	public User(String role) {
+		this.role = role;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

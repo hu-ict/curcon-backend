@@ -35,7 +35,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
  
 			try {         
 				// Validate the token         
-				JwtParser parser = Jwts.parser().setSigningKey(AuthenticationResource.key);         
+				JwtParser parser = Jwts.parser().setSigningKey(AuthenticationRestService.key);         
 				Claims claims = parser.parseClaimsJws(token).getBody(); 
  
 				String user = claims.getSubject();         
