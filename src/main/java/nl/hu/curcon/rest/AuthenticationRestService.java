@@ -1,5 +1,6 @@
 package nl.hu.curcon.rest;
 
+import java.security.Key;
 import java.util.Calendar;
 
 import javax.ws.rs.Consumes;
@@ -7,30 +8,30 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-
 /* import com.fasterxml.classmate.util.ResolvedTypeCache.Key; */
 import javax.ws.rs.core.Response;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
+import io.jsonwebtoken.impl.crypto.MacProvider;
 import nl.hu.curcon.dao.impl.UserDaoImpl;
 import nl.hu.curcon.domain.User;
-import java.security.Key;
-
-import io.jsonwebtoken.impl.crypto.MacProvider;
+import nl.hu.curcon.service.UserService;
 
 @Path("/authentication")
 public class AuthenticationRestService {
 	public static final Key key = MacProvider.generateKey(); 
+	@Autowired
+	UserService userService;
 	
 	 @POST   
 	 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)   
 	 public Response authenticateUser(@FormParam("username") String username,                                     
 			 						  @FormParam("password") String password) {     
-		 try {       
-			 // Authenticate the user against the database       
+		 try {             
 			 UserDaoImpl dao = new UserDaoImpl();       
 			 User role = dao.findRoleForUsernameAndPassword(username, password);              
 			 	
