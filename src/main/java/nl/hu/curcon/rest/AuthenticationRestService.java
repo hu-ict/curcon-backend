@@ -17,13 +17,13 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
-import nl.hu.curcon.dao.impl.UserDaoImpl;
-import nl.hu.curcon.domain.User;
+import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.service.UserService;
 
 @Path("/authentication")
 public class AuthenticationRestService {
 	public static final Key key = MacProvider.generateKey(); 
+	
 	@Autowired
 	UserService userService;
 	
@@ -31,11 +31,10 @@ public class AuthenticationRestService {
 	 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)   
 	 public Response authenticateUser(@FormParam("username") String username,                                     
 			 						  @FormParam("password") String password) {     
-		 try {             
-			 UserDaoImpl dao = new UserDaoImpl();       
-			 User role = dao.findRoleForUsernameAndPassword(username, password);              
+		 try {  
+			 UserDto userDto = userService.find(username, password);            
 			 	
-			 if (role == null) { 
+			 if (userDto == null) { 
 				 throw new IllegalArgumentException("No user found!");  
 			 }               
 			 
@@ -44,7 +43,7 @@ public class AuthenticationRestService {
 			 expiration.add(Calendar.MINUTE, 30);          
 			 String token =  Jwts.builder()         
 					 .setSubject(username)         
-					 .claim("role", role)         
+					 .claim("role", userDto)         
 					 .setExpiration(expiration.getTime())         
 					 .signWith(SignatureAlgorithm.HS512, key)         
 					 .compact(); 
