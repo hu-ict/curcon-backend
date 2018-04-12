@@ -16,6 +16,7 @@ import nl.hu.curcon.domain.ProfessionalSkill;
 import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.domain.Trefwoord;
+import nl.hu.curcon.domain.User;
 import nl.hu.curcon.domain.hboi.BeroepsTaak;
 import nl.hu.curcon.rest.MyApplication;
 
@@ -98,6 +99,11 @@ public class Domain2DtoMapperHRef {
 	public static String mapHRef(Leerlijn domain) {
 		if (domain == null) {return null;}
 		return MyApplication.getBaseUrl() + "leerlijnen/" + domain.getId();
+	}
+	
+	public static String mapHRef(User domain) {
+		if (domain == null) {return null;}
+		return MyApplication.getBaseUrl() + "gebruikers/" + domain.getUsername();
 	}
 
 

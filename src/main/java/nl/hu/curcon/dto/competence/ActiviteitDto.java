@@ -7,13 +7,13 @@ public class ActiviteitDto {
 
 	public ActiviteitDto() {
 		super();
-	};
+	}
 
 	public ActiviteitDto(int id, String naam, String omschrijving) {
 		this.id = id;
 		this.naam = naam;
 		this.omschrijving = omschrijving;
-	};
+	}
 
 	public String getNaam() {
 		return naam;
