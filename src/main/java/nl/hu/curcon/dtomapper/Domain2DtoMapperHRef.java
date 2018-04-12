@@ -103,8 +103,7 @@ public class Domain2DtoMapperHRef {
 	
 	public static String mapHRef(User domain) {
 		if (domain == null) {return null;}
-		return MyApplication.getBaseUrl() + "gebruikers/" + domain.getUsername();
+		return MyApplication.getBaseUrl() + "authentication/" + domain.getUsername();
 	}
-
 
 }
