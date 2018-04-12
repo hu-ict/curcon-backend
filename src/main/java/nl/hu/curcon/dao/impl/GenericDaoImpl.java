@@ -7,9 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import nl.hu.curcon.dao.GenericDao;
-import nl.hu.curcon.domain.User;
-
-
 /**
  * Created by Frits on 12-5-2015.
  */

@@ -1,7 +1,7 @@
 package nl.hu.curcon.rest;
 
-import java.security.Key;
-import java.util.Calendar;
+//import java.security.Key;
+//import java.util.Calendar;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -13,17 +13,18 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.crypto.MacProvider;
+//import com.google.common.net.HttpHeaders;
+
+//import io.jsonwebtoken.JwtException;
+//import io.jsonwebtoken.Jwts;
+//import io.jsonwebtoken.SignatureAlgorithm;
+//import io.jsonwebtoken.impl.crypto.MacProvider;
 import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.service.UserService;
 
 @Path("/authentication")
 public class AuthenticationRestService {
-	public static final Key key = MacProvider.generateKey(); 
-	
+//	public static final Key key = MacProvider.generateKey(); 
 	@Autowired
 	UserService userService;
 	
@@ -39,19 +40,22 @@ public class AuthenticationRestService {
 			 }               
 			 
 			 // Issue a token for the user       
-			 Calendar expiration = Calendar.getInstance();       
-			 expiration.add(Calendar.MINUTE, 30);          
-			 String token =  Jwts.builder()         
-					 .setSubject(username)         
-					 .claim("role", userDto)         
-					 .setExpiration(expiration.getTime())         
-					 .signWith(SignatureAlgorithm.HS512, key)         
-					 .compact(); 
+//			 Calendar expiration = Calendar.getInstance();       
+//			 expiration.add(Calendar.MINUTE, 30);          
+//			 String token =  Jwts.builder()         
+//					 .setSubject(username)         
+//					 .claim("role", userDto)         
+//					 .setExpiration(expiration.getTime())         
+//					 .signWith(SignatureAlgorithm.HS512, key)         
+//					 .compact(); 
 		 
-			 // Return the token on the response       
-			 return Response.ok(token).build(); 
+			 // Return the token on the response
+			 
+			 //String token = authHeader.substring("Bearer".length()).trim(); 
+			return Response.status(401).build();
 	 
-	    } catch (JwtException | IllegalArgumentException e) {       
+	    } //catch (JwtException | IllegalArgumentException e) {
+		 catch (IllegalArgumentException e) {
 	    	return Response.status(Response.Status.UNAUTHORIZED).build();     
     	}   
 	}

@@ -8,20 +8,20 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.ext.Provider;
 
-import com.google.common.net.HttpHeaders;
+//import com.google.common.net.HttpHeaders;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.Jwts;
+//import io.jsonwebtoken.Claims;
+//import io.jsonwebtoken.JwtException;
+//import io.jsonwebtoken.JwtParser;
+//import io.jsonwebtoken.Jwts;
 
 @Provider 
 @Priority(Priorities.AUTHENTICATION) 
 public class AuthenticationFilter implements ContainerRequestFilter {   
-	
+
 	@Override   
 	public void filter(ContainerRequestContext requestCtx) throws IOException { 
-	 
+/*		 
 		// Users are treated as guests, unless a valid JWT is provided     
 		boolean isSecure = requestCtx.getSecurityContext().isSecure();     
 		MySecurityContext msc = new MySecurityContext("Unknown", "guest", isSecure); 
@@ -31,22 +31,24 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 		if (authHeader != null && authHeader.startsWith("Bearer ")) { 
  
 			// Extract the token from the HTTP Authorization header       
-			String token = authHeader.substring("Bearer".length()).trim(); 
+			String token = authHeader.substring("Bearer".length()).trim();
  
-			try {         
-				// Validate the token         
-				JwtParser parser = Jwts.parser().setSigningKey(AuthenticationRestService.key);         
-				Claims claims = parser.parseClaimsJws(token).getBody(); 
- 
-				String user = claims.getSubject();         
-				String role = claims.get("role").toString(); 
- 
-				msc = new MySecurityContext(user, role, isSecure);                
-			} catch (JwtException | IllegalArgumentException e) {         
-				System.out.println("Invalid JWT, processing as guest!");       
-			}     	
+//			try {         
+//				// Validate the token         
+//				JwtParser parser = Jwts.parser().setSigningKey(AuthenticationRestService.key);         
+//				Claims claims = parser.parseClaimsJws(token).getBody(); 
+// 
+//				String user = claims.getSubject();         
+//				String role = claims.get("role").toString(); 
+// 
+//				msc = new MySecurityContext(user, role, isSecure);                
+//			} catch (JwtException | IllegalArgumentException e) {         
+//				System.out.println("Invalid JWT, processing as guest!");       
+//			}     	
 		}          
 		
-		requestCtx.setSecurityContext(msc);   
+		requestCtx.setSecurityContext(msc); 	
+		*/  
 	} 
+
 } 

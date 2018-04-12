@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import nl.hu.curcon.dao.UserDao;
 import nl.hu.curcon.domain.User;
 
+@Repository
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	
 	@Override
