@@ -17,9 +17,11 @@ import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.domain.ToetsPlanning;
 import nl.hu.curcon.domain.Trefwoord;
+import nl.hu.curcon.domain.User;
 import nl.hu.curcon.dto.BloomNiveauDto;
 import nl.hu.curcon.dto.PeriodeDto;
 import nl.hu.curcon.dto.ToetsPlanningDto;
+import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
 import nl.hu.curcon.dto.post.BeoordelingsElementPostDto;
 import nl.hu.curcon.dto.post.CohortPostDto;
@@ -137,6 +139,14 @@ public class Dto2DomainMapper {
 		domain.setNaam(dto.getNaam());
 		domain.setGewicht(dto.getGewicht());
 		domain.setOmschrijving(dto.getOmschrijving());
+		return domain;
+	}
+	public User map(UserDto dto) {
+		User domain = new User();
+
+		domain.setUsername(dto.getUsername());
+		domain.setPassword(dto.getPassword());
+		domain.setRole(dto.getRole());
 		return domain;
 	}
 }
