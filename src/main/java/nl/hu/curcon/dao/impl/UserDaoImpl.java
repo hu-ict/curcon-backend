@@ -10,7 +10,8 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	
 	@Override
 	public User findRoleForUsernameAndPassword(String username, String password) {   
-		String query = "SELECT role FROM useraccount WHERE username = ? AND password = ?";          
+		System.out.println("USERDAOIMPL +"+username);
+		String query = "SELECT usr FROM User as usr WHERE usr.username = '"+username+"' AND usr.password = '"+password+"'";          
 		return (User) this.em.createQuery(query).getSingleResult();  
 	}
 }
