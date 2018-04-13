@@ -1,5 +1,6 @@
 package nl.hu.curcon.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nl.hu.curcon.dao.UserDao;
@@ -10,6 +11,7 @@ import nl.hu.curcon.service.UserService;
 
 @Service
 public class UserServiceImpl extends GenericService implements UserService {
+	@Autowired
 	private UserDao userDao; 
 	
 	@Override
