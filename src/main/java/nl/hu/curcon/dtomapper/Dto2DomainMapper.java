@@ -22,18 +22,6 @@ import nl.hu.curcon.dto.BloomNiveauDto;
 import nl.hu.curcon.dto.PeriodeDto;
 import nl.hu.curcon.dto.ToetsPlanningDto;
 import nl.hu.curcon.dto.UserDto;
-import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
-import nl.hu.curcon.dto.post.BeoordelingsElementPostDto;
-import nl.hu.curcon.dto.post.CohortPostDto;
-import nl.hu.curcon.dto.post.CursusPostDto;
-import nl.hu.curcon.dto.post.DocentPostDto;
-import nl.hu.curcon.dto.post.LeerdoelPostDto;
-import nl.hu.curcon.dto.post.LeerlijnPostDto;
-import nl.hu.curcon.dto.post.OpleidingsProfielPostDto;
-import nl.hu.curcon.dto.post.OrganisatiePostDto;
-import nl.hu.curcon.dto.post.ToetsElementPostDto;
-import nl.hu.curcon.dto.post.ToetsPostDto;
-import nl.hu.curcon.dto.post.TrefwoordPostDto;
 
 /**
  * @author berend.wilkens, 30 mei 2017
@@ -143,7 +131,6 @@ public class Dto2DomainMapper {
 	}
 	public User map(UserDto dto) {
 		User domain = new User();
-
 		domain.setUsername(dto.getUsername());
 		domain.setPassword(dto.getPassword());
 		domain.setRole(dto.getRole());

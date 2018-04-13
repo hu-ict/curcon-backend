@@ -16,9 +16,7 @@ public class UserServiceImpl extends GenericService implements UserService {
 	
 	@Override
 	public UserDto find(String username, String password) {
-		System.out.println("USERSERVICE"+username);
 		User user = userDao.findRoleForUsernameAndPassword(username, password);
-		System.out.println("USERSERVICEending"+user);
 		return Domain2DtoMapper.map(user);
 	}
 }
