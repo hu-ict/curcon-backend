@@ -1,0 +1,10 @@
+package nl.hu.curcon.dao;
+
+import org.springframework.stereotype.Repository;
+
+import nl.hu.curcon.domain.Module;
+
+	@Repository
+	public interface ModuleDao extends GenericDao<Module>  {
+		Module find(String name);
+	}
