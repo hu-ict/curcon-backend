@@ -15,8 +15,8 @@ public class FunctionServiceImpl extends GenericService implements FunctionServi
 	private FunctionDao funcDao; 
 	
 	@Override
-	public FunctionDto find(String name) {
-		Function function = funcDao.find(name);
+	public FunctionDto find(int id) {
+		Function function = funcDao.find(id);
 		return Domain2DtoMapper.map(function);
 	}
 }

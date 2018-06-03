@@ -4,6 +4,6 @@ import nl.hu.curcon.dto.FunctionDto;
 
 public interface FunctionService {
 
-	FunctionDto find(String name);
+	FunctionDto find(int id);
 
 }

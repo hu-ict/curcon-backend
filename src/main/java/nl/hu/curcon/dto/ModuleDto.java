@@ -5,16 +5,16 @@ import java.util.Set;
 import java.util.List;
 import java.util.Set;
 
-public class ModuleDto {
+public class ModuleDto extends HRefDto{
 	private int id;
 	private String name;
-	private Set<FunctionDto> functions;
+	private HRefDto functions;
 
 	public ModuleDto() {
 		super();
 	}
 
-	public ModuleDto(int id, String name, Set<FunctionDto> HRefs) {
+	public ModuleDto(int id, String name, HRefDto HRefs) {
 		this.setId(id);
 		this.setName(name);
 		this.setFunctions(HRefs);
@@ -31,13 +31,16 @@ public class ModuleDto {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public int getId() {
+		return id;
+	}
 
-	public void setFunctions(Set<FunctionDto> Set) {
+	public void setFunctions(HRefDto Set) {
 		this.functions=Set;
 		
 	}
 
-	public Set<FunctionDto> getFunctions() {
+	public HRefDto getFunctions() {
 		return functions;
 	}
 }

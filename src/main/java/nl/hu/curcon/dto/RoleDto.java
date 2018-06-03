@@ -8,13 +8,13 @@ import nl.hu.curcon.domain.Role;
 public class RoleDto extends HRefDto {
 	private int id;
 	private String name;
-	private Set<ModuleDto> modules;
+	private HRefDto modules;
 
 	public RoleDto() {
 		super();
 	}
 
-	public RoleDto(int id, String name, Set<ModuleDto> modules) {
+	public RoleDto(int id, String name, HRefDto modules) {
 		this.setId(id);
 		this.setName(name);
 		this.setModules(modules);
@@ -28,11 +28,11 @@ public class RoleDto extends HRefDto {
 		this.name = name;
 	}
 
-	public Set<ModuleDto> getModules() {
+	public HRefDto getModules() {
 		return modules;
 	}
 
-	public void setModules(Set<ModuleDto> set) {
+	public void setModules(HRefDto set) {
 		this.modules = set;
 	}
 

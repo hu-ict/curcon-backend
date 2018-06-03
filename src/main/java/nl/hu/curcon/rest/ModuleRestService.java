@@ -1,29 +1,31 @@
 package nl.hu.curcon.rest;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.swagger.annotations.Api;
-import nl.hu.curcon.dto.HRefDto;
-import nl.hu.curcon.dto.LinkDto;
+import nl.hu.curcon.dto.FunctionDto;
+import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dto.RoleDto;
-import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
-import nl.hu.curcon.service.UserService;
+import nl.hu.curcon.service.ModuleService;
 
 @Component
-@Path("/users")
+@Path("/modules")
 @Api(hidden = true)
-public class UserRestService {
+public class ModuleRestService {
     @Autowired
-    UserService userService;
+    ModuleService moduleService;
 
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
@@ -32,15 +34,20 @@ public class UserRestService {
 	Dto2DomainMapper dto2DomainMapper;
 
 	@GET
-	@Path("/{username}")
+	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public UserDto find(@PathParam("username") String username) {
-		return userService.find(username);
+	public ModuleDto find(@PathParam("id") int id) {
+		return moduleService.find(id);
 	}
 	@GET
-	@Path("{username}/role")
+	@Path("/{id}/functions")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public HRefDto findRole(@PathParam("username") String username) {
-		return userService.find(username).getRole();
+	public Response findOpleidingsProfielenByOrganisatie(@PathParam("id") int id) {
+		List<FunctionDto> list = moduleService.findFunctionsByModuleId(id);
+		if (list != null) {
+			return Response.ok(list).build();
+		} else {
+			return Response.status(404).build();
+		}
 	}
 }

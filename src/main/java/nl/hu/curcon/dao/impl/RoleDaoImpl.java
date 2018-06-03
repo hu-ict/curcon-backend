@@ -9,8 +9,9 @@ import nl.hu.curcon.domain.Role;
 public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
 	
 	@Override
-	public Role find(String name) {   
-		String query = "SELECT rol FROM Roles as rol WHERE rol.name = '"+name+"'";          
+	public Role find(int id) { 
+		System.out.println(id);
+		String query = "SELECT rol FROM Role as rol WHERE rol.id = "+id;          
 		Role result= (Role) this.em.createQuery(query).getSingleResult();
 		return result;
 	}

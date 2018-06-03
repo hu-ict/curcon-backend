@@ -2,16 +2,16 @@ package nl.hu.curcon.dto;
 
 import nl.hu.curcon.domain.Role;
 
-public class UserDto extends LinkDto{
+public class UserDto extends HRefDto{
 	private String username;
 	private String password;
-	private LinkDto role;
+	private HRefDto role;
 	
 	public UserDto() {
 		super();
 	}
 	
-	public UserDto(String username, String password, LinkDto role) {
+	public UserDto(String username, String password, HRefDto role) {
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setRole(role);
@@ -33,12 +33,12 @@ public class UserDto extends LinkDto{
 		this.password = password;
 	}
 
-	public LinkDto getRole() {
+	public HRefDto getRole() {
 		return role;
 	}
 
-	public void setRole(LinkDto role) {
-		this.role = role;
+	public void setRole(HRefDto hRefDtoOP) {
+		this.role = hRefDtoOP;
 	}
 	
 	

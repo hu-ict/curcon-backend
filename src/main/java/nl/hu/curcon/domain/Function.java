@@ -24,9 +24,6 @@ public class Function implements Serializable {
 	private int id;
 	@Column(name = "name")
 	private String name;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "function_module", joinColumns = @JoinColumn(name = "function_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"))
-	private Set<Module> modules;
 
 	public Function() {
 
@@ -35,12 +32,6 @@ public class Function implements Serializable {
 	public Function(int id, String name) {
 		this.id=id;
 		this.name = name;
-	}
-
-	public Function(int id, String name, Set<Module> modules) {
-		this.id=id;
-		this.name = name;
-		this.modules = modules;
 	}
 
 	public int getId() {
@@ -57,14 +48,6 @@ public class Function implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Set<Module> getModules() {
-		return modules;
-	}
-
-	public void setModules(Set<Module> modules) {
-		this.modules = modules;
 	}
 
 }

@@ -10,20 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.swagger.annotations.Api;
-import nl.hu.curcon.dto.HRefDto;
-import nl.hu.curcon.dto.LinkDto;
-import nl.hu.curcon.dto.RoleDto;
+import nl.hu.curcon.dto.FunctionDto;
 import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
-import nl.hu.curcon.service.UserService;
+import nl.hu.curcon.service.FunctionService;
 
 @Component
-@Path("/users")
+@Path("/functions")
 @Api(hidden = true)
-public class UserRestService {
+public class FunctionRestService {
     @Autowired
-    UserService userService;
+    FunctionService functionService;
 
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
@@ -32,15 +30,9 @@ public class UserRestService {
 	Dto2DomainMapper dto2DomainMapper;
 
 	@GET
-	@Path("/{username}")
+	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public UserDto find(@PathParam("username") String username) {
-		return userService.find(username);
-	}
-	@GET
-	@Path("{username}/role")
-	@Produces({ MediaType.APPLICATION_JSON })
-	public HRefDto findRole(@PathParam("username") String username) {
-		return userService.find(username).getRole();
+	public FunctionDto find(@PathParam("id") int id) {
+		return functionService.find(id);
 	}
 }

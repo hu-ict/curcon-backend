@@ -7,6 +7,7 @@ import nl.hu.curcon.domain.BloomNiveau;
 import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Docent;
+import nl.hu.curcon.domain.Function;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.Leerlijn;
 import nl.hu.curcon.domain.MillerNiveau;
@@ -116,6 +117,11 @@ public class Domain2DtoMapperHRef {
 	public static String mapHRef(Module domain) {
 		if (domain == null) {return null;}
 		return MyApplication.getBaseUrl() + "modules/" + domain.getId();
+	}
+
+	public static String mapHRef(Function domain) {
+		if (domain == null) {return null;}
+		return MyApplication.getBaseUrl() + "functions/" + domain.getId();
 	}
 
 

@@ -298,7 +298,9 @@ public class Domain2DtoMapper {
 		dto.setUsername(user.getUsername());
 		dto.setPassword(user.getPassword());
 
-		dto.setRole(Domain2DtoMapperLink.mapLink(user.getRole()));
+		HRefDto hRefDtoOP = new HRefDto();
+		hRefDtoOP.setHRef(MyApplication.getBaseUrl() + "roles/" + user.getRole().getId());
+		dto.setRole(hRefDtoOP);
 		dto.setHRef(Domain2DtoMapperHRef.mapHRef(user));
 		return dto;
 	}
@@ -308,10 +310,10 @@ public class Domain2DtoMapper {
 		dto.setId(role.getId());
 		dto.setName(role.getName());
 
-		dto.setModules(new HashSet<ModuleDto>());
-		for (Module m:role.getModules()) {
-			dto.getModules().add(map(m));
-		}
+		HRefDto hRefDtoOP = new HRefDto();
+		hRefDtoOP.setHRef(MyApplication.getBaseUrl() + "roles/" + role.getId()+"/modules");
+		dto.setModules(hRefDtoOP);
+		dto.setHRef(Domain2DtoMapperHRef.mapHRef(role));
 		return dto;
 	}
 	public static ModuleDto map(Module module) {
@@ -320,10 +322,10 @@ public class Domain2DtoMapper {
 		dto.setId(module.getId());
 		dto.setName(module.getName());
 
-		dto.setFunctions(new HashSet<FunctionDto>());
-		for (Function f : module.getFunctions()) {
-			dto.getFunctions().add(map(f));
-		}
+		HRefDto hRefDtoOP = new HRefDto();
+		hRefDtoOP.setHRef(MyApplication.getBaseUrl() + "modules/" + module.getId()+"/functions");
+		dto.setFunctions(hRefDtoOP);
+		dto.setHRef(Domain2DtoMapperHRef.mapHRef(module));
 		return dto;
 	}
 	
@@ -334,6 +336,7 @@ public class Domain2DtoMapper {
 		FunctionDto fto = new FunctionDto();
 		fto.setId(function.getId());
 		fto.setName((function.getName()));
+		fto.setHRef(Domain2DtoMapperHRef.mapHRef(function));
 		return fto;
 	}
 

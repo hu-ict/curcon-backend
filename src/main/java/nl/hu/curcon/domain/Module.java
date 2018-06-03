@@ -30,10 +30,8 @@ public class Module implements Serializable {
 	@Column(name = "name")
 	private String name;
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "module_role", joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	private Set<Role> roles;
-	@ManyToMany(mappedBy = "modules")
-	private Set<Function> functions;
+	@JoinTable(name = "function_module", joinColumns = @JoinColumn(name = "function_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"))
+	private List<Function> functions;
 
 	public Module() {
 
@@ -44,10 +42,10 @@ public class Module implements Serializable {
 		this.name = name;
 	}
 
-	public Module(int id, String name, Set<Role> roles) {
+	public Module(int id, String name, List<Function> functions) {
 		this.id=id;
 		this.name = name;
-		this.roles = roles;
+		this.functions=functions;
 	}
 
 	public int getId() {
@@ -66,19 +64,11 @@ public class Module implements Serializable {
 		this.name = name;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	public Set<Function> getFunctions() {
+	public List<Function> getFunctions() {
 		return functions;
 	}
 
-	public void setFunctions(Set<Function> functions) {
+	public void setFunctions(List<Function> functions) {
 		this.functions = functions;
 	}
 

@@ -9,8 +9,8 @@ import nl.hu.curcon.domain.Function;
 public class FunctionDaoImpl extends GenericDaoImpl<Function> implements FunctionDao {
 		
 		@Override
-		public Function find(String name) {   
-			String query = "SELECT func FROM Functions as func WHERE func.name = '"+name+"'";          
+		public Function find(int id) {   
+			String query = "SELECT func FROM Function func WHERE func.id ="+id;          
 			return (Function) this.em.createQuery(query).getSingleResult();  
 		}
 	}

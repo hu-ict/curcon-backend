@@ -7,5 +7,5 @@ import nl.hu.curcon.domain.Module;
 
 @Repository
 public interface FunctionDao extends GenericDao<Function>  {
-	Function find(String name);
+	Function find(int id);
 }

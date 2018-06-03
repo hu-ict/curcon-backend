@@ -9,8 +9,8 @@ import nl.hu.curcon.domain.Module;
 public class ModuleDaoImpl extends GenericDaoImpl<Module> implements ModuleDao {
 	
 	@Override
-	public Module find(String name) {   
-		String query = "SELECT mod FROM Modules as mod WHERE mod.name = '"+name+"'";          
+	public Module find(int id) {   
+		String query = "SELECT mod FROM Module as mod WHERE mod.id ="+id;          
 		Module result= (Module) this.em.createQuery(query).getSingleResult();
 		return result;
 	}

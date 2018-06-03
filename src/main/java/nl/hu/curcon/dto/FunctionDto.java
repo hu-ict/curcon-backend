@@ -1,6 +1,5 @@
 package nl.hu.curcon.dto;
 
-import nl.hu.curcon.domain.Role;
 
 public class FunctionDto extends HRefDto{
 	private int id;
@@ -27,5 +26,7 @@ public class FunctionDto extends HRefDto{
 			this.id=i;
 			
 		}
-
+		public int getId() {
+			return id;
+		}
 }

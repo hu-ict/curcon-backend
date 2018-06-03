@@ -1,13 +1,17 @@
 package nl.hu.curcon.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -21,8 +25,9 @@ public class Role implements Serializable{
 	private int id;
 	@Column(name="name")
 	private String name;
-	@ManyToMany(mappedBy = "roles")
-	private Set<Module> modules;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "module_role", joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	private List<Module> modules;
 
 	public Role() {
 
@@ -33,7 +38,7 @@ public class Role implements Serializable{
 		this.name = name;
 	}
 
-	public Role(int id, String name, Set<Module> modules) {
+	public Role(int id, String name, List<Module> modules) {
 		this.id=id;
 		this.name = name;
 		this.modules = modules;
@@ -55,11 +60,11 @@ public class Role implements Serializable{
 		this.name = name;
 	}
 
-	public Set<Module> getModules() {
+	public List<Module> getModules() {
 		return modules;
 	}
 
-	public void setModules(Set<Module> modules) {
+	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
 }
