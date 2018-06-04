@@ -30,7 +30,7 @@ public class Module implements Serializable {
 	@Column(name = "name")
 	private String name;
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "function_module", joinColumns = @JoinColumn(name = "function_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"))
+	@JoinTable(name = "function_module", joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "function_id", referencedColumnName = "id"))
 	private List<Function> functions;
 
 	public Module() {
