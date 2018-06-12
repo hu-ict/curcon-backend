@@ -18,17 +18,17 @@ import nl.hu.curcon.service.ModuleService;
 @Service
 public class ModuleServiceImpl extends GenericService implements ModuleService {
 	@Autowired
-	private ModuleDao funcDao;
+	private ModuleDao moduleDao;
 
 	@Override
 	public ModuleDto find(int id) {
-		return Domain2DtoMapper.map(funcDao.find(id));
+		return Domain2DtoMapper.map(moduleDao.find(id));
 	}
 
 	@Transactional
 	@Override
 	public List<FunctionDto> findFunctionsByModuleId(int id) {
-	    Module module = funcDao.find(id);
+	    Module module = moduleDao.find(id);
 		if (module == null)
 			return null;
 		List<FunctionDto> functions = new ArrayList<>();

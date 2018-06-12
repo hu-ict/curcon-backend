@@ -21,19 +21,19 @@ import nl.hu.curcon.service.RoleService;
 @Service
 public class RoleServiceImpl extends GenericService implements RoleService {
 	@Autowired
-	private RoleDao funcDao; 
+	private RoleDao roleDao; 
 	
 	@Transactional
 	@Override
 	public RoleDto find(int id) {
-		Role Role = funcDao.find(id);
+		Role Role = roleDao.find(id);
 		return Domain2DtoMapper.map(Role);
 	}
 
 	@Transactional
 	@Override
 	public List<ModuleDto>findModulesByRoleId(int id){
-		Role Role = funcDao.find(id);
+		Role Role = roleDao.find(id);
 		if (Role == null)
 			return null;
 		List<ModuleDto> modules =new ArrayList<>();
