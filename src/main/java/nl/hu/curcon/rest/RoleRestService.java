@@ -44,7 +44,6 @@ import nl.hu.curcon.service.RoleService;
 		@Path("/{id}/modules")
 		@Produces({ MediaType.APPLICATION_JSON })
 		public Response findOpleidingsProfielenByOrganisatie(@PathParam("id") int id) {
-			roleService.find(id).getModules();
 			List<ModuleDto> list = roleService.findModulesByRoleId(id);
 			if (list != null) {
 				return Response.ok(list).build();
