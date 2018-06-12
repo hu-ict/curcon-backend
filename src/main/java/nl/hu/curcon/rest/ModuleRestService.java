@@ -24,8 +24,8 @@ import nl.hu.curcon.service.ModuleService;
 @Path("/modules")
 @Api(hidden = true)
 public class ModuleRestService {
-    @Autowired
-    ModuleService moduleService;
+	@Autowired
+	ModuleService moduleService;
 
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
@@ -34,11 +34,19 @@ public class ModuleRestService {
 	Dto2DomainMapper dto2DomainMapper;
 
 	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response findAll() {
+		List<ModuleDto> list = moduleService.findAll();
+		return Response.ok(list).build();
+	}
+
+	@GET
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ModuleDto find(@PathParam("id") int id) {
 		return moduleService.find(id);
 	}
+
 	@GET
 	@Path("/{id}/functions")
 	@Produces({ MediaType.APPLICATION_JSON })

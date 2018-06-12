@@ -11,4 +11,6 @@ public interface RoleService {
 
 	List<ModuleDto> findModulesByRoleId(int id);
 
+	List<RoleDto> findAll();
+
 }

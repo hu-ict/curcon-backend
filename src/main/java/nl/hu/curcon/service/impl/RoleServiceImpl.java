@@ -21,8 +21,8 @@ import nl.hu.curcon.service.RoleService;
 @Service
 public class RoleServiceImpl extends GenericService implements RoleService {
 	@Autowired
-	private RoleDao roleDao; 
-	
+	private RoleDao roleDao;
+
 	@Transactional
 	@Override
 	public RoleDto find(int id) {
@@ -32,14 +32,25 @@ public class RoleServiceImpl extends GenericService implements RoleService {
 
 	@Transactional
 	@Override
-	public List<ModuleDto>findModulesByRoleId(int id){
+	public List<ModuleDto> findModulesByRoleId(int id) {
 		Role Role = roleDao.find(id);
 		if (Role == null)
 			return null;
-		List<ModuleDto> modules =new ArrayList<>();
+		List<ModuleDto> modules = new ArrayList<>();
 		for (Module module : Role.getModules()) {
 			modules.add(Domain2DtoMapper.map(module));
 		}
-        return modules;
+		return modules;
 	}
+
+	@Override
+	public List<RoleDto> findAll() {
+		List<RoleDto> dtos = new ArrayList<RoleDto>();
+		List<Role> roles = roleDao.findAll();
+		for (Role r : roles) {
+			dtos.add(Domain2DtoMapper.map(r));
+		}
+		return dtos;
+	}
+
 }

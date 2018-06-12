@@ -46,13 +46,14 @@ public class UserServiceImpl extends GenericService implements UserService {
 
 	}
 
-	//@Transactional
+	// @Transactional
 	@Override
 	public List<UserDto> findAll() {
 		List<UserDto> dtos = new ArrayList<UserDto>();
-        List<User> docenten = userDao.findAll();
-        for (User d: docenten){
-            dtos.add(Domain2DtoMapper.map(d));
-        }
-        return dtos;}
+		List<User> users = userDao.findAll();
+		for (User u : users) {
+			dtos.add(Domain2DtoMapper.map(u));
+		}
+		return dtos;
+	}
 }

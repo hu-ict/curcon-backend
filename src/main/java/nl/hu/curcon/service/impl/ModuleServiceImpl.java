@@ -37,4 +37,13 @@ public class ModuleServiceImpl extends GenericService implements ModuleService {
 		}
 		return functions;
 	}
+	@Override
+	public List<ModuleDto> findAll() {
+		List<ModuleDto> dtos = new ArrayList<ModuleDto>();
+		List<Module> modules = moduleDao.findAll();
+		for (Module m : modules) {
+			dtos.add(Domain2DtoMapper.map(m));
+		}
+		return dtos;
+	}
 }

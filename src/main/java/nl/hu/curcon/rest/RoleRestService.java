@@ -17,6 +17,7 @@ import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
 import nl.hu.curcon.dto.RoleDto;
+import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.RoleService;
@@ -33,7 +34,12 @@ import nl.hu.curcon.service.RoleService;
 
 		@Autowired
 		Dto2DomainMapper dto2DomainMapper;
-
+		@GET
+		@Produces({ MediaType.APPLICATION_JSON })
+		public Response findAll() {
+			List<RoleDto> list = roleService.findAll();
+			return Response.ok(list).build();
+		}
 		@GET
 		@Path("/{id}")
 		@Produces({ MediaType.APPLICATION_JSON })

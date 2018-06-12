@@ -7,5 +7,5 @@ import nl.hu.curcon.dto.ModuleDto;
 
 	@Repository
 	public interface ModuleDao extends GenericDao<Module>  {
-		Module find(int id);
+
 	}

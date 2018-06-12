@@ -10,7 +10,7 @@ public interface ModuleService {
 	ModuleDto find(int id);
 
 	List<FunctionDto> findFunctionsByModuleId(int id);
-	
+	List <ModuleDto> findAll();
 	
 
 }
