@@ -67,4 +67,7 @@ public class Role implements Serializable{
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
+	public void addModule(Module module) {
+		this.modules.add(module);
+	}
 }
