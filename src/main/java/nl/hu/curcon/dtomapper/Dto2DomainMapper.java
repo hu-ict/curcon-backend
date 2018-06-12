@@ -33,10 +33,13 @@ import nl.hu.curcon.dto.post.BeoordelingsElementPostDto;
 import nl.hu.curcon.dto.post.CohortPostDto;
 import nl.hu.curcon.dto.post.CursusPostDto;
 import nl.hu.curcon.dto.post.DocentPostDto;
+import nl.hu.curcon.dto.post.FunctionPostDto;
 import nl.hu.curcon.dto.post.LeerdoelPostDto;
 import nl.hu.curcon.dto.post.LeerlijnPostDto;
+import nl.hu.curcon.dto.post.ModulePostDto;
 import nl.hu.curcon.dto.post.OpleidingsProfielPostDto;
 import nl.hu.curcon.dto.post.OrganisatiePostDto;
+import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dto.post.ToetsElementPostDto;
 import nl.hu.curcon.dto.post.ToetsPostDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
@@ -166,6 +169,26 @@ public class Dto2DomainMapper {
 	}
 	public Function map(FunctionDto dto) {
 		Function domain = new Function();
+		domain.setName(dto.getName());
+		return domain;
+	}
+
+	public Module map(ModulePostDto dto) {
+		Module domain = new Module();
+		domain.setName(dto.getName());
+
+		return domain;
+	}
+
+	public Function map(FunctionPostDto dto) {
+		Function domain = new Function();
+		domain.setName(dto.getName());
+
+		return domain;
+	}
+
+	public Role map(RolePutDto dto) {
+		Role domain = new Role();
 		domain.setName(dto.getName());
 		return domain;
 	}

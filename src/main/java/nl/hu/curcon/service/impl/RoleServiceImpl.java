@@ -8,13 +8,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import nl.hu.curcon.dao.RoleDao;
+import nl.hu.curcon.domain.Cursus;
+import nl.hu.curcon.domain.Docent;
 import nl.hu.curcon.domain.Module;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
 import nl.hu.curcon.domain.Role;
+import nl.hu.curcon.domain.User;
 import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
 import nl.hu.curcon.dto.RoleDto;
+import nl.hu.curcon.dto.UserDto;
+import nl.hu.curcon.dto.post.ModulePostDto;
+import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.service.RoleService;
 
@@ -51,6 +57,42 @@ public class RoleServiceImpl extends GenericService implements RoleService {
 			dtos.add(Domain2DtoMapper.map(r));
 		}
 		return dtos;
+	}
+	@Override
+	@Transactional
+	public int create(RolePutDto roleDto) {
+		Role role = dto2DomainMapper.map(roleDto);
+		role = roleDao.save(role);
+		return role.getId();
+	}
+	
+	@Override
+	@Transactional
+	public boolean delete(int id) {
+		Role role = roleDao.find(id);
+		if (role == null) { return false; }
+		roleDao.delete(id);
+		return true;
+	}
+
+	@Override
+	@Transactional
+	public boolean update(int id, RolePutDto roleDto) {
+		Role role = roleDao.find(id);
+		if (role == null) { return false; }
+		role.setName(roleDto.getName());
+		role = roleDao.update(role);
+		return true;
+	}
+
+	@Override
+	public int createModuleByRole(int roleId, ModulePostDto moduleDto) {
+		Role role = roleDao.find(roleId);
+		if (role == null) return 0;
+		Module module = dto2DomainMapper.map(moduleDto);
+		role.addModule(module);
+		roleDao.save(role);
+		return module.getId();
 	}
 
 }

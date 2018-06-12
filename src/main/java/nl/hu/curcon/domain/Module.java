@@ -72,4 +72,9 @@ public class Module implements Serializable {
 		this.functions = functions;
 	}
 
+	public void addFunction(Function function) {
+		this.functions.add(function);
+		
+	}
+
 }

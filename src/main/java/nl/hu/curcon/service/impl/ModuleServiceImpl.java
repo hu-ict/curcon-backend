@@ -10,7 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import nl.hu.curcon.dao.ModuleDao;
 import nl.hu.curcon.domain.Function;
 import nl.hu.curcon.domain.Module;
+import nl.hu.curcon.domain.Role;
+import nl.hu.curcon.domain.Module;
 import nl.hu.curcon.dto.FunctionDto;
+import nl.hu.curcon.dto.ModuleDto;
+import nl.hu.curcon.dto.post.FunctionPostDto;
+import nl.hu.curcon.dto.post.ModulePostDto;
 import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.service.ModuleService;
@@ -45,5 +50,40 @@ public class ModuleServiceImpl extends GenericService implements ModuleService {
 			dtos.add(Domain2DtoMapper.map(m));
 		}
 		return dtos;
+	}
+	@Override
+	@Transactional
+	public int create(ModulePostDto moduleDto) {
+		Module module = dto2DomainMapper.map(moduleDto);
+		module = moduleDao.save(module);
+		return module.getId();
+	}
+	
+	@Override
+	@Transactional
+	public boolean delete(int id) {
+		Module module = moduleDao.find(id);
+		if (module == null) { return false; }
+		moduleDao.delete(id);
+		return true;
+	}
+
+	@Override
+	@Transactional
+	public boolean update(int id, ModulePostDto moduleDto) {
+		Module module = moduleDao.find(id);
+		if (module == null) { return false; }
+		module.setName(moduleDto.getName());
+		module = moduleDao.update(module);
+		return true;
+	}
+	@Override
+	public int createFunctionByModule(int moduleId, FunctionPostDto functionDto) {
+		Module module = moduleDao.find(moduleId);
+		if (module == null) return 0;
+		Function function = dto2DomainMapper.map(functionDto);
+		module.addFunction(function);
+		moduleDao.save(module);
+		return function.getId();
 	}
 }
