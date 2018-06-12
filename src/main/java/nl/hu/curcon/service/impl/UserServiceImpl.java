@@ -37,9 +37,10 @@ public class UserServiceImpl extends GenericService implements UserService {
 		List<Module> modules = userDao.find(username).getRole().getModules();
 		for (Module m : modules) {
 			for (Function f : m.getFunctions()) {
-				// if (!functions.contains(f)) {
-				functions.add(Domain2DtoMapper.map(f));
-				// }
+				//Needs Equals in dto.FunctionDto
+				if (!functions.contains(Domain2DtoMapper.map(f))) {
+					functions.add(Domain2DtoMapper.map(f));
+				}
 			}
 		}
 		return functions;

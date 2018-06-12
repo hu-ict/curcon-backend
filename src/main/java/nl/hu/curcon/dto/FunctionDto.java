@@ -1,5 +1,6 @@
 package nl.hu.curcon.dto;
 
+import nl.hu.curcon.domain.Function;
 
 public class FunctionDto extends HRefDto{
 	private int id;
@@ -29,4 +30,8 @@ public class FunctionDto extends HRefDto{
 		public int getId() {
 			return id;
 		}
+		@Override
+	    public boolean equals(Object oth){
+	        return id==(((FunctionDto)oth).id);
+	    }
 }
