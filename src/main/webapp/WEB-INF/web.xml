@@ -71,7 +71,7 @@
 		</init-param>
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>nl.hu.curcon.rest,com.fasterxml.jackson.jaxrs.json</param-value>
+			<param-value>nl.hu.curcon.rest,nl.hu.curcon.filter,com.fasterxml.jackson.jaxrs.json</param-value>
 		</init-param>
         <init-param>
             <param-name>jersey.config.server.provider.classnames</param-name>
