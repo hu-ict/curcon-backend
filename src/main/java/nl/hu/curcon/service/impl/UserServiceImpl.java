@@ -40,6 +40,12 @@ public class UserServiceImpl extends GenericService implements UserService {
 	public List<FunctionDto> findFunctionsByUsername(String username) {
 		// TODO testen of dit werkt.
 		List<FunctionDto> functions = new ArrayList<>();
+
+		if(userDao.find(username)== null || userDao.find(username).getRole()== null  ){
+			System.out.println(username+"<-gebruiker staat niet in de database of heeft geen rol");
+			return null;
+		} 
+		
 		List<Module> modules = userDao.find(username).getRole().getModules();
 		for (Module m : modules) {
 			for (Function f : m.getFunctions()) {
