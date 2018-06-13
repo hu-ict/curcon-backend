@@ -153,7 +153,6 @@ public class Dto2DomainMapper {
 	public User map(UserDto dto) {
 		User domain = new User();
 		domain.setUsername(dto.getUsername());
-		domain.setPassword(dto.getPassword());
 		return domain;
 	}
 	public Role map(RoleDto dto) {

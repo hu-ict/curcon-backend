@@ -85,16 +85,6 @@ public class UserServiceImpl extends GenericService implements UserService {
 		userDao.delete(username);
 		return true;
 	}
-
-	@Override
-	@Transactional
-	public boolean update(String username, UserPutDto userDto) {
-		User user = userDao.find(username);
-		if (user == null) { return false; }
-		user.setPassword(userDto.getPassword());
-		user = userDao.update(user);
-		return true;
-	}
 	@Override
 	@Transactional
 	public boolean updateRoleByUser(String username, int roleId) {

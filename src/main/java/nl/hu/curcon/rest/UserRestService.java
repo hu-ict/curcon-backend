@@ -69,17 +69,6 @@ public class UserRestService {
 		return Response.ok(list).build();
 
 	}
-	@PUT
-	@Path("/{username}")
-	@Transactional
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response update(@PathParam("username") String username, UserPutDto userDto) {
-		if (userService.update(username, userDto)) {
-			return Response.status(200).build();
-		} else {
-			return Response.status(404).build();
-		}
-	}
 
 	@DELETE
 	@Path("/{username}")

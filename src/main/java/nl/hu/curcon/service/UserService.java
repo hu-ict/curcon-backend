@@ -18,7 +18,6 @@ public interface UserService {
 
 	List<FunctionDto> findFunctionsByUsername(String username);
 	String create(UserDto dto);
-	boolean update(String username, UserPutDto userDto);
 	boolean delete(String username);
 	boolean updateRoleByUser(String username, int roleId);
 }

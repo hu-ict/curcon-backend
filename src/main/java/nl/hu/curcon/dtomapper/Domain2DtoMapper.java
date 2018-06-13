@@ -296,7 +296,6 @@ public class Domain2DtoMapper {
 		if (user == null) { return null; }
 		UserDto dto = new UserDto();
 		dto.setUsername(user.getUsername());
-		dto.setPassword(user.getPassword());
 
 		HRefDto hRefDtoOP = new HRefDto();
 		hRefDtoOP.setHRef(MyApplication.getBaseUrl() + "roles/" + user.getRole().getId());
