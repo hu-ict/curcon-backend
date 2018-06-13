@@ -3,6 +3,7 @@ package nl.hu.curcon.filter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,15 @@ public class FirebaseInit {
 	@Autowired 
 	UserService userService; 
 	// This is to connect to the firebase Console App/ Project where Only ADMINS should login
-	public static void FirebaseInit() throws IOException {
+	public void FirebaseInitialize() throws IOException {
 		// Only initializes an app if none exist yet.
 		System.out.println("FIREBASEAPPS" + FirebaseApp.getApps().size());
 		if (FirebaseApp.getApps().size() == 0) {
 			// FIXME This is an aboslute path
-			String path = "C:\\Users\\Martin\\workspace\\curcon\\src\\main\\java\\nl\\hu\\curcon\\filter\\curconhu-firebase-adminsdk-gbgvn-e48f9044b6.json";
+			String path = "/curconhu-firebase-adminsdk-gbgvn-e48f9044b6.json";
 
-			FileInputStream serviceAccount = new FileInputStream(path);
+			InputStream serviceAccount = getClass().getResourceAsStream(path);
+			//FileInputStream serviceAccount = new getResourceAsStream(path);
 
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))

@@ -9,6 +9,8 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.ext.Provider;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
@@ -18,7 +20,9 @@ import com.google.firebase.auth.FirebaseToken;
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 	public static ContainerRequestContext requestCtx;
-
+	 @Autowired
+	 FirebaseInit firebaseInit;
+	
 	@Override
 	public void filter(ContainerRequestContext requestCtx) throws IOException {
 		AuthenticationFilter.requestCtx = requestCtx;
@@ -38,7 +42,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 			try {
 				// Validate the token
 				// FIXME init 1x in de applicatie laten gebeuren waar?
-				FirebaseInit.FirebaseInit();
+				firebaseInit.FirebaseInitialize();
 
 				FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
 				String user = decodedToken.getEmail();

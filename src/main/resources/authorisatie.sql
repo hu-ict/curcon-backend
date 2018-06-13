@@ -12,8 +12,8 @@ INSERT INTO MODULE  VALUES (2, 'Module2');
 INSERT INTO ROLE  VALUES (1, 'ROLE1');
 INSERT INTO ROLE  VALUES (2, 'ROLE2');
 
-INSERT INTO user (username, password, role_id) VALUES ("user1@live.nl", 'pas1', 1);
-INSERT INTO user (username, password, role_id) VALUES ("user2@live.nl", 'pas2', 2);
+INSERT INTO user (username, password, role_id) VALUES ("luccah06071@gmail.com", 'pas1', 1);
+INSERT INTO user (username, password, role_id) VALUES ("martindaniel1998@gmail.com", 'pas2', 2);
 
 INSERT INTO `function_module` (`module_id`, `function_id`) VALUES ('1', '1');
 INSERT INTO `function_module` (`module_id`, `function_id`) VALUES ('2', '2');
