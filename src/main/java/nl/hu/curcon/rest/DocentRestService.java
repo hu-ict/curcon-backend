@@ -58,6 +58,10 @@ public class DocentRestService {
 	@Transactional
 	@ApiOperation(value = "Wijzigt een docent.")
 	public Response update(@PathParam("docentId") int docentId, DocentPostDto docentDto) {
+		if (!firebaseInit.functionInUser("docent_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (docentService.update(docentId, docentDto)) {
 			return Response.status(200).build();
 		} else {
