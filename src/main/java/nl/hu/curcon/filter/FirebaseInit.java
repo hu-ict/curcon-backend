@@ -27,7 +27,7 @@ public class FirebaseInit {
 		System.out.println("FIREBASEAPPS" + FirebaseApp.getApps().size());
 		if (FirebaseApp.getApps().size() == 0) {
 			// FIXME This is an aboslute path
-			String path = "/curconhu-firebase-adminsdk-gbgvn-e48f9044b6.json";
+			String path = "curconhu-firebase-adminsdk-gbgvn-e48f9044b6.json";
 
 			InputStream serviceAccount = getClass().getResourceAsStream(path);
 			//FileInputStream serviceAccount = new getResourceAsStream(path);
