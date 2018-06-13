@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import nl.hu.curcon.dao.ModuleDao;
 import nl.hu.curcon.dao.RoleDao;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Docent;
@@ -28,6 +29,9 @@ import nl.hu.curcon.service.RoleService;
 public class RoleServiceImpl extends GenericService implements RoleService {
 	@Autowired
 	private RoleDao roleDao;
+	
+	@Autowired
+	private ModuleDao moduleDao;
 
 	@Transactional
 	@Override
@@ -86,13 +90,17 @@ public class RoleServiceImpl extends GenericService implements RoleService {
 	}
 
 	@Override
-	public int createModuleByRole(int roleId, ModulePostDto moduleDto) {
+	@Transactional
+	public boolean addModuleToRole(int roleId, int moduleId) {
 		Role role = roleDao.find(roleId);
-		if (role == null) return 0;
-		Module module = dto2DomainMapper.map(moduleDto);
-		role.addModule(module);
+		if (role == null) {return false;};
+		Module module=moduleDao.find(moduleId);
+		if (module==null) {
+		return false;
+		}
+		role.getModules().add(module);
 		roleDao.save(role);
-		return module.getId();
+		return true;
 	}
 
 }

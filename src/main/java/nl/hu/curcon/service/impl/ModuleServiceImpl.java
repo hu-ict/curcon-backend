@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import nl.hu.curcon.dao.FunctionDao;
 import nl.hu.curcon.dao.ModuleDao;
 import nl.hu.curcon.domain.Function;
 import nl.hu.curcon.domain.Module;
@@ -24,6 +25,9 @@ import nl.hu.curcon.service.ModuleService;
 public class ModuleServiceImpl extends GenericService implements ModuleService {
 	@Autowired
 	private ModuleDao moduleDao;
+	
+	@Autowired
+	private FunctionDao functionDao;
 
 	@Override
 	public ModuleDto find(int id) {
@@ -78,12 +82,16 @@ public class ModuleServiceImpl extends GenericService implements ModuleService {
 		return true;
 	}
 	@Override
-	public int createFunctionByModule(int moduleId, FunctionPostDto functionDto) {
+	@Transactional
+	public boolean addFunctionToModule(int moduleId, int functionId) {
 		Module module = moduleDao.find(moduleId);
-		if (module == null) return 0;
-		Function function = dto2DomainMapper.map(functionDto);
-		module.addFunction(function);
+		if (module == null) return false;
+		Function function = functionDao.find(functionId);
+	    if (function==null){
+	    	return false;
+	    }
+		module.getFunctions().add(function);
 		moduleDao.save(module);
-		return function.getId();
+		return true;
 	}
 }

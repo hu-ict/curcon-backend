@@ -21,10 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import io.swagger.annotations.Api;
 import nl.hu.curcon.dto.FunctionDto;
 import nl.hu.curcon.dto.ModuleDto;
-import nl.hu.curcon.dto.RoleDto;
-import nl.hu.curcon.dto.post.FunctionPostDto;
+import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.ModulePostDto;
-import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.ModuleService;
@@ -94,13 +92,10 @@ public class ModuleRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public Response createFunctionByModule(@PathParam("moduleId") int moduleId,
-			FunctionPostDto functionDto) {
-		int functionId = moduleService.createFunctionByModule(moduleId, functionDto);
-		if (functionId >0){
-		UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("/functions/" + functionId);
-		URI uri = builder.build();
-		return Response.status(201).contentLocation(uri).build();
-		}else {
+			IdPostDto dto) {
+		if (moduleService.addFunctionToModule(moduleId, dto.getId())) {
+			return Response.ok().build();
+		} else {
 			return Response.status(404).build();
 		}
 	}

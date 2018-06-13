@@ -1,6 +1,5 @@
 package nl.hu.curcon.rest;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -13,21 +12,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import nl.hu.curcon.dto.CursusDto;
 import nl.hu.curcon.dto.FunctionDto;
 import nl.hu.curcon.dto.HRefDto;
-import nl.hu.curcon.dto.LinkDto;
 import nl.hu.curcon.dto.UserDto;
-import nl.hu.curcon.dto.post.CursusPostDto;
-import nl.hu.curcon.dto.post.RolePutDto;
+import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.UserPutDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
@@ -103,12 +97,9 @@ public class UserRestService {
 	@POST
 	@Path("/{username}/role")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response createCursusByOrganisatie(@PathParam("username") String username, RolePutDto roleDto) {
-		int roleId = userService.updateRoleByUser(username, roleDto);
-		if (roleId > 0) {
-			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("/role/" + roleId);
-			URI uri = builder.build();
-			return Response.status(201).contentLocation(uri).build();
+	public Response createCursusByOrganisatie(@PathParam("username") String username, IdPostDto dto) {
+		if (userService.updateRoleByUser(username, dto.getId())) {
+			return Response.ok().build();
 		} else {
 			return Response.status(404).build();
 		}

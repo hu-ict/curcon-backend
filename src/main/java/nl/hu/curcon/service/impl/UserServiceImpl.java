@@ -7,17 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import nl.hu.curcon.dao.RoleDao;
 import nl.hu.curcon.dao.UserDao;
 import nl.hu.curcon.domain.Function;
 import nl.hu.curcon.domain.Module;
-import nl.hu.curcon.domain.Organisatie;
 import nl.hu.curcon.domain.Role;
 import nl.hu.curcon.domain.User;
 import nl.hu.curcon.dto.FunctionDto;
-import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dto.UserDto;
-import nl.hu.curcon.dto.post.ModulePostDto;
-import nl.hu.curcon.dto.post.OrganisatiePostDto;
+import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dto.post.UserPutDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
@@ -27,6 +25,8 @@ import nl.hu.curcon.service.UserService;
 public class UserServiceImpl extends GenericService implements UserService {
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired RoleDao roleDao;
 
 	@Override
 	public UserDto find(String username) {
@@ -96,12 +96,16 @@ public class UserServiceImpl extends GenericService implements UserService {
 		return true;
 	}
 	@Override
-	public int updateRoleByUser(String username, RolePutDto dto) {
+	@Transactional
+	public boolean updateRoleByUser(String username, int roleId) {
 		User user = userDao.find(username);
-		if (user == null) return 0;
-		Role role = dto2DomainMapper.map(dto);
+		if (user == null) return false;
+		Role role = roleDao.find(roleId);
+		if (role == null) {
+		return false;
+		}
 		user.setRole(role);
 		userDao.save(user);
-		return role.getId();
+		return true;
 	}
 }

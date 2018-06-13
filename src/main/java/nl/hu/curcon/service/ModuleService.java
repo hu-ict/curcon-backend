@@ -20,7 +20,7 @@ public interface ModuleService {
 
 	boolean update(int id, ModulePostDto moduleDto);
 
-	int createFunctionByModule(int moduleId, FunctionPostDto functionDto);
+	boolean addFunctionToModule(int moduleId, int functionId);
 	
 
 }

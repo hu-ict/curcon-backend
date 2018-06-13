@@ -21,6 +21,6 @@ public interface RoleService {
 
 	int create(RolePutDto roleDto);
 
-	int createModuleByRole(int roleId, ModulePostDto moduleDto);
+	boolean addModuleToRole(int roleId, int moduleId);
 
 }

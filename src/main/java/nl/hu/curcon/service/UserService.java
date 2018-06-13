@@ -20,5 +20,5 @@ public interface UserService {
 	String create(UserDto dto);
 	boolean update(String username, UserPutDto userDto);
 	boolean delete(String username);
-	int updateRoleByUser(String username, RolePutDto dto);
+	boolean updateRoleByUser(String username, int roleId);
 }
