@@ -130,12 +130,12 @@ INSERT INTO professionalskill (id, activiteit_id, code, beschrijving, niveau) VA
 INSERT INTO professionalskill (id, activiteit_id, code, beschrijving, niveau) VALUES (15, 10, 'LPO', 'Leren & Persoonlijke Ontwikkeling', 'S');
 
 INSERT INTO organisatie (id, naam) VALUES (1, 'Hogeschool Utrecht I-ICT');
-INSERT INTO docent (id, naam, organisatie_id) VALUES (1, 'Berend Wilkens', 1)
-INSERT INTO docent (id, naam, organisatie_id) VALUES (2, 'Leo Pruijt', 1)
-INSERT INTO docent (id, naam, organisatie_id) VALUES (3, 'Dan Greve', 1)
-INSERT INTO docent (id, naam, organisatie_id) VALUES (4, 'Jeroen Weber', 1)
-INSERT INTO docent (id, naam, organisatie_id) VALUES (5, 'Rik Jansen', 1)
-INSERT INTO docent (id, naam, organisatie_id) VALUES (6, 'Rik Boss', 1)
+INSERT INTO docent (id, naam, organisatie_id) VALUES (1, 'Berend Wilkens', 1);
+INSERT INTO docent (id, naam, organisatie_id) VALUES (2, 'Leo Pruijt', 1);
+INSERT INTO docent (id, naam, organisatie_id) VALUES (3, 'Dan Greve', 1);
+INSERT INTO docent (id, naam, organisatie_id) VALUES (4, 'Jeroen Weber', 1);
+INSERT INTO docent (id, naam, organisatie_id) VALUES (5, 'Rik Jansen', 1);
+INSERT INTO docent (id, naam, organisatie_id) VALUES (6, 'Rik Boss', 1);
 INSERT INTO opleidingsprofiel (id, naam, organisatie_id) VALUES (1, 'Business IT and Management', 1);
 INSERT INTO opleidingsprofiel (id, naam, organisatie_id) VALUES (2, 'Software and Information Enginering', 1);
 INSERT INTO opleidingsprofiel (id, naam, organisatie_id) VALUES (3, 'System and Network Enginering', 1);
