@@ -52,7 +52,7 @@ public class ModuleRestService {
 	@GET
 	@Path("/{moduleId}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public ModuleDto find(@PathParam("id") int id) {
+	public ModuleDto find(@PathParam("moduleId") int id) {
 		return moduleService.find(id);
 	}
 	@POST
