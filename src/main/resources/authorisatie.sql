@@ -11,8 +11,8 @@ INSERT INTO ROLE  VALUES (1, 'Ophaler');
 INSERT INTO ROLE  VALUES (2, 'Beheerder');
 
 --Paswoord moet weg en andere usersemails
-INSERT INTO user (username, password, role_id) VALUES ("Test1Curcon@gmail.com", 'pas1', 1);
-INSERT INTO user (username, password, role_id) VALUES ("Test2Curcon@gmail.com", 'pas2', 2);
+INSERT INTO user (username, password, role_id) VALUES ("test1curcon@gmail.com", 'pas1', 1);
+INSERT INTO user (username, password, role_id) VALUES ("test2curcon@gmail.com", 'pas2', 2);
 
 INSERT INTO `function_module` (`module_id`, `function_id`) VALUES ('1', '1');
 INSERT INTO `function_module` (`module_id`, `function_id`) VALUES ('2', '1');
