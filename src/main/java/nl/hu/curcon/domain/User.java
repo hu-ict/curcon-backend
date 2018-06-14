@@ -13,7 +13,7 @@ public class User {
 	@Id
 	@Column(name = "username", unique = true, nullable = false)
 	private String username;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	private Role role;
 
 	public User() {

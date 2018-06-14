@@ -14,6 +14,7 @@ import nl.hu.curcon.domain.Module;
 import nl.hu.curcon.domain.Role;
 import nl.hu.curcon.domain.User;
 import nl.hu.curcon.dto.FunctionDto;
+import nl.hu.curcon.dto.RoleDto;
 import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.RolePutDto;
@@ -38,7 +39,6 @@ public class UserServiceImpl extends GenericService implements UserService {
 	@Transactional
 	@Override
 	public List<FunctionDto> findFunctionsByUsername(String username) {
-		// TODO testen of dit werkt.
 		List<FunctionDto> functions = new ArrayList<>();
 
 		if(userDao.find(username)== null || userDao.find(username).getRole()== null  ){
@@ -97,5 +97,17 @@ public class UserServiceImpl extends GenericService implements UserService {
 		user.setRole(role);
 		userDao.save(user);
 		return true;
+	}
+
+	@Override
+	public List<RoleDto> findRoleByUser(String username) {
+		User user = userDao.find(username);
+		if (user == null)
+			return null;
+		List<RoleDto> roles = new ArrayList<>();
+		Role role =user.getRole();
+		roles.add(Domain2DtoMapper.map(role));
+		
+		return roles;
 	}
 }

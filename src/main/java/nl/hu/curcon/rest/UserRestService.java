@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import io.swagger.annotations.Api;
 import nl.hu.curcon.dto.FunctionDto;
 import nl.hu.curcon.dto.HRefDto;
+import nl.hu.curcon.dto.RoleDto;
 import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.UserPutDto;
@@ -29,7 +30,7 @@ import nl.hu.curcon.service.UserService;
 
 @Component
 @Path("/users")
-@Api(hidden = true)
+@Api(hidden = false, value = "[User] Raadplegen en wijzigen van een USER.")
 public class UserRestService {
 	@Autowired
 	UserService userService;
@@ -57,8 +58,9 @@ public class UserRestService {
 	@GET
 	@Path("{username}/role")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public HRefDto findRole(@PathParam("username") String username) {
-		return userService.find(username).getRole();
+	public Response findRole(@PathParam("username") String username) {
+		List<RoleDto> list= userService.findRoleByUser(username);
+		return Response.ok(list).build();
 	}
 
 	@GET
@@ -83,7 +85,7 @@ public class UserRestService {
 			return Response.status(200).build();
 		}
 	}
-	@POST
+	@PUT
 	@Path("/{username}/role")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response createCursusByOrganisatie(@PathParam("username") String username, IdPostDto dto) {

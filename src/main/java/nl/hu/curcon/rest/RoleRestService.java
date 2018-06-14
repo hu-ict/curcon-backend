@@ -29,7 +29,7 @@ import nl.hu.curcon.service.RoleService;
 
 	@Component
 	@Path("/roles")
-	@Api(hidden = true)
+	@Api(hidden = false,value="Beheren van Rollen")
 	public class RoleRestService {
 	    @Autowired
 	    RoleService roleService;

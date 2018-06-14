@@ -29,7 +29,7 @@ import nl.hu.curcon.service.FunctionService;
 
 @Component
 @Path("/functions")
-@Api(hidden = true)
+@Api(hidden = false,value="Beheren van functions")
 public class FunctionRestService {
     @Autowired
     FunctionService functionService;

@@ -29,7 +29,7 @@ import nl.hu.curcon.service.ModuleService;
 
 @Component
 @Path("/modules")
-@Api(hidden = true)
+@Api(hidden = false,value="Beheren van modules")
 public class ModuleRestService {
 	@Autowired
 	ModuleService moduleService;
