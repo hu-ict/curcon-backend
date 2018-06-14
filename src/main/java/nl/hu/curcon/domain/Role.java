@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @SuppressWarnings("serial")
 @Entity
@@ -25,8 +26,9 @@ public class Role implements Serializable{
 	private int id;
 	@Column(name="name")
 	private String name;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "module_role", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"))
+	@ManyToMany//(cascade = CascadeType.ALL)
+	@JoinTable(name = "module_role",uniqueConstraints = {  @UniqueConstraint(columnNames={"role_id", "module_id"})}, joinColumns = 
+	@JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"))
 	private List<Module> modules;
 
 	public Role() {
@@ -66,8 +68,5 @@ public class Role implements Serializable{
 
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
-	}
-	public void addModule(Module module) {
-		this.modules.add(module);
 	}
 }

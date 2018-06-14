@@ -103,4 +103,19 @@ public class RoleServiceImpl extends GenericService implements RoleService {
 		return true;
 	}
 
+	@Override
+	public boolean removeModuleFromRole(int roleId, int moduleId) {
+		Role r = roleDao.find(roleId);
+		if (r == null)
+			return false;
+		Module m = moduleDao.find(moduleId);
+		if (m == null)
+			return false;
+		if (!r.getModules().contains(m))
+			return false;
+		r.getModules().remove(m);
+		roleDao.save(r);
+		return true;
+	}
+
 }

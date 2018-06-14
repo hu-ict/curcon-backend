@@ -18,6 +18,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import nl.hu.curcon.dto.FunctionDto;
 
 @SuppressWarnings("serial")
 @Entity
@@ -29,8 +32,11 @@ public class Module implements Serializable {
 	private int id;
 	@Column(name = "name")
 	private String name;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "function_module", joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "function_id", referencedColumnName = "id"))
+	@ManyToMany//(cascade = CascadeType.ALL)
+	@JoinTable(name = "function_module",uniqueConstraints = {  @UniqueConstraint(columnNames={"module_id", "function_id"})}, joinColumns = 
+	@JoinColumn(name = "module_id", referencedColumnName = "id"), inverseJoinColumns = 
+	@JoinColumn(name = "function_id", referencedColumnName = "id") 
+	)
 	private List<Function> functions;
 
 	public Module() {
@@ -71,10 +77,9 @@ public class Module implements Serializable {
 	public void setFunctions(List<Function> functions) {
 		this.functions = functions;
 	}
-
-	public void addFunction(Function function) {
-		this.functions.add(function);
-		
+	@Override
+	public boolean equals(Object oth) {
+		return id == (((Module) oth).id);
 	}
 
 }

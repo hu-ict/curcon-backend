@@ -49,6 +49,9 @@ public class Function implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	@Override
+	public boolean equals(Object oth) {
+		return id == (((Function) oth).id);
+	}
 
 }

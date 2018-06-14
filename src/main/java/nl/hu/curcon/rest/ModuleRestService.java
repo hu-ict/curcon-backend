@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.FunctionDto;
 import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dto.post.IdPostDto;
@@ -76,6 +78,20 @@ public class ModuleRestService {
 			return Response.status(404).build();
 		}
 	}
+	@DELETE
+	@Path("/{moduleId}")
+	@Transactional
+	public Response delete(@PathParam("moduleId") int moduleId) {
+		ModuleDto dto = moduleService.find(moduleId);
+		if (dto == null) {
+			return Response.status(404).build();
+
+		} else {
+			moduleService.delete(dto.getId());
+			return Response.status(200).build();
+		}
+	}
+	
 	@GET
 	@Path("/{moduleId}/functions")
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -94,6 +110,18 @@ public class ModuleRestService {
 	public Response createFunctionByModule(@PathParam("moduleId") int moduleId,
 			IdPostDto dto) {
 		if (moduleService.addFunctionToModule(moduleId, dto.getId())) {
+			return Response.ok().build();
+		} else {
+			return Response.status(404).build();
+		}
+	}
+	@DELETE
+	@Path("/{moduleId}/{functionId}")
+	@Transactional
+	@ApiOperation(value = "Verwijderd een functie van een module. [LINK]")
+	public Response removeFunctionFromModule(@PathParam("moduleId") int moduleId,
+			@PathParam("functionId") int functionId) {
+		if (moduleService.removeFunctionFromModule(moduleId, functionId)) {
 			return Response.ok().build();
 		} else {
 			return Response.status(404).build();

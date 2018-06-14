@@ -94,4 +94,19 @@ public class ModuleServiceImpl extends GenericService implements ModuleService {
 		moduleDao.save(module);
 		return true;
 	}
+
+	@Override
+	public boolean removeFunctionFromModule(int moduleId, int functionId) {
+			Module m = moduleDao.find(moduleId);
+			if (m == null)
+				return false;
+			Function f = functionDao.find(functionId);
+			if (f == null)
+				return false;
+			if (!m.getFunctions().contains(f))
+				return false;
+			m.getFunctions().remove(f);
+			moduleDao.save(m);
+			return true;
+		}
 }

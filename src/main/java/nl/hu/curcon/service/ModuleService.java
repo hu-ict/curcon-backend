@@ -21,6 +21,8 @@ public interface ModuleService {
 	boolean update(int id, ModulePostDto moduleDto);
 
 	boolean addFunctionToModule(int moduleId, int functionId);
+
+	boolean removeFunctionFromModule(int moduleId, int functionId);
 	
 
 }

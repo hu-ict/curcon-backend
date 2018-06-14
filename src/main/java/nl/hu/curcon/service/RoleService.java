@@ -23,4 +23,6 @@ public interface RoleService {
 
 	boolean addModuleToRole(int roleId, int moduleId);
 
+	boolean removeModuleFromRole(int roleId, int moduleId);
+
 }

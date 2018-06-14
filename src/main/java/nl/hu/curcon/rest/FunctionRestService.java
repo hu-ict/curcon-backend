@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -16,13 +17,11 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.swagger.annotations.Api;
 import nl.hu.curcon.dto.FunctionDto;
-import nl.hu.curcon.dto.ModuleDto;
-import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.post.FunctionPostDto;
-import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.FunctionService;
@@ -48,9 +47,9 @@ public class FunctionRestService {
 	}
 	
 	@GET
-	@Path("/{id}")
+	@Path("/{functionId}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public FunctionDto find(@PathParam("id") int id) {
+	public FunctionDto find(@PathParam("functionId") int id) {
 		return functionService.find(id);
 	}
 	@POST
@@ -74,6 +73,19 @@ public class FunctionRestService {
 			return Response.status(200).build();
 		} else {
 			return Response.status(404).build();
+		}
+	}
+	@DELETE
+	@Path("/{functionId}")
+	@Transactional
+	public Response delete(@PathParam("functionId") int functionId) {
+		FunctionDto dto = functionService.find(functionId);
+		if (dto == null) {
+			return Response.status(404).build();
+
+		} else {
+			functionService.delete(dto.getId());
+			return Response.status(200).build();
 		}
 	}
 }
