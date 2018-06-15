@@ -24,7 +24,7 @@ public class Role implements Serializable{
 	@Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name="name")
+	@Column(name="name", unique = true)
 	private String name;
 	@ManyToMany//(cascade = CascadeType.ALL)
 	@JoinTable(name = "module_role",uniqueConstraints = {  @UniqueConstraint(columnNames={"role_id", "module_id"})}, joinColumns = 

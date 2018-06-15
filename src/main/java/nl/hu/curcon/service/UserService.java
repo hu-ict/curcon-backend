@@ -22,4 +22,5 @@ public interface UserService {
 	String create(UserDto dto);
 	boolean delete(String username);
 	boolean updateRoleByUser(String username, int roleId);
+	
 }

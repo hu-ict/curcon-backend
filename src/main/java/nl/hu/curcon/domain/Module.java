@@ -30,7 +30,7 @@ public class Module implements Serializable {
 	@Column(name="id")
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name = "name")
+	@Column(name = "name", unique=true)
 	private String name;
 	@ManyToMany//(cascade = CascadeType.ALL)
 	@JoinTable(name = "function_module",uniqueConstraints = {  @UniqueConstraint(columnNames={"module_id", "function_id"})}, joinColumns = 

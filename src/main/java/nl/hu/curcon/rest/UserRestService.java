@@ -59,8 +59,8 @@ public class UserRestService {
 	@Path("{username}/role")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findRole(@PathParam("username") String username) {
-		List<RoleDto> list= userService.findRoleByUser(username);
-		return Response.ok(list).build();
+		RoleDto role= userService.findRoleByUser(username).get(0);
+		return Response.ok(role).build();
 	}
 
 	@GET
