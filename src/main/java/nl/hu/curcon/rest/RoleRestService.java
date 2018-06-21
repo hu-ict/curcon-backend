@@ -29,6 +29,7 @@ import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.RoleService;
+import nl.hu.curcon.filter.FirebaseInit;
 
 @Component
 @Path("/roles")
@@ -37,6 +38,9 @@ public class RoleRestService {
 	@Autowired
 	RoleService roleService;
 
+	@Autowired
+	FirebaseInit firebaseInit;
+	
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
 
@@ -60,6 +64,10 @@ public class RoleRestService {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response create(RolePutDto roleDto) {
+		if (!firebaseInit.functionInUser("role_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int roleId = roleService.create(roleDto);
 		if (roleId > 0) {
 			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("roles/" + roleId);
@@ -74,6 +82,10 @@ public class RoleRestService {
 	@Path("/{roleId}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(@PathParam("roleId") int roleId, RolePutDto roleDto) {
+		if (!firebaseInit.functionInUser("role_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (roleService.update(roleId, roleDto)) {
 			return Response.status(200).build();
 		} else {
@@ -84,6 +96,10 @@ public class RoleRestService {
 	@Path("/{roleId}")
 	@Transactional
 	public Response delete(@PathParam("roleId") int roleId) {
+		if (!firebaseInit.functionInUser("role_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		RoleDto dto = roleService.find(roleId);
 		if (dto == null) {
 			return Response.status(404).build();
@@ -110,6 +126,10 @@ public class RoleRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public Response createModuleByRole(@PathParam("roleId") int roleId, IdPostDto dto) {
+		if (!firebaseInit.functionInUser("rolemodule_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (roleService.addModuleToRole(roleId, dto.getId())) {
 			return Response.ok().build();
 		} else {
@@ -123,6 +143,10 @@ public class RoleRestService {
 	@ApiOperation(value = "Verwijderd een module van een rol. [LINK]")
 	public Response removeRolFromModule(@PathParam("roleId") int roleId,
 			@PathParam("moduleId") int moduleId) {
+		if (!firebaseInit.functionInUser("rolemodule_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (roleService.removeModuleFromRole(roleId, moduleId)) {
 			return Response.ok().build();
 		} else {
