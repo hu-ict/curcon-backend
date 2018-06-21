@@ -5,7 +5,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,7 +35,7 @@ public class BeroepsTaakRestService {
 	public List<BeroepsTaakDto> findAll() {
 		if (!firebaseInit.functionInUser("beroepstaken_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return beroepsTaakService.findAll();
 	}
@@ -44,7 +46,7 @@ public class BeroepsTaakRestService {
 	public BeroepsTaakDto find(@PathParam("beroepsTaakId") int beroepsTaakId) {
 		if (!firebaseInit.functionInUser("beroepstaak_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return beroepsTaakService.find(beroepsTaakId);
 	}
@@ -55,7 +57,7 @@ public class BeroepsTaakRestService {
 	public BeroepsTaakTypesDto findTypes() {
 		if (!firebaseInit.functionInUser("beroepstaaktypes_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return beroepsTaakService.findTypes();
 	}
@@ -66,7 +68,7 @@ public class BeroepsTaakRestService {
 	public BeroepsTaakDto find(@PathParam("activiteitId") int activiteitId, @PathParam("architectuurLaagId") int architectuurLaagId, @PathParam("niveau") int niveau) {
 		if (!firebaseInit.functionInUser("beroepstaak_find")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return beroepsTaakService.find(activiteitId, architectuurLaagId, niveau);
 	}

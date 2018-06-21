@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -48,7 +49,7 @@ public class OrganisatieRestService {
 	public List<OrganisatieDto> findAll() {
 		if (!firebaseInit.functionInUser("organisaties_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return organisatieService.findAll();
 	}

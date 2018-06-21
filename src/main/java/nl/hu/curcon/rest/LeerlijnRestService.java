@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -42,7 +43,7 @@ public class LeerlijnRestService {
 	public LeerlijnDto find(@PathParam("id") int id) {
 		if (!firebaseInit.functionInUser("leerlijn_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return leerlijnService.find(id);
 	}
@@ -53,7 +54,7 @@ public class LeerlijnRestService {
 	public LeerlijnDto update(LeerlijnPostDto leerlijnDto) {
 		if (!firebaseInit.functionInUser("leerlijn_put")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return leerlijnService.update(leerlijnDto);
 	}
@@ -63,7 +64,7 @@ public class LeerlijnRestService {
 	public void delete(@PathParam("id") int id) {
 		if (!firebaseInit.functionInUser("leerlijn_delete")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		leerlijnService.delete(id);
 	}
@@ -75,7 +76,7 @@ public class LeerlijnRestService {
 	public List<TrefwoordDto> findTrefwoordenByLeerlijn(@PathParam("leerlijnId") int leerlijnId) {
 		if (!firebaseInit.functionInUser("leerlijntrefwoorden_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return leerlijnService.findTrefwoordenByLeerlijn(leerlijnId);
 	}

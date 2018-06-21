@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -42,7 +43,7 @@ public class CohortRestService {
 	public CohortDto find(@PathParam("cohortId") int id) {
 		if (!firebaseInit.functionInUser("cohort_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return cohortService.find(id);
 	}

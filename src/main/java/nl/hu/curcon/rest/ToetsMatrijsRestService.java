@@ -4,7 +4,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,7 +35,7 @@ public class ToetsMatrijsRestService {
 	public ToetsMatrijsDto find(@PathParam("cursus_id") int cursus_id) {
 		if (!firebaseInit.functionInUser("toetsmatrijs_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return toetsMatrijsService.find(cursus_id);
 	}

@@ -6,7 +6,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,7 +42,7 @@ public class TrefwoordRestService {
 	public TrefwoordDto find(@PathParam("id") int id) {
 		if (!firebaseInit.functionInUser("trefwoord_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return trefwoordService.find(id);
 	}
@@ -51,7 +53,7 @@ public class TrefwoordRestService {
 	public boolean update(TrefwoordPostDto trefwoordDto) {
 		if (!firebaseInit.functionInUser("trefwoord_put")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return trefwoordService.update(trefwoordDto);
 	}
@@ -61,7 +63,7 @@ public class TrefwoordRestService {
 	public void delete(@PathParam("id") int id) {
 		if (!firebaseInit.functionInUser("trefwoord_delete")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		trefwoordService.delete(id);
 	}

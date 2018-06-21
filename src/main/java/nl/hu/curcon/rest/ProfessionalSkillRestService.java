@@ -5,7 +5,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,7 +39,7 @@ public class ProfessionalSkillRestService {
 	public List<ProfessionalSkillDto> findAll() {
 		if (!firebaseInit.functionInUser("professionals_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return professionalSkillService.findAll();
 	}
@@ -48,7 +50,7 @@ public class ProfessionalSkillRestService {
 	public ProfessionalSkillDto find(@PathParam("id") int id) {
 		if (!firebaseInit.functionInUser("professional_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return professionalSkillService.find(id);
 	}
@@ -59,7 +61,7 @@ public class ProfessionalSkillRestService {
 	public ProfessionalSkillTypesDto findTypes() {
 		if (!firebaseInit.functionInUser("professionaltypes_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return professionalSkillService.findTypes();
 	}
@@ -70,7 +72,7 @@ public class ProfessionalSkillRestService {
 	public ProfessionalSkillDto find(@PathParam("skillId") int skillId, @PathParam("niveau") String niveau) {
 		if (!firebaseInit.functionInUser("professional_find")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return professionalSkillService.find(skillId, niveau);
 	}

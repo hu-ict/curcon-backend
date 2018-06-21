@@ -6,7 +6,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,7 +39,7 @@ public class ToetsProgrammaRest {
 	public List<EctsToetsVormDto> getVorm(@PathParam("cohortId") int cohortId) {
 		if (!firebaseInit.functionInUser("toetsvorm_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return toetsProgrammaService.getEctsToetsVorm(cohortId);
 	}
@@ -50,7 +52,7 @@ public class ToetsProgrammaRest {
 	public List<EctsBeroepsTaakDto> getEcts(@PathParam("cohortId") int cohortId) {
 		if (!firebaseInit.functionInUser("ects_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return toetsProgrammaService.getEctsBroepsTaak(cohortId);
 	}
@@ -63,7 +65,7 @@ public class ToetsProgrammaRest {
 	public List<ConformiteitBeroepsTaakDto> calcProfiel(@PathParam("cohortId") int cohortId) {
 		if (!firebaseInit.functionInUser("calcprofiel_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return toetsProgrammaService.calcProfile(cohortId);
 	}

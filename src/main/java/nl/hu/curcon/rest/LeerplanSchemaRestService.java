@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -39,7 +40,7 @@ public class LeerplanSchemaRestService {
 	public LeerplanSchemaDto find(@PathParam("cohortId") int cohortId) {
 		if (!firebaseInit.functionInUser("leerplan_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return leerplanSchemaService.find(cohortId);
 	}
@@ -52,7 +53,7 @@ public class LeerplanSchemaRestService {
 	public ProfielDto findProfiel(@PathParam("cohortId") int cohortId) {
 		if (!firebaseInit.functionInUser("leerplanschemaprofiel_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return leerplanSchemaService.getCalcProfile(cohortId);
 	}
@@ -64,7 +65,7 @@ public class LeerplanSchemaRestService {
 	public List<LeerdoelOverzichtDto> findLeerdoelenByCohortAndBeroepsTaak(@PathParam("cohortId") int cohortId, @PathParam("activiteitId") int activiteitId, @PathParam("architectuurlaagId") int architectuurlaagId) {
 		if (!firebaseInit.functionInUser("leerdoelencohortberoepstaak_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return leerplanSchemaService.findLeerdoelenByCohortAndBeroepsTaak(cohortId, activiteitId, architectuurlaagId);
 	}
@@ -77,7 +78,7 @@ public class LeerplanSchemaRestService {
 	public Map<Integer, Map<Integer, EctsGewichtNiveauDto>> calcEctsGewichtByCohortAndBeroepsTaak(@PathParam("cohortId") int cohortId, @PathParam("activiteitId") int activiteitId, @PathParam("architectuurlaagId") int architectuurlaagId) {
 		if (!firebaseInit.functionInUser("ECTScohortberoepstaak_get")) {
 			//Niet Geauthoriseerd
-			return Response.status(403).build();
+			throw new WebApplicationException(Response.status(403).build());
 		}
 		return leerplanSchemaService.calcEctsGewichtByCohortAndBeroepsTaak(cohortId, activiteitId, architectuurlaagId);
 	}
