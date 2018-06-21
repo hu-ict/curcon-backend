@@ -27,6 +27,7 @@ import nl.hu.curcon.dto.post.UserPutDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.UserService;
+import nl.hu.curcon.filter.FirebaseInit;
 
 @Component
 @Path("/users")
@@ -34,7 +35,8 @@ import nl.hu.curcon.service.UserService;
 public class UserRestService {
 	@Autowired
 	UserService userService;
-
+	@Autowired
+	FirebaseInit firebaseInit;
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
 
@@ -44,6 +46,10 @@ public class UserRestService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll() {
+		if (!firebaseInit.functionInUser("users_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<UserDto> list = userService.findAll();
 		return Response.ok(list).build();
 	}
@@ -76,6 +82,10 @@ public class UserRestService {
 	@Path("/{username}")
 	@Transactional
 	public Response delete(@PathParam("username") String username) {
+		if (!firebaseInit.functionInUser("user_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		UserDto dto = userService.find(username);
 		if (dto == null) {
 			return Response.status(404).build();
@@ -89,6 +99,10 @@ public class UserRestService {
 	@Path("/{username}/role")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response createCursusByOrganisatie(@PathParam("username") String username, IdPostDto dto) {
+		if (!firebaseInit.functionInUser("user_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (userService.updateRoleByUser(username, dto.getId())) {
 			return Response.ok().build();
 		} else {
