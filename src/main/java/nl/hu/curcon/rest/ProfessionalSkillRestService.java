@@ -16,6 +16,7 @@ import nl.hu.curcon.dto.competence.ProfessionalSkillTypesDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.ProfessionalSkillService;
+import nl.hu.curcon.filter.FirebaseInit;
 
 @Component
 @Path("/professionalskills")
@@ -23,7 +24,8 @@ import nl.hu.curcon.service.ProfessionalSkillService;
 public class ProfessionalSkillRestService {
 	@Autowired
 	ProfessionalSkillService professionalSkillService;
-
+	@Autowired
+	FirebaseInit firebaseInit;
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
 
@@ -33,6 +35,10 @@ public class ProfessionalSkillRestService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<ProfessionalSkillDto> findAll() {
+		if (!firebaseInit.functionInUser("professionals_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return professionalSkillService.findAll();
 	}
 
@@ -40,6 +46,10 @@ public class ProfessionalSkillRestService {
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ProfessionalSkillDto find(@PathParam("id") int id) {
+		if (!firebaseInit.functionInUser("professional_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return professionalSkillService.find(id);
 	}
 
@@ -47,6 +57,10 @@ public class ProfessionalSkillRestService {
  	@Path("/types")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ProfessionalSkillTypesDto findTypes() {
+		if (!firebaseInit.functionInUser("professionaltypes_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return professionalSkillService.findTypes();
 	}
 
@@ -54,6 +68,10 @@ public class ProfessionalSkillRestService {
 	@Path("/skill/{skillId}/niveaus/{niveau}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ProfessionalSkillDto find(@PathParam("skillId") int skillId, @PathParam("niveau") String niveau) {
+		if (!firebaseInit.functionInUser("professional_find")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return professionalSkillService.find(skillId, niveau);
 	}
 

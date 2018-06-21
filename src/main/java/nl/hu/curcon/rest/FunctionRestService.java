@@ -25,6 +25,7 @@ import nl.hu.curcon.dto.post.FunctionPostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.FunctionService;
+import nl.hu.curcon.filter.FirebaseInit;
 
 @Component
 @Path("/functions")
@@ -32,6 +33,8 @@ import nl.hu.curcon.service.FunctionService;
 public class FunctionRestService {
     @Autowired
     FunctionService functionService;
+	@Autowired
+	FirebaseInit firebaseInit;
 
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
@@ -55,6 +58,10 @@ public class FunctionRestService {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response create(FunctionPostDto functionDto) {
+		if (!firebaseInit.functionInUser("function_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int functionId = functionService.create(functionDto);
 		if (functionId > 0) {
 			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("functions/" + functionId);
@@ -69,6 +76,10 @@ public class FunctionRestService {
 	@Path("/{functionId}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(@PathParam("functionId") int functionId, FunctionPostDto functionDto) {
+		if (!firebaseInit.functionInUser("function_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (functionService.update(functionId, functionDto)) {
 			return Response.status(200).build();
 		} else {
@@ -79,6 +90,10 @@ public class FunctionRestService {
 	@Path("/{functionId}")
 	@Transactional
 	public Response delete(@PathParam("functionId") int functionId) {
+		if (!firebaseInit.functionInUser("function_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		FunctionDto dto = functionService.find(functionId);
 		if (dto == null) {
 			return Response.status(404).build();

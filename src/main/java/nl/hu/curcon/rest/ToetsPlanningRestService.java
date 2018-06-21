@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import nl.hu.curcon.dto.ToetsPlanningDto;
 import nl.hu.curcon.service.ToetsPlanningService;
+import nl.hu.curcon.filter.FirebaseInit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,10 +26,16 @@ import io.swagger.annotations.Api;
 public class ToetsPlanningRestService {
     @Autowired
     ToetsPlanningService toetsPlanningService;
+	@Autowired
+	FirebaseInit firebaseInit;
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<ToetsPlanningDto> findAll() {
+		if (!firebaseInit.functionInUser("toetsplanningen_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return toetsPlanningService.findAll();
 	}
 
@@ -36,6 +43,10 @@ public class ToetsPlanningRestService {
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ToetsPlanningDto find(@PathParam("id") int id) {
+		if (!firebaseInit.functionInUser("toetsplanning_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return toetsPlanningService.find(id);
 	}
 
@@ -43,6 +54,10 @@ public class ToetsPlanningRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToetsPlanningDto create(ToetsPlanningDto toetsPlanningDto) {
+		if (!firebaseInit.functionInUser("toetsplanning_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return toetsPlanningService.create(toetsPlanningDto);
 	}
 
@@ -51,12 +66,20 @@ public class ToetsPlanningRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public ToetsPlanningDto update(ToetsPlanningDto toetsPlanningDto) {
+		if (!firebaseInit.functionInUser("toetsplanning_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return toetsPlanningService.update(toetsPlanningDto);
 	}
 
 	@DELETE
 	@Path("/{id}")
 	public void delete(@PathParam("id") int id) {
+		if (!firebaseInit.functionInUser("toetsplanning_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		toetsPlanningService.delete(id);
 	}
 

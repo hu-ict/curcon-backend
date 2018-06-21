@@ -21,6 +21,7 @@ import nl.hu.curcon.dto.BeoordelingsElementDto;
 import nl.hu.curcon.dto.ToetsElementDto;
 import nl.hu.curcon.dto.post.BeoordelingsElementPostDto;
 import nl.hu.curcon.service.BeoordelingsElementService;
+import nl.hu.curcon.filter.FirebaseInit;
 
 @Component
 @Path("/beoordelingselementen")
@@ -28,17 +29,26 @@ import nl.hu.curcon.service.BeoordelingsElementService;
 public class BeoordelingsElementRestService {
 	@Autowired
 	BeoordelingsElementService beoordelingsElementService;
+	@Autowired
+	FirebaseInit firebaseInit;
 
 	@GET
 	@Path("/{beoordelingsElementId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response find(@PathParam("beoordelingsElementId") int beoordelingsElementId) {
+		if (!firebaseInit.functionInUser("beoordelingselement_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		BeoordelingsElementDto beoordelingsElementDto = beoordelingsElementService.find(beoordelingsElementId);
 		if (beoordelingsElementDto != null) {
 			return Response.ok(beoordelingsElementDto).build();
+		
 		} else {
 			return Response.status(404).build();
 		}
+		
+		
 	}
 
 	@ApiOperation(hidden = false, value = "Wijzigen van een beoordelingselement")
@@ -47,6 +57,12 @@ public class BeoordelingsElementRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(@PathParam("beoordelingsElementId") int beoordelingsElementId,
 			BeoordelingsElementPostDto beoordelingsElementPostDto) {
+		
+		if (!firebaseInit.functionInUser("beoordelingselement_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
+		
 		if (beoordelingsElementService.update(beoordelingsElementId, beoordelingsElementPostDto)) {
 			return Response.status(200).build();
 		} else {
@@ -57,6 +73,11 @@ public class BeoordelingsElementRestService {
 	@DELETE
 	@Path("/{beoordelingsElementId}")
 	public Response delete(@PathParam("beoordelingsElementId") int beoordelingsElementId) {
+		
+		if (!firebaseInit.functionInUser("beoordelingselement_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (beoordelingsElementService.delete(beoordelingsElementId)) {
 			return Response.ok().build();
 		} else {
@@ -69,6 +90,10 @@ public class BeoordelingsElementRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft alle toetselementen bij een beoordelingelement.")
 	public Response findToetElementenByLeerdoel(@PathParam("beoordelingsElementId") int beoordelingsElementId) {
+		if (!firebaseInit.functionInUser("beoordelingselement_getlist")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<ToetsElementDto> list = beoordelingsElementService
 				.getToetslementenByBeoordelingsElement(beoordelingsElementId);
 		if (list != null) {
