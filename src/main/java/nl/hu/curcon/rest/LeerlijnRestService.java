@@ -25,6 +25,7 @@ import nl.hu.curcon.dto.competence.TrefwoordDto;
 import nl.hu.curcon.dto.post.LeerlijnPostDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
 import nl.hu.curcon.service.LeerlijnService;
+import nl.hu.curcon.filter.FirebaseInit;
 
 @Component
 @Path("/leerlijnen")
@@ -32,11 +33,17 @@ import nl.hu.curcon.service.LeerlijnService;
 public class LeerlijnRestService {
     @Autowired
     LeerlijnService leerlijnService;
+	@Autowired
+	FirebaseInit firebaseInit;
 
 	@GET
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public LeerlijnDto find(@PathParam("id") int id) {
+		if (!firebaseInit.functionInUser("leerlijn_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return leerlijnService.find(id);
 	}
 
@@ -44,12 +51,20 @@ public class LeerlijnRestService {
 	@Path("/{id}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public LeerlijnDto update(LeerlijnPostDto leerlijnDto) {
+		if (!firebaseInit.functionInUser("leerlijn_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return leerlijnService.update(leerlijnDto);
 	}
 
 	@DELETE
 	@Path("/{id}")
 	public void delete(@PathParam("id") int id) {
+		if (!firebaseInit.functionInUser("leerlijn_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		leerlijnService.delete(id);
 	}
 	
@@ -58,6 +73,10 @@ public class LeerlijnRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public List<TrefwoordDto> findTrefwoordenByLeerlijn(@PathParam("leerlijnId") int leerlijnId) {
+		if (!firebaseInit.functionInUser("leerlijntrefwoorden_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		return leerlijnService.findTrefwoordenByLeerlijn(leerlijnId);
 	}
 
@@ -67,6 +86,10 @@ public class LeerlijnRestService {
 	@Transactional
 	@ApiOperation(value = "Maakt een nieuw trefwoord aan binnen een leerlijn.")
 	public Response createTrefwoordByLeerlijn(@PathParam("leerlijnId") int leerlijnId, TrefwoordPostDto trefwoordDto) {
+		if (!firebaseInit.functionInUser("leerlijntrefwoord_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int trefwoordId = leerlijnService.createTrefwoordByLeerlijn(leerlijnId, trefwoordDto);
 		if (trefwoordId > 0) {
 			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl())
