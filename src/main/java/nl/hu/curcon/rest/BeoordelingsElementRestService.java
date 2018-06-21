@@ -21,6 +21,7 @@ import nl.hu.curcon.dto.BeoordelingsElementDto;
 import nl.hu.curcon.dto.ToetsElementDto;
 import nl.hu.curcon.dto.post.BeoordelingsElementPostDto;
 import nl.hu.curcon.service.BeoordelingsElementService;
+import nl.hu.curcon.filter.FirebaseInit;
 
 @Component
 @Path("/beoordelingselementen")
@@ -28,6 +29,8 @@ import nl.hu.curcon.service.BeoordelingsElementService;
 public class BeoordelingsElementRestService {
 	@Autowired
 	BeoordelingsElementService beoordelingsElementService;
+	@Autowired
+	FirebaseInit firebaseInit;
 
 	@GET
 	@Path("/{beoordelingsElementId}")
