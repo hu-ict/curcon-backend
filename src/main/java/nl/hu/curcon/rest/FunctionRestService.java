@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -45,6 +46,10 @@ public class FunctionRestService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll() {
+		if (!firebaseInit.functionInUser("functions_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		List<FunctionDto> list = functionService.findAll();
 		return Response.ok(list).build();
 	}
@@ -53,6 +58,10 @@ public class FunctionRestService {
 	@Path("/{functionId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public FunctionDto find(@PathParam("functionId") int id) {
+		if (!firebaseInit.functionInUser("function_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return functionService.find(id);
 	}
 	@POST
