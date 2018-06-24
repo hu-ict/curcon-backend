@@ -121,6 +121,10 @@ public class ModuleRestService {
 	@Path("/{moduleId}/functions")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findOpleidingsProfielenByOrganisatie(@PathParam("moduleId") int id) {
+		if (!firebaseInit.functionInUser("modulefunctions_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<FunctionDto> list = moduleService.findFunctionsByModuleId(id);
 		if (list != null) {
 			return Response.ok(list).build();

@@ -122,6 +122,10 @@ public class RoleRestService {
 	@Path("/{roleId}/modules")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findModulesByRole(@PathParam("roleId") int id) {
+		if (!firebaseInit.functionInUser("rolemodules_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<ModuleDto> list = roleService.findModulesByRoleId(id);
 		if (list != null) {
 			return Response.ok(list).build();
