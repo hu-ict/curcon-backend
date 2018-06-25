@@ -82,10 +82,6 @@ public class UserRestService {
 	@Path("{username}/functions")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findFunctionsbyuser(@PathParam("username") String username) {
-		if (!firebaseInit.functionInUser("userfunctions_get")) {
-			//Niet Geauthoriseerd
-			return Response.status(403).build();
-		}
 		List<FunctionDto> list = userService.findFunctionsByUsername(username);
 		return Response.ok(list).build();
 
