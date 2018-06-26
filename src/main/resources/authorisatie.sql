@@ -3,6 +3,11 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+DELETE FROM `user`;
+DELETE FROM `role`;
+DELETE FROM `module`;
+DELETE FROM `function`;
+
 INSERT INTO `function` (`id`, `name`) VALUES
 ('1','beoordelingselement_get'),
 ('2','beoordelingselement_put'),
@@ -123,11 +128,9 @@ INSERT INTO `module` (`id`, `name`) VALUES
 ('6','read_cohort'),
 ('7','beheer_cursussenberoepstaak'),
 ('8','beheer_cursussentoets'),
-('9','beheer_cursussen'),
 ('10','read_cursussen'),
 ('11','read_cursustoetsen'),
 ('12','beheer_cursussen'),
-('13','beheer_cursussencursus'),
 ('14','beheer_docentendocent'),
 ('15','read_docenten'),
 ('16','beheer_functionfunction'),
@@ -167,7 +170,18 @@ INSERT INTO `role` (`id`, `name`) VALUES
 ('2','admin'),
 ('3','cursusleider'),
 ('4','cursuscommissie'),
-('5','curriculumcommissie');
+('5','curriculumcommissie'),
+('6','developer');
+
+COMMIT;
+
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+DELETE FROM `function_module`;
 
 INSERT INTO `function_module` (`module_id`, `function_id`) VALUES
 ('1','1'),
@@ -178,16 +192,16 @@ INSERT INTO `function_module` (`module_id`, `function_id`) VALUES
 ('3','6'),
 ('3','7'),
 ('3','8'),
-('4','9'),
+('4','12'),
 ('5','10'),
 ('4','11'),
 ('5','12'),
-('6','13'),
+('6','12'),
 ('10','14'),
-('9','15'),
+('12','15'),
 ('8','16'),
 ('10','17'),
-('9','18'),
+('12','18'),
 ('11','19'),
 ('8','20'),
 ('7','21'),
@@ -280,6 +294,14 @@ INSERT INTO `function_module` (`module_id`, `function_id`) VALUES
 ('42','108'),
 ('42','109');
 
+COMMIT;
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+DELETE FROM `module_role`;
 
 INSERT INTO `module_role` (`role_id`, `module_id`) VALUES
 ('5','1'),
@@ -290,11 +312,11 @@ INSERT INTO `module_role` (`role_id`, `module_id`) VALUES
 ('1','6'),
 ('3','7'),
 ('4','8'),
-('3','9'),
+('3','12'),
 ('1','10'),
 ('4','11'),
 ('4','12'),
-('5','13'),
+('5','12'),
 ('2','14'),
 ('1','15'),
 ('2','16'),
@@ -336,11 +358,8 @@ INSERT INTO `module_role` (`role_id`, `module_id`) VALUES
 ('6','6'),
 ('6','7'),
 ('6','8'),
-('6','9'),
 ('6','10'),
 ('6','11'),
-('6','12'),
-('6','13'),
 ('6','14'),
 ('6','15'),
 ('6','16'),
@@ -442,6 +461,15 @@ INSERT INTO `module_role` (`role_id`, `module_id`) VALUES
 ('5','43'),
 ('5','44'),
 ('5','46');
+
+COMMIT;
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+DELETE FROM `user`;
 
 INSERT INTO `user` (`username`, `role_id`) VALUES
 ('luccah06071@gmail.com', 6),
