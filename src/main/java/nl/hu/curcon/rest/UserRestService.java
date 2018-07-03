@@ -1,5 +1,6 @@
 package nl.hu.curcon.rest;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -13,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,15 +22,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.swagger.annotations.Api;
 import nl.hu.curcon.dto.FunctionDto;
-import nl.hu.curcon.dto.HRefDto;
 import nl.hu.curcon.dto.RoleDto;
 import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.post.IdPostDto;
-import nl.hu.curcon.dto.post.UserPutDto;
+import nl.hu.curcon.dto.post.UserPostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
-import nl.hu.curcon.service.UserService;
 import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.service.UserService;
 
 @Component
 @Path("/users")
@@ -65,6 +66,23 @@ public class UserRestService {
 		}
 		return userService.find(username);
 	}
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response create(UserPostDto userDto) {
+		if (!firebaseInit.functionInUser("user_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
+		String username = userService.create(userDto);
+		if (username!=""&&username!=null) {
+			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("users/" + username);
+			URI uri = builder.build();
+			return Response.status(201).contentLocation(uri).build();
+		} else {
+			return Response.status(404).build();
+		}
+	}
+	
 
 	@GET
 	@Path("{username}/role")
