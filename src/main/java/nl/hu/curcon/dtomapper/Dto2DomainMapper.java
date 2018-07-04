@@ -43,6 +43,7 @@ import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dto.post.ToetsElementPostDto;
 import nl.hu.curcon.dto.post.ToetsPostDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
+import nl.hu.curcon.dto.post.UserPostDto;
 
 /**
  * @author berend.wilkens, 30 mei 2017
@@ -189,6 +190,11 @@ public class Dto2DomainMapper {
 	public Role map(RolePutDto dto) {
 		Role domain = new Role();
 		domain.setName(dto.getName());
+		return domain;
+	}
+	public User map(UserPostDto dto) {
+		User domain = new User();
+		domain.setUsername(dto.getUsername());
 		return domain;
 	}
 }

@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -23,6 +24,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dto.RoleDto;
+import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
@@ -49,6 +51,10 @@ public class RoleRestService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll() {
+		if (!firebaseInit.functionInUser("roles_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		List<RoleDto> list = roleService.findAll();
 		return Response.ok(list).build();
 	}
@@ -57,6 +63,10 @@ public class RoleRestService {
 	@Path("/{roleId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public RoleDto find(@PathParam("roleId") int id) {
+		if (!firebaseInit.functionInUser("role_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return roleService.find(id);
 	}
 
@@ -112,6 +122,10 @@ public class RoleRestService {
 	@Path("/{roleId}/modules")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findModulesByRole(@PathParam("roleId") int id) {
+		if (!firebaseInit.functionInUser("rolemodules_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<ModuleDto> list = roleService.findModulesByRoleId(id);
 		if (list != null) {
 			return Response.ok(list).build();

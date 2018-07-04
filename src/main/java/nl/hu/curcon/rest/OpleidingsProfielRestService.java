@@ -194,11 +194,11 @@ public class OpleidingsProfielRestService {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
-		String s = "opleidingsProfielId: ["+opleidingsProfielId+"] dto: ["+dto.getId()+"]";
+		//String s = "opleidingsProfielId: ["+opleidingsProfielId+"] dto: ["+dto.getId()+"]";
 		if (opleidingsProfielService.addBeroepsTaakToOpleidingsProfiel(opleidingsProfielId, dto.getId())) {
-			return Response.ok(s+" true").build();
+			return Response.ok().build();
 		} else {
-			return Response.ok(s+" false").build();
+			return Response.status(404).build();
 		}
 	}
 
@@ -230,11 +230,12 @@ public class OpleidingsProfielRestService {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
-		String s = "opleidingsProfielId: ["+opleidingsProfielId+"] dto: ["+dto.getId()+"]";
+		//String s = "opleidingsProfielId: ["+opleidingsProfielId+"] dto: ["+dto.getId()+"]";
 		if (opleidingsProfielService.addProfessionalSkillsToOpleidingsProfiel(opleidingsProfielId, dto.getId())) {
-			return Response.ok(s+" true").build();
+			return Response.ok().build();
 		} else {
-			return Response.ok(s+" false").build();
+			return Response.status(404).build();
+			//return Response.ok(s+" false").build();
 		}
 	}
 

@@ -16,9 +16,7 @@ import nl.hu.curcon.domain.User;
 import nl.hu.curcon.dto.FunctionDto;
 import nl.hu.curcon.dto.RoleDto;
 import nl.hu.curcon.dto.UserDto;
-import nl.hu.curcon.dto.post.IdPostDto;
-import nl.hu.curcon.dto.post.RolePutDto;
-import nl.hu.curcon.dto.post.UserPutDto;
+import nl.hu.curcon.dto.post.UserPostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.service.UserService;
 
@@ -71,7 +69,7 @@ public class UserServiceImpl extends GenericService implements UserService {
 	}
 	@Override
 	@Transactional
-	public String create(UserDto userDto) {
+	public String create(UserPostDto userDto) {
 		User user = dto2DomainMapper.map(userDto);
 		user = userDao.save(user);
 		return user.getUsername();
