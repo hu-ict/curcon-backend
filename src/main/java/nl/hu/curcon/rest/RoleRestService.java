@@ -23,7 +23,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dto.RoleDto;
-import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;

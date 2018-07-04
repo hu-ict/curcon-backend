@@ -38,7 +38,7 @@ public class LeerplanSchemaRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public LeerplanSchemaDto find(@PathParam("cohortId") int cohortId) {
-		if (!firebaseInit.functionInUser("leerplan_get")) {
+		if (!firebaseInit.functionInUser("leerplanschema_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -89,7 +89,7 @@ public class LeerplanSchemaRestService {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft eventuele inconsistenties in het leerplanschema.")
 	public Response checkProfiel(@PathParam("cohortId") int cohortId) {
-		if (!firebaseInit.functionInUser("leerplan_check")) {
+		if (!firebaseInit.functionInUser("leerplanschema_check")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
