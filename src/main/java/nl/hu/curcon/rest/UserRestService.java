@@ -69,10 +69,12 @@ public class UserRestService {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response create(UserPostDto userDto) {
-		if (!firebaseInit.functionInUser("user_post")) {
-			//Niet Geauthoriseerd
-			return Response.status(403).build();
-		}
+		//TODO iedereen mag een user toevoegen die dan de rol "publiek" krijgt, b.v bij eerste keer inloggen. 
+		
+//		if (!firebaseInit.functionInUser("user_post")) {
+//			//Niet Geauthoriseerd
+//			return Response.status(403).build();
+//		}
 		String username = userService.create(userDto);
 		if (username!=""&&username!=null) {
 			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("users/" + username);

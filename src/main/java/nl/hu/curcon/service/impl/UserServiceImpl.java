@@ -71,6 +71,8 @@ public class UserServiceImpl extends GenericService implements UserService {
 	@Transactional
 	public String create(UserPostDto userDto) {
 		User user = dto2DomainMapper.map(userDto);
+		Role role = roleDao.find(1);	//NOTE User krijgt nu roleid 1 op creatie==Publiek
+		user.setRole(role);
 		user = userDao.save(user);
 		return user.getUsername();
 	}
