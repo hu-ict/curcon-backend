@@ -23,7 +23,7 @@
 		<class>nl.hu.curcon.domain.User</class>
 		<properties>
 			<property name="hibernate.connection.charSet" value="UTF-8" />
-			<property name="hibernate.url" value="jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com" />
+			<property name="hibernate.url" value="jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com:5432/d7q1vhnaj31gmp" />
 			<property name="hibernate.username" value="tdvrifbafmsvzi" />
 			<property name="hibernate.password" value="f96cb884ec39d9e2e1652aa317e4f8234550d6a3145172aefc5a3ed153a271d9" />
 <!-- 			<property name="hibernate.url" value="jdbc:mysql://127.4.113.2:3306/curcon"/> -->
