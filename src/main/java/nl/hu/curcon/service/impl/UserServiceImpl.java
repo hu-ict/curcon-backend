@@ -21,6 +21,7 @@ import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.service.UserService;
 
 @Service
+
 public class UserServiceImpl extends GenericService implements UserService {
 	@Autowired
 	private UserDao userDao;
