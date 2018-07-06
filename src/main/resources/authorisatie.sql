@@ -24,7 +24,7 @@ INSERT INTO `function` (`id`, `name`) VALUES
 (10, 'cohort_put'),
 (11, 'cohortcursussen_get'),
 (12, 'cohortcursus_post'),
-(13, 'cohortcohortcursus_delete'),
+(13, 'cohortcursus_delete'),
 (14, 'cursus_get'),
 (15, 'cursus_put'),
 (16, 'cursus_delete'),
