@@ -37,13 +37,13 @@
 	<bean id="dataSourceOpenShift"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com" />
+		<property name="url" value="jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com:5432/d7q1vhnaj31gmp" />
 	</bean>
 
 	<bean id="dataSourceLocal"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com" />
+		<property name="url" value="jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com:5432/d7q1vhnaj31gmp" />
 		<property name="username" value="tdvrifbafmsvzi" />
 		<property name="password" value="f96cb884ec39d9e2e1652aa317e4f8234550d6a3145172aefc5a3ed153a271d9" />
 	</bean>
