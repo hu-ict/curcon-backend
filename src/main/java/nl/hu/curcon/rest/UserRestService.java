@@ -60,16 +60,16 @@ public class UserRestService {
 	@Path("/{username}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public UserDto find(@PathParam("username") String username) {
-		if (!firebaseInit.functionInUser("user_get")) {
-			//Niet Geauthoriseerd
-			throw new WebApplicationException(Response.status(403).build());
-		}
+//		if (!firebaseInit.functionInUser("user_get")) {
+//			//Niet Geauthoriseerd
+//			throw new WebApplicationException(Response.status(403).build());
+//		}
 		return userService.find(username);
 	}
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response create(UserPostDto userDto) {
-		//TODO iedereen mag een user toevoegen die dan de rol "publiek" krijgt, b.v bij eerste keer inloggen. 
+		//NOTE  iedereen mag een user toevoegen die dan de rol "publiek" krijgt, b.v bij eerste keer inloggen. 
 		
 //		if (!firebaseInit.functionInUser("user_post")) {
 //			//Niet Geauthoriseerd
