@@ -151,7 +151,7 @@ public class RoleRestService {
 	}
 	
 	@DELETE
-	@Path("/{roleId}/{moduleId}")
+	@Path("/{roleId}/modules/{moduleId}")
 	@Transactional
 	@ApiOperation(value = "Verwijderd een module van een rol. [LINK]")
 	public Response removeRolFromModule(@PathParam("roleId") int roleId,

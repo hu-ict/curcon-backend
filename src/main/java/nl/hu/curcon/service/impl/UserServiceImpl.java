@@ -62,7 +62,7 @@ public class UserServiceImpl extends GenericService implements UserService {
 	@Override
 	public List<UserDto> findAll() {
 		List<UserDto> dtos = new ArrayList<UserDto>();
-		List<User> users = userDao.findAll();
+		List<User> users = userDao.findAll("username");
 		for (User u : users) {
 			dtos.add(Domain2DtoMapper.map(u));
 		}

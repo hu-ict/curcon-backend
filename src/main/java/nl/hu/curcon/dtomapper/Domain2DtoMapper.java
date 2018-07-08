@@ -297,9 +297,11 @@ public class Domain2DtoMapper {
 		UserDto dto = new UserDto();
 		dto.setUsername(user.getUsername());
 
-		HRefDto hRefDtoOP = new HRefDto();
-		hRefDtoOP.setHRef(MyApplication.getBaseUrl() + "roles/" + user.getRole().getId());
-		dto.setRole(hRefDtoOP);
+		//HRefDto hRefDtoOP = new HRefDto();
+		
+		//hRefDtoOP.setHRef(MyApplication.getBaseUrl() + "roles/" + user.getRole().getId());
+		//dto.setRole(hRefDtoOP);
+		dto.setRole(Domain2DtoMapperLink.mapLink(user.getRole()));
 		dto.setHRef(Domain2DtoMapperHRef.mapHRef(user));
 		return dto;
 	}
