@@ -170,6 +170,7 @@ INSERT INTO `user` (`username`, `role_id`) VALUES
 ('jan.testgebruiker@gmail.com', 6),
 ('luccah06071@gmail.com', 6),
 ('redouan.bouzid96@gmail.com', 6);
+('test1curcon@gmail.com',6)
 
 --
 -- Gegevens worden geëxporteerd voor tabel `function_module`
