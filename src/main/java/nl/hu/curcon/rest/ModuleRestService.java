@@ -149,7 +149,7 @@ public class ModuleRestService {
 		}
 	}
 	@DELETE
-	@Path("/{moduleId}/{functionId}")
+	@Path("/{moduleId}/functions/{functionId}")
 	@Transactional
 	@ApiOperation(value = "Verwijderd een functie van een module. [LINK]")
 	public Response removeFunctionFromModule(@PathParam("moduleId") int moduleId,
