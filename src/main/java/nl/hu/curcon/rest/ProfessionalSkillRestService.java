@@ -18,7 +18,7 @@ import nl.hu.curcon.dto.competence.ProfessionalSkillTypesDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.ProfessionalSkillService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/professionalskills")
@@ -27,7 +27,7 @@ public class ProfessionalSkillRestService {
 	@Autowired
 	ProfessionalSkillService professionalSkillService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
 
@@ -37,7 +37,7 @@ public class ProfessionalSkillRestService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<ProfessionalSkillDto> findAll() {
-		if (!firebaseInit.functionInUser("professionals_get")) {
+		if (!functionChecker.functionInUser("professionals_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -48,7 +48,7 @@ public class ProfessionalSkillRestService {
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ProfessionalSkillDto find(@PathParam("id") int id) {
-		if (!firebaseInit.functionInUser("professional_get")) {
+		if (!functionChecker.functionInUser("professional_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -59,7 +59,7 @@ public class ProfessionalSkillRestService {
  	@Path("/types")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ProfessionalSkillTypesDto findTypes() {
-		if (!firebaseInit.functionInUser("professionaltypes_get")) {
+		if (!functionChecker.functionInUser("professionaltypes_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -70,7 +70,7 @@ public class ProfessionalSkillRestService {
 	@Path("/skill/{skillId}/niveaus/{niveau}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ProfessionalSkillDto find(@PathParam("skillId") int skillId, @PathParam("niveau") String niveau) {
-		if (!firebaseInit.functionInUser("professional_find")) {
+		if (!functionChecker.functionInUser("professional_find")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}

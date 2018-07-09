@@ -16,7 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.ToetsMatrijsDto;
 import nl.hu.curcon.service.ToetsMatrijsService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/toetsmatrijzen")
@@ -25,7 +25,7 @@ public class ToetsMatrijsRestService {
 	@Autowired
 	ToetsMatrijsService toetsMatrijsService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@GET
 	@Path("/{cursus_id}")
@@ -33,7 +33,7 @@ public class ToetsMatrijsRestService {
 	@Transactional
 	@ApiOperation(value="Geeft een toetsmatrijs op basis van het cursusId.")
 	public ToetsMatrijsDto find(@PathParam("cursus_id") int cursus_id) {
-		if (!firebaseInit.functionInUser("toetsmatrijs_get")) {
+		if (!functionChecker.functionInUser("toetsmatrijs_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}

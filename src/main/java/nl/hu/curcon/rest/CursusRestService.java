@@ -33,7 +33,7 @@ import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.LeerdoelPostDto;
 import nl.hu.curcon.dto.post.ToetsPostDto;
 import nl.hu.curcon.service.CursusService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 /**
  * @author berend.wilkens, 16 mei 2017
@@ -45,7 +45,7 @@ public class CursusRestService {
 	@Autowired
 	CursusService cursusService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	private static final Logger LOG = LoggerFactory.getLogger(CursusRestService.class);
 
@@ -55,7 +55,7 @@ public class CursusRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft een cursus op basis van zijn id")
 	public Response find(@PathParam("cursusId") int id) {
-		if (!firebaseInit.functionInUser("cursus_get")) {
+		if (!functionChecker.functionInUser("cursus_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -73,7 +73,7 @@ public class CursusRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Doet een update op een bestaande cursus.")
 	public Response update(@PathParam("cursusId") int cursusId, CursusPostDto cursusDto) {
-		if (!firebaseInit.functionInUser("cursus_put")) {
+		if (!functionChecker.functionInUser("cursus_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -89,7 +89,7 @@ public class CursusRestService {
 	@Transactional
 	@ApiOperation(hidden = true, value = "Verwijderd een cursus met zijn leerdoelen en toetsen.")
 	public Response delete(@PathParam("cursusId") int id) {
-		if (!firebaseInit.functionInUser("cursus_delete")) {
+		if (!functionChecker.functionInUser("cursus_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -109,7 +109,7 @@ public class CursusRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft alle leerdoelen bij een cursus.")
 	public Response findLeerdoelenByCursus(@PathParam("cursusId") int cursusId) {
-		if (!firebaseInit.functionInUser("cursusleerdoelen_get")) {
+		if (!functionChecker.functionInUser("cursusleerdoelen_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -127,7 +127,7 @@ public class CursusRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Maakt een nieuw leerdoel bij een cursus.")
 	public Response createLeerdoelByCursus(@PathParam("cursusId") int cursusId, LeerdoelPostDto leerdoelDto) {
-		if (!firebaseInit.functionInUser("cursusleerdoel_post")) {
+		if (!functionChecker.functionInUser("cursusleerdoel_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -150,7 +150,7 @@ public class CursusRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft alle toetsen bij een cursus.")
 	public Response findToetsenByCursus(@PathParam("cursusId") int id) {
-		if (!firebaseInit.functionInUser("cursustoetsen_get")) {
+		if (!functionChecker.functionInUser("cursustoetsen_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -168,7 +168,7 @@ public class CursusRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Maakt een toets bij een cursus.")
 	public Response create(@PathParam("cursusId") int cursusId, ToetsPostDto toetsDto) {
-		if (!firebaseInit.functionInUser("cursustoets_post")) {
+		if (!functionChecker.functionInUser("cursustoets_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -189,7 +189,7 @@ public class CursusRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft alle beroepstaken bij een cursus.")
 	public Response findBeroepsTakenByCursus(@PathParam("cursusId") int id) {
-		if (!firebaseInit.functionInUser("cursusberoepstaken_get")) {
+		if (!functionChecker.functionInUser("cursusberoepstaken_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -207,7 +207,7 @@ public class CursusRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Voegt een nieuwe beroepstaak aan een cursus toe. [LINK]")
 	public Response addBeroepsTaakToCursus(@PathParam("cursusId") int cursusId, IdPostDto dto) {
-		if (!firebaseInit.functionInUser("cursusberoepstaak_post")) {
+		if (!functionChecker.functionInUser("cursusberoepstaak_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -224,7 +224,7 @@ public class CursusRestService {
 	@ApiOperation(value = "Verwijderd een beroepsTaak van een cursus. [LINK]")
 	public Response removeBeroepsTaakFromCursus(@PathParam("cursusId") int cursusId,
 			@PathParam("beroepstaakId") int beroepstaakId) {
-		if (!firebaseInit.functionInUser("cursusberoepstaak_delete")) {
+		if (!functionChecker.functionInUser("cursusberoepstaak_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -241,7 +241,7 @@ public class CursusRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft alle professional skill bij een cursus.")
 	public Response findProfessionalSkillsByCursus(@PathParam("cursusId") int id) {
-		if (!firebaseInit.functionInUser("cursusprofessionals_get")) {
+		if (!functionChecker.functionInUser("cursusprofessionals_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -259,7 +259,7 @@ public class CursusRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Voegt een nieuwe professional skill aan een cursus toe. [LINK]")
 	public Response addProfessionalSkillToCursus(@PathParam("cursusId") int cursusId, IdPostDto dto) {
-		if (!firebaseInit.functionInUser("cursusprofessional_post")) {
+		if (!functionChecker.functionInUser("cursusprofessional_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -276,7 +276,7 @@ public class CursusRestService {
 	@ApiOperation(value = "Verwijderd een professional skill van een cursus. [LINK]")
 	public Response removeProfessionalSkillFromCursus(@PathParam("cursusId") int cursusId,
 			@PathParam("professionalskillId") int professionalskillId) {
-		if (!firebaseInit.functionInUser("cursusprofessional_delete")) {
+		if (!functionChecker.functionInUser("cursusprofessional_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -293,7 +293,7 @@ public class CursusRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft de resultaten van de check van een cursus.")
 	public Response checkCursus(@PathParam("cursusId") int cursusId) {
-		if (!firebaseInit.functionInUser("cursuschecks_get")) {
+		if (!functionChecker.functionInUser("cursuschecks_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}

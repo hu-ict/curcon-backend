@@ -29,7 +29,7 @@ import nl.hu.curcon.dto.post.ModulePostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.ModuleService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/modules")
@@ -39,7 +39,7 @@ public class ModuleRestService {
 	ModuleService moduleService;
 	
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
@@ -50,7 +50,7 @@ public class ModuleRestService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll() {
-		if (!firebaseInit.functionInUser("modules_get")) {
+		if (!functionChecker.functionInUser("modules_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -62,7 +62,7 @@ public class ModuleRestService {
 	@Path("/{moduleId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ModuleDto find(@PathParam("moduleId") int id) {
-		if (!firebaseInit.functionInUser("module_get")) {
+		if (!functionChecker.functionInUser("module_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -71,7 +71,7 @@ public class ModuleRestService {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response create(ModulePostDto moduleDto) {
-		if (!firebaseInit.functionInUser("module_post")) {
+		if (!functionChecker.functionInUser("module_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -89,7 +89,7 @@ public class ModuleRestService {
 	@Path("/{moduleId}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(@PathParam("moduleId") int moduleId, ModulePostDto moduleDto) {
-		if (!firebaseInit.functionInUser("module_put")) {
+		if (!functionChecker.functionInUser("module_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -103,7 +103,7 @@ public class ModuleRestService {
 	@Path("/{moduleId}")
 	@Transactional
 	public Response delete(@PathParam("moduleId") int moduleId) {
-		if (!firebaseInit.functionInUser("module_delete")) {
+		if (!functionChecker.functionInUser("module_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -121,7 +121,7 @@ public class ModuleRestService {
 	@Path("/{moduleId}/functions")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findOpleidingsProfielenByOrganisatie(@PathParam("moduleId") int id) {
-		if (!firebaseInit.functionInUser("modulefunctions_get")) {
+		if (!functionChecker.functionInUser("modulefunctions_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -138,7 +138,7 @@ public class ModuleRestService {
 	@Transactional
 	public Response createFunctionByModule(@PathParam("moduleId") int moduleId,
 			IdPostDto dto) {
-		if (!firebaseInit.functionInUser("modulefunction_post")) {
+		if (!functionChecker.functionInUser("modulefunction_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -154,7 +154,7 @@ public class ModuleRestService {
 	@ApiOperation(value = "Verwijderd een functie van een module. [LINK]")
 	public Response removeFunctionFromModule(@PathParam("moduleId") int moduleId,
 			@PathParam("functionId") int functionId) {
-		if (!firebaseInit.functionInUser("modulefunction_delete")) {
+		if (!functionChecker.functionInUser("modulefunction_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}

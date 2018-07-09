@@ -25,7 +25,7 @@ import nl.hu.curcon.dto.CursusDto;
 import nl.hu.curcon.dto.post.CohortPostDto;
 import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.service.CohortService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Path("/cohorten")
 @Component
@@ -34,14 +34,14 @@ public class CohortRestService {
 	@Autowired
 	CohortService cohortService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 	
 	@GET
 	@Path("/{cohortId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(hidden=false, value = "Geeft een cohort op basis van zijn id")
 	public CohortDto find(@PathParam("cohortId") int id) {
-		if (!firebaseInit.functionInUser("cohort_get")) {
+		if (!functionChecker.functionInUser("cohort_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -53,7 +53,7 @@ public class CohortRestService {
 	@Path("/{cohortId}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(@PathParam("cohortId") int cohortId, CohortPostDto cohortDto) {
-		if (!firebaseInit.functionInUser("cohort_put")) {
+		if (!functionChecker.functionInUser("cohort_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -70,7 +70,7 @@ public class CohortRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft alle cursussen van een cohort (examenprogramma)")
 	public Response findLeerdoelenByCursus(@PathParam("cohortId") int cohortId) {
-		if (!firebaseInit.functionInUser("cohortcursussen_get")) {
+		if (!functionChecker.functionInUser("cohortcursussen_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -88,7 +88,7 @@ public class CohortRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Koppelt een cursus aan een cohort (examenprogramma)")
 	public Response addCursusToCohort(@PathParam("cohortId") int cohortId, IdPostDto dto) {
-		if (!firebaseInit.functionInUser("cohortcursus_post")) {
+		if (!functionChecker.functionInUser("cohortcursus_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -104,7 +104,7 @@ public class CohortRestService {
 	@Transactional
 	@ApiOperation(value = "Verwijdert een cursus uit een cohort (examenprogramma), cursus zelf wordt niet verwijderd.")
 	public Response removeCursusFromCohort(@PathParam("cohortId") int cohortId, @PathParam("cursusId") int cursusId) {
-		if (!firebaseInit.functionInUser("cohortcursus_delete")) {
+		if (!functionChecker.functionInUser("cohortcursus_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}

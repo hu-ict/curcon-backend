@@ -16,7 +16,7 @@ import io.swagger.annotations.Api;
 import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 import nl.hu.curcon.dto.competence.BeroepsTaakTypesDto;
 import nl.hu.curcon.service.BeroepsTaakService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 /**
  * @author berend.wilkens, 18 mei 2017
@@ -28,12 +28,12 @@ public class BeroepsTaakRestService {
     @Autowired
     BeroepsTaakService beroepsTaakService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<BeroepsTaakDto> findAll() {
-		if (!firebaseInit.functionInUser("beroepstaken_get")) {
+		if (!functionChecker.functionInUser("beroepstaken_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -44,7 +44,7 @@ public class BeroepsTaakRestService {
 	@Path("/{beroepsTaakId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public BeroepsTaakDto find(@PathParam("beroepsTaakId") int beroepsTaakId) {
-		if (!firebaseInit.functionInUser("beroepstaak_get")) {
+		if (!functionChecker.functionInUser("beroepstaak_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -55,7 +55,7 @@ public class BeroepsTaakRestService {
  	@Path("/types")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public BeroepsTaakTypesDto findTypes() {
-		if (!firebaseInit.functionInUser("beroepstaaktypes_get")) {
+		if (!functionChecker.functionInUser("beroepstaaktypes_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -66,7 +66,7 @@ public class BeroepsTaakRestService {
 	@Path("/activiteiten/{activiteitId}/architectuurlagen/{architectuurLaagId}/niveaus/{niveau}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public BeroepsTaakDto find(@PathParam("activiteitId") int activiteitId, @PathParam("architectuurLaagId") int architectuurLaagId, @PathParam("niveau") int niveau) {
-		if (!firebaseInit.functionInUser("beroepstaak_find")) {
+		if (!functionChecker.functionInUser("beroepstaak_find")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}

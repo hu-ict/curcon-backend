@@ -28,7 +28,7 @@ import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.UserPostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 import nl.hu.curcon.service.UserService;
 
 @Component
@@ -38,7 +38,7 @@ public class UserRestService {
 	@Autowired
 	UserService userService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
 
@@ -48,7 +48,7 @@ public class UserRestService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll() {
-		if (!firebaseInit.functionInUser("users_get")) {
+		if (!functionChecker.functionInUser("users_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -60,7 +60,7 @@ public class UserRestService {
 	@Path("/{username}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public UserDto find(@PathParam("username") String username) {
-//		if (!firebaseInit.functionInUser("user_get")) {
+//		if (!functionChecker.functionInUser("user_get")) {
 //			//Niet Geauthoriseerd
 //			throw new WebApplicationException(Response.status(403).build());
 //		}
@@ -71,7 +71,7 @@ public class UserRestService {
 	public Response create(UserPostDto userDto) {
 		//NOTE  iedereen mag een user toevoegen die dan de rol "publiek" krijgt, b.v bij eerste keer inloggen. 
 		
-//		if (!firebaseInit.functionInUser("user_post")) {
+//		if (!functionChecker.functionInUser("user_post")) {
 //			//Niet Geauthoriseerd
 //			return Response.status(403).build();
 //		}
@@ -90,7 +90,7 @@ public class UserRestService {
 	@Path("{username}/role")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findRole(@PathParam("username") String username) {
-		if (!firebaseInit.functionInUser("userrole_get")) {
+		if (!functionChecker.functionInUser("userrole_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -111,7 +111,7 @@ public class UserRestService {
 	@Path("/{username}")
 	@Transactional
 	public Response delete(@PathParam("username") String username) {
-		if (!firebaseInit.functionInUser("user_delete")) {
+		if (!functionChecker.functionInUser("user_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -128,7 +128,7 @@ public class UserRestService {
 	@Path("/{username}/role")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response createCursusByOrganisatie(@PathParam("username") String username, IdPostDto dto) {
-		if (!firebaseInit.functionInUser("user_put")) {
+		if (!functionChecker.functionInUser("user_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
