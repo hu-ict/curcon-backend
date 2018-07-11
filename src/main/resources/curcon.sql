@@ -1230,7 +1230,7 @@ ALTER TABLE `trefwoord_cursus`
 --
 -- Indexen voor tabel `user`
 --
-ALTER TABLE `user`
+ALTER TABLE `useraccount`
   ADD PRIMARY KEY (`username`);
 
 --
