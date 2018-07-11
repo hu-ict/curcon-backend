@@ -26,7 +26,7 @@ import nl.hu.curcon.dto.ToetsElementDto;
 import nl.hu.curcon.dto.post.LeerdoelPostDto;
 import nl.hu.curcon.dto.post.ToetsElementPostDto;
 import nl.hu.curcon.service.LeerdoelService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/leerdoelen")
@@ -35,14 +35,14 @@ public class LeerdoelRestService {
 	@Autowired
 	LeerdoelService leerdoelService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@GET
 	@Path("/{leerdoelId}")
 	@Transactional
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response find(@PathParam("leerdoelId") int leerdoelId) {
-		if (!firebaseInit.functionInUser("leerdoel_get")) {
+		if (!functionChecker.functionInUser("leerdoel_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -60,7 +60,7 @@ public class LeerdoelRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Wijzigt een leerdoel op basis van Id.")
 	public Response update(@PathParam("leerdoelId") int leerdoelId, LeerdoelPostDto leerdoelDto) {
-		if (!firebaseInit.functionInUser("leerdoel_put")) {
+		if (!functionChecker.functionInUser("leerdoel_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -76,7 +76,7 @@ public class LeerdoelRestService {
 	@Transactional
 	@ApiOperation(value = "Verwijdert een leerdoel.")
 	public Response delete(@PathParam("leerdoelId") int leerdoelId) {
-		if (!firebaseInit.functionInUser("leerdoel_delete")) {
+		if (!functionChecker.functionInUser("leerdoel_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -96,7 +96,7 @@ public class LeerdoelRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft alle toetselementen bij een leerdoel.")
 	public Response findToetElementenByLeerdoel(@PathParam("leerdoelId") int leerdoelId) {
-		if (!firebaseInit.functionInUser("leerdoeltoetselementen_get")) {
+		if (!functionChecker.functionInUser("leerdoeltoetselementen_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -113,7 +113,7 @@ public class LeerdoelRestService {
 	@Path("/{leerdoelId}/toetselementen")
 	@ApiOperation(value = "Maakt een nieuw toetselement bij een leerdoel.")
 	public Response createToetElementByLeerdoel(@PathParam("leerdoelId") int leerdoelId, ToetsElementPostDto toetsElementDto) {
-		if (!firebaseInit.functionInUser("leerdoeltoetselement_post")) {
+		if (!functionChecker.functionInUser("leerdoeltoetselement_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}

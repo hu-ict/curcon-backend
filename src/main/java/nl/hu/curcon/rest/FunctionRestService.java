@@ -25,7 +25,7 @@ import nl.hu.curcon.dto.post.FunctionPostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.FunctionService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/functions")
@@ -34,7 +34,7 @@ public class FunctionRestService {
     @Autowired
     FunctionService functionService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
@@ -45,7 +45,7 @@ public class FunctionRestService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll() {
-		if (!firebaseInit.functionInUser("functions_get")) {
+		if (!functionChecker.functionInUser("functions_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -57,7 +57,7 @@ public class FunctionRestService {
 	@Path("/{functionId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public FunctionDto find(@PathParam("functionId") int id) {
-//		if (!firebaseInit.functionInUser("function_get")) {
+//		if (!functionChecker.functionInUser("function_get")) {
 //			//Niet Geauthoriseerd
 //			return Response.status(403).build();
 //		}
@@ -66,7 +66,7 @@ public class FunctionRestService {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response create(FunctionPostDto functionDto) {
-		if (!firebaseInit.functionInUser("function_post")) {
+		if (!functionChecker.functionInUser("function_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -84,7 +84,7 @@ public class FunctionRestService {
 	@Path("/{functionId}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(@PathParam("functionId") int functionId, FunctionPostDto functionDto) {
-		if (!firebaseInit.functionInUser("function_put")) {
+		if (!functionChecker.functionInUser("function_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -98,7 +98,7 @@ public class FunctionRestService {
 	@Path("/{functionId}")
 	@Transactional
 	public Response delete(@PathParam("functionId") int functionId) {
-		if (!firebaseInit.functionInUser("function_delete")) {
+		if (!functionChecker.functionInUser("function_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}

@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.DocentDto;
 import nl.hu.curcon.dto.post.DocentPostDto;
 import nl.hu.curcon.service.DocentService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 /**
  * @author berend.wilkens, 12 apr. 2017
@@ -32,7 +32,7 @@ public class DocentRestService {
     @Autowired
     DocentService docentService;
     @Autowired
-    FirebaseInit firebaseInit;
+    FunctionChecker functionChecker;
     
 	@GET
 	@Path("/{docentId}")
@@ -40,7 +40,7 @@ public class DocentRestService {
 	@Transactional
 	@ApiOperation(value = "Geeft een docent op basis van id.")
 	public Response find(@PathParam("docentId") int id)  {
-		if (!firebaseInit.functionInUser("docent_get")) {
+		if (!functionChecker.functionInUser("docent_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -58,7 +58,7 @@ public class DocentRestService {
 	@Transactional
 	@ApiOperation(value = "Wijzigt een docent.")
 	public Response update(@PathParam("docentId") int docentId, DocentPostDto docentDto) {
-		if (!firebaseInit.functionInUser("docent_put")) {
+		if (!functionChecker.functionInUser("docent_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}

@@ -19,7 +19,7 @@ import nl.hu.curcon.dto.post.TrefwoordPostDto;
 import nl.hu.curcon.dtomapper.Domain2DtoMapper;
 import nl.hu.curcon.dtomapper.Dto2DomainMapper;
 import nl.hu.curcon.service.TrefwoordService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/trefwoorden")
@@ -28,7 +28,7 @@ public class TrefwoordRestService {
     @Autowired
     TrefwoordService trefwoordService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@Autowired
 	Domain2DtoMapper domain2DtoMapper;
@@ -40,7 +40,7 @@ public class TrefwoordRestService {
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public TrefwoordDto find(@PathParam("id") int id) {
-		if (!firebaseInit.functionInUser("trefwoord_get")) {
+		if (!functionChecker.functionInUser("trefwoord_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -51,7 +51,7 @@ public class TrefwoordRestService {
 	@Path("/{id}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public boolean update(TrefwoordPostDto trefwoordDto) {
-		if (!firebaseInit.functionInUser("trefwoord_put")) {
+		if (!functionChecker.functionInUser("trefwoord_put")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -61,7 +61,7 @@ public class TrefwoordRestService {
 	@DELETE
 	@Path("/{id}")
 	public void delete(@PathParam("id") int id) {
-		if (!firebaseInit.functionInUser("trefwoord_delete")) {
+		if (!functionChecker.functionInUser("trefwoord_delete")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}

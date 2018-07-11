@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 
 import nl.hu.curcon.dto.ToetsPlanningDto;
 import nl.hu.curcon.service.ToetsPlanningService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,12 +29,12 @@ public class ToetsPlanningRestService {
     @Autowired
     ToetsPlanningService toetsPlanningService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<ToetsPlanningDto> findAll() {
-		if (!firebaseInit.functionInUser("toetsplanningen_get")) {
+		if (!functionChecker.functionInUser("toetsplanningen_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -45,7 +45,7 @@ public class ToetsPlanningRestService {
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ToetsPlanningDto find(@PathParam("id") int id) {
-		if (!firebaseInit.functionInUser("toetsplanning_get")) {
+		if (!functionChecker.functionInUser("toetsplanning_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -56,7 +56,7 @@ public class ToetsPlanningRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToetsPlanningDto create(ToetsPlanningDto toetsPlanningDto) {
-		if (!firebaseInit.functionInUser("toetsplanning_post")) {
+		if (!functionChecker.functionInUser("toetsplanning_post")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -68,7 +68,7 @@ public class ToetsPlanningRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public ToetsPlanningDto update(ToetsPlanningDto toetsPlanningDto) {
-		if (!firebaseInit.functionInUser("toetsplanning_put")) {
+		if (!functionChecker.functionInUser("toetsplanning_put")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -78,7 +78,7 @@ public class ToetsPlanningRestService {
 	@DELETE
 	@Path("/{id}")
 	public void delete(@PathParam("id") int id) {
-		if (!firebaseInit.functionInUser("toetsplanning_delete")) {
+		if (!functionChecker.functionInUser("toetsplanning_delete")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}

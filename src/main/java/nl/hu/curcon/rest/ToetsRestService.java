@@ -25,7 +25,7 @@ import nl.hu.curcon.dto.ToetsDto;
 import nl.hu.curcon.dto.post.BeoordelingsElementPostDto;
 import nl.hu.curcon.dto.post.ToetsPostDto;
 import nl.hu.curcon.service.ToetsService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/toetsen")
@@ -34,7 +34,7 @@ public class ToetsRestService {
     @Autowired
     ToetsService toetsService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@GET
 	@Path("/{toetsId}")
@@ -42,7 +42,7 @@ public class ToetsRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft een toets op basis van zijn id")
 	public Response find(@PathParam("toetsId") int toetsId) {
-		if (!firebaseInit.functionInUser("toets_get")) {
+		if (!functionChecker.functionInUser("toets_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -60,7 +60,7 @@ public class ToetsRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Doet een update op een bestaande toets.")
 	public Response update(@PathParam("toetsId") int toetsId, ToetsPostDto toetsDto) {
-		if (!firebaseInit.functionInUser("toets_put")) {
+		if (!functionChecker.functionInUser("toets_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -76,7 +76,7 @@ public class ToetsRestService {
 	@Transactional
 	@ApiOperation(value="Verwijderd een toets met zijn beoordelingselementen.")
 	public Response delete(@PathParam("toetsId") int toetsId) {
-		if (!firebaseInit.functionInUser("toets_delete")) {
+		if (!functionChecker.functionInUser("toets_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -96,7 +96,7 @@ public class ToetsRestService {
 	@Transactional
 	@ApiOperation(value = "Maakt een nieuwe beoordelingselement aan binnen een toets.")
 	public Response createBeoordelingselementByToets(@PathParam("toetsId") int toetsId, BeoordelingsElementPostDto beoordelingsElementPostDto) {
-		if (!firebaseInit.functionInUser("toetsbeoordelingselement_post")) {
+		if (!functionChecker.functionInUser("toetsbeoordelingselement_post")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -118,7 +118,7 @@ public class ToetsRestService {
 	@Transactional
 	@ApiOperation(value = "Geeft een lijst met alle trefwoorden binnen een leerlijn.")
 	public Response findBeoordelingsElementenByToets(@PathParam("toetsId") int toetsId) {
-		if (!firebaseInit.functionInUser("toetsbeoordelingselementen_get")) {
+		if (!functionChecker.functionInUser("toetsbeoordelingselementen_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}

@@ -17,7 +17,7 @@ import io.swagger.annotations.Api;
 import nl.hu.curcon.dto.ToetsElementDto;
 import nl.hu.curcon.dto.post.ToetsElementPutDto;
 import nl.hu.curcon.service.ToetsElementService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/toetselementen")
@@ -27,13 +27,13 @@ public class ToetsElementRestService {
     @Autowired
     ToetsElementService toetsElementService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@GET
 	@Path("/{toetsElementId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ToetsElementDto find(@PathParam("toetsElementId") int id) {
-		if (!firebaseInit.functionInUser("toetselement_get")) {
+		if (!functionChecker.functionInUser("toetselement_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -44,7 +44,7 @@ public class ToetsElementRestService {
 	@Path("/{toetsElementId}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(@PathParam("toetsElementId") int toetsElementId, ToetsElementPutDto toetsElementDto) {
-		if (!firebaseInit.functionInUser("toetselement_put")) {
+		if (!functionChecker.functionInUser("toetselement_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -58,7 +58,7 @@ public class ToetsElementRestService {
 	@DELETE
 	@Path("/{toetsElementId}")
 	public Response delete(@PathParam("toetsElementId") int toetsElementId) {
-		if (!firebaseInit.functionInUser("toetselement_delete")) {
+		if (!functionChecker.functionInUser("toetselement_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
