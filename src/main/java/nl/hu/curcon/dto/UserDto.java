@@ -4,13 +4,13 @@ import nl.hu.curcon.domain.Role;
 
 public class UserDto extends HRefDto{
 	private String username;
-	private HRefDto role;
+	private LinkDto role;
 	
 	public UserDto() {
 		super();
 	}
 	
-	public UserDto(String username, HRefDto role) {
+	public UserDto(String username, LinkDto role) {
 		this.setUsername(username);
 		this.setRole(role);
 	}
@@ -27,7 +27,7 @@ public class UserDto extends HRefDto{
 		return role;
 	}
 
-	public void setRole(HRefDto hRefDtoOP) {
+	public void setRole(LinkDto hRefDtoOP) {
 		this.role = hRefDtoOP;
 	}
 	
