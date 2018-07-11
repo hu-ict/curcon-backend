@@ -25,15 +25,15 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 	 FirebaseInit firebaseInit;
 	
 	@Override
-	public void filter(ContainerRequestContext requestCtx) throws IOException {
-		AuthenticationFilter.requestCtx = requestCtx;
+	public void filter(ContainerRequestContext requestCtxNew) throws IOException {
+		AuthenticationFilter.requestCtx = requestCtxNew;
 
 		// Users are treated as guests, unless a valid token is provided
-		boolean isSecure = requestCtx.getSecurityContext().isSecure();
-		MySecurityContext msc = new MySecurityContext("Unknown", "guest", isSecure);
+		boolean isSecure = requestCtxNew.getSecurityContext().isSecure();
+		MySecurityContext msc = new MySecurityContext(null,null, isSecure);
 		// Check if the HTTP Authorization header is present and formatted
 		// correctly
-		String authHeader = requestCtx.getHeaderString(HttpHeaders.AUTHORIZATION);
+		String authHeader = requestCtxNew.getHeaderString(HttpHeaders.AUTHORIZATION);
 		System.out.println(authHeader + "44");
 		if (authHeader != null) {// FIXME && authHeader.startsWith("Bearer ")) {
 			// Extract the token from the HTTP Authorization header
@@ -54,12 +54,22 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
 			} catch (IllegalArgumentException e) {
 				System.out.println("Invalid token, processing as guest!");
+				 msc = getunknown();
 			} catch (FirebaseAuthException e) {
+				System.out.println("ERROR FIREBASEEXCEPTION was null");
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				msc = getunknown();
 			}
+		}else{
+			System.out.println("ERROR header was null");
+			 msc = getunknown();
 		}
 		System.out.println(msc + "43");
 		requestCtx.setSecurityContext(msc);
+	}
+	private MySecurityContext getunknown(){
+		System.out.println("ERROR setting to unkownw");
+		 return new MySecurityContext("Unknown", "guest", false);
 	}
 }

@@ -20,7 +20,7 @@ import nl.hu.curcon.dto.check.ConformiteitBeroepsTaakDto;
 import nl.hu.curcon.dto.check.EctsBeroepsTaakDto;
 import nl.hu.curcon.dto.check.EctsToetsVormDto;
 import nl.hu.curcon.service.ToetsProgrammaService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/toetsprogrammas")
@@ -29,7 +29,7 @@ public class ToetsProgrammaRest {
 	@Autowired
 	ToetsProgrammaService toetsProgrammaService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 	
 	@GET
 	@Path("/{cohortId}/vorm")
@@ -37,7 +37,7 @@ public class ToetsProgrammaRest {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft de spreiding van toetsvorm per tussen- en eindcompetentie voor een opleidingsprofiel voor een cohort.")
 	public List<EctsToetsVormDto> getVorm(@PathParam("cohortId") int cohortId) {
-		if (!firebaseInit.functionInUser("toetsvorm_get")) {
+		if (!functionChecker.functionInUser("toetsvorm_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -50,7 +50,7 @@ public class ToetsProgrammaRest {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft de ects per tussen- en eindcompetentie voor een opleidingsprofiel voor een cohort.")
 	public List<EctsBeroepsTaakDto> getEcts(@PathParam("cohortId") int cohortId) {
-		if (!firebaseInit.functionInUser("ects_get")) {
+		if (!functionChecker.functionInUser("ects_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -63,7 +63,7 @@ public class ToetsProgrammaRest {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft een berekend opleidingsprofiel voor een cohort.")
 	public List<ConformiteitBeroepsTaakDto> calcProfiel(@PathParam("cohortId") int cohortId) {
-		if (!firebaseInit.functionInUser("calcprofiel_get")) {
+		if (!functionChecker.functionInUser("calcprofiel_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}

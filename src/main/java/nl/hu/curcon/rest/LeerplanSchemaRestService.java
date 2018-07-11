@@ -22,7 +22,7 @@ import nl.hu.curcon.dto.LeerplanSchemaDto;
 import nl.hu.curcon.dto.check.EctsGewichtNiveauDto;
 import nl.hu.curcon.dto.check.ProfielDto;
 import nl.hu.curcon.service.LeerplanSchemaService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/leerplanschemas")
@@ -31,14 +31,14 @@ public class LeerplanSchemaRestService {
 	@Autowired
 	LeerplanSchemaService leerplanSchemaService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 	
 	@GET
 	@Path("/{cohortId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public LeerplanSchemaDto find(@PathParam("cohortId") int cohortId) {
-		if (!firebaseInit.functionInUser("leerplanschema_get")) {
+		if (!functionChecker.functionInUser("leerplanschema_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -51,7 +51,7 @@ public class LeerplanSchemaRestService {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft een berekend opleidingsprofiel voor een cohort.")
 	public ProfielDto findProfiel(@PathParam("cohortId") int cohortId) {
-		if (!firebaseInit.functionInUser("leerplanschemaprofiel_get")) {
+		if (!functionChecker.functionInUser("leerplanschemaprofiel_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -63,7 +63,7 @@ public class LeerplanSchemaRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public List<LeerdoelOverzichtDto> findLeerdoelenByCohortAndBeroepsTaak(@PathParam("cohortId") int cohortId, @PathParam("activiteitId") int activiteitId, @PathParam("architectuurlaagId") int architectuurlaagId) {
-		if (!firebaseInit.functionInUser("leerdoelencohortberoepstaak_get")) {
+		if (!functionChecker.functionInUser("leerdoelencohortberoepstaak_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -76,7 +76,7 @@ public class LeerplanSchemaRestService {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft voor elke periode het ECTS gewicht voor een bepaalde beroepstaak.")
 	public Map<Integer, Map<Integer, EctsGewichtNiveauDto>> calcEctsGewichtByCohortAndBeroepsTaak(@PathParam("cohortId") int cohortId, @PathParam("activiteitId") int activiteitId, @PathParam("architectuurlaagId") int architectuurlaagId) {
-		if (!firebaseInit.functionInUser("ECTScohortberoepstaak_get")) {
+		if (!functionChecker.functionInUser("ECTScohortberoepstaak_get")) {
 			//Niet Geauthoriseerd
 			throw new WebApplicationException(Response.status(403).build());
 		}
@@ -89,7 +89,7 @@ public class LeerplanSchemaRestService {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft eventuele inconsistenties in het leerplanschema.")
 	public Response checkProfiel(@PathParam("cohortId") int cohortId) {
-		if (!firebaseInit.functionInUser("leerplanschema_check")) {
+		if (!functionChecker.functionInUser("leerplanschema_check")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}

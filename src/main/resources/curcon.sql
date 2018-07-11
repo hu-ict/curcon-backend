@@ -899,7 +899,7 @@ CREATE TABLE `trefwoord_cursus` (
 -- Tabelstructuur voor tabel `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `useraccount` (
   `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `role` varchar(20) COLLATE utf8_unicode_ci NOT NULL
@@ -909,7 +909,7 @@ CREATE TABLE `user` (
 -- Gegevens worden geëxporteerd voor tabel `user`
 --
 
-INSERT INTO `user` (`username`, `password`, `role`) VALUES
+INSERT INTO `useraccount` (`username`, `password`, `role`) VALUES
 ('alex', 'password', 'docent'),
 ('Redouan', 'password', 'student');
 
@@ -1230,7 +1230,7 @@ ALTER TABLE `trefwoord_cursus`
 --
 -- Indexen voor tabel `user`
 --
-ALTER TABLE `user`
+ALTER TABLE `useraccount`
   ADD PRIMARY KEY (`username`);
 
 --

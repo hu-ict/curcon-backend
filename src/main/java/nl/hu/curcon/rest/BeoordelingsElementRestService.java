@@ -21,7 +21,7 @@ import nl.hu.curcon.dto.BeoordelingsElementDto;
 import nl.hu.curcon.dto.ToetsElementDto;
 import nl.hu.curcon.dto.post.BeoordelingsElementPostDto;
 import nl.hu.curcon.service.BeoordelingsElementService;
-import nl.hu.curcon.filter.FirebaseInit;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/beoordelingselementen")
@@ -30,13 +30,13 @@ public class BeoordelingsElementRestService {
 	@Autowired
 	BeoordelingsElementService beoordelingsElementService;
 	@Autowired
-	FirebaseInit firebaseInit;
+	FunctionChecker functionChecker;
 
 	@GET
 	@Path("/{beoordelingsElementId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response find(@PathParam("beoordelingsElementId") int beoordelingsElementId) {
-		if (!firebaseInit.functionInUser("beoordelingselement_get")) {
+		if (!functionChecker.functionInUser("beoordelingselement_get")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -58,7 +58,7 @@ public class BeoordelingsElementRestService {
 	public Response update(@PathParam("beoordelingsElementId") int beoordelingsElementId,
 			BeoordelingsElementPostDto beoordelingsElementPostDto) {
 		
-		if (!firebaseInit.functionInUser("beoordelingselement_put")) {
+		if (!functionChecker.functionInUser("beoordelingselement_put")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -74,7 +74,7 @@ public class BeoordelingsElementRestService {
 	@Path("/{beoordelingsElementId}")
 	public Response delete(@PathParam("beoordelingsElementId") int beoordelingsElementId) {
 		
-		if (!firebaseInit.functionInUser("beoordelingselement_delete")) {
+		if (!functionChecker.functionInUser("beoordelingselement_delete")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
@@ -90,7 +90,7 @@ public class BeoordelingsElementRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft alle toetselementen bij een beoordelingelement.")
 	public Response findToetElementenByLeerdoel(@PathParam("beoordelingsElementId") int beoordelingsElementId) {
-		if (!firebaseInit.functionInUser("beoordelingselement_getlist")) {
+		if (!functionChecker.functionInUser("beoordelingselement_getlist")) {
 			//Niet Geauthoriseerd
 			return Response.status(403).build();
 		}
