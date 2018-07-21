@@ -305,7 +305,7 @@ INSERT INTO `function` (`id`, `name`) VALUES
 (75, 'organisatie_put'),
 (76, 'organisatie_delete'),
 (77, 'organisatiedocenten_get'),
-(78, 'organisatiedocent_put'),
+(78, 'organisatiedocent_post'),
 (79, 'organisatiecursussen_get'),
 (80, 'organisatiecursus_post'),
 (81, 'organisatieopleidingsprofielen_get'),
@@ -382,7 +382,7 @@ INSERT INTO `role` (`id`, `name`) VALUES
 -- Gegevens worden geëxporteerd voor tabel `user`
 --
 
-INSERT INTO `user` (`username`, `role_id`) VALUES
+INSERT INTO `useraccount` (`username`, `role_id`) VALUES
 ('jan.testgebruiker@gmail.com', 6),
 ('luccah06071@gmail.com', 6),
 ('redouan.bouzid96@gmail.com', 6);
