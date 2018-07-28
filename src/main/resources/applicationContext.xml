@@ -36,16 +36,16 @@
 
 	<bean id="dataSourceOpenShift"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.4.113.2:3306/curcon" />
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com:5432/d7q1vhnaj31gmp" />
 	</bean>
 
 	<bean id="dataSourceLocal"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/curcon" />
-		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com:5432/d7q1vhnaj31gmp" />
+		<property name="username" value="tdvrifbafmsvzi" />
+		<property name="password" value="f96cb884ec39d9e2e1652aa317e4f8234550d6a3145172aefc5a3ed153a271d9" />
 	</bean>
 
 	<bean id="entityManagerFactory"
@@ -63,7 +63,7 @@
 		</property>
 		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 			 <prop key="hibernate.hbm2ddl.auto">validate</prop> 
