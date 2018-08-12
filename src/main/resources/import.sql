@@ -1,4 +1,4 @@
-INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (1, "Onthouden", "");
+ INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (1, "Onthouden", "");
 INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (2, "Begrijpen", "");
 INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (3, "Toepassen", "");
 INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (4, "Analyseren", "");
@@ -10,11 +10,13 @@ INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (2, "Toepasse
 INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (3, "Tonen", "Beoordeling in realistische voorspelbare situatie (simulatie/project)");
 INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (4, "Doen", "Beoordeling in echte beroepssituaties");
 
+
 INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (1, "Beheren", "Het beheersbaar laten verlopen van alle activiteiten gericht op het proces van ontwikkeling, ingebruikname en gebruik van ict-systemen.");
 INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (2, "Analyseren", "Het analyseren van processen, producten en informatiestromen  in hun onderlinge samenhang en de context van de omgeving.");
 INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (3, "Adviseren", "Het adviseren over de herinrichting van processen en/of informatiestromen  en voor een nieuw te ontwikkelen of aan te schaffen ict-systeem op basis van een analyse en in overleg met stakeholders.");
 INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (4, "Ontwerpen", "Het ontwerpen van een ict-systeem op basis van specificaties en binnen vooraf gestelde kaders.");
 INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (5, "Realiseren", "Het realiseren van een ict-systeem op basis van een ontwerp en binnen gestelde kaders.");
+
 
 --INSERT INTO activiteit (id, naam, omschrijving) VALUES (6, 'Leiderschap', 'neem initiatief en vervul een leidende rol in een team om de gestelde doelen te bereiken.'));
 --INSERT INTO activiteit (id, naam, omschrijving) VALUES (7, 'Samenwerken', 'draag actief bij aan het product of het resultaat van het team.'));
@@ -225,6 +227,156 @@ INSERT INTO "toetselement" ("id", "gewicht", "beoordelingselement_id", "bloomniv
 
 
 --Authorisatie gedeelte
+INSERT INTO "function" ("id", "name") VALUES
+(1, "beoordelingselement_get"),
+(2, "beoordelingselement_put"),
+(3, "beoordelingselement_delete"),
+(4, "beoordelingselement_getlist"),
+(5, "beroepstaak_get"),
+(6, "beroepstaken_get"),
+(7, "beroepstaaktypes_get"),
+(8, "beroepstaak_find"),
+(9, "cohort_get"),
+(10, "cohort_put"),
+(11, "cohortcursussen_get"),
+(12, "cohortcursus_post"),
+(13, "cohortcursus_delete"),
+(14, "cursus_get"),
+(15, "cursus_put"),
+(16, "cursus_delete"),
+(17, "cursusleerdoelen_get"),
+(18, "cursusleerdoel_post"),
+(19, "cursustoetsen_get"),
+(20, "cursustoets_post"),
+(21, "cursusberoepstaken_get"),
+(22, "cursusberoepstaak_post"),
+(23, "cursusberoepstaak_delete"),
+(24, "cursusprofessionals_get"),
+(25, "cursusprofessional_post"),
+(26, "cursusprofessional_delete"),
+(27, "cursuschecks_get"),
+(28, "docent_get"),
+(29, "docent_put"),
+(30, "functions_get"),
+(31, "function_get"),
+(32, "function_post"),
+(33, "function_put"),
+(34, "function_delete"),
+(35, "leerdoel_get"),
+(36, "leerdoel_put"),
+(37, "leerdoel_delete"),
+(38, "leerdoeltoetselementen_get"),
+(39, "leerdoeltoetselement_post"),
+(40, "leerlijn_get"),
+(41, "leerlijn_put"),
+(42, "leerlijn_delete"),
+(43, "leerlijntrefwoorden_get"),
+(44, "leerlijntrefwoorden_post"),
+(45, "leerplanschema_get"),
+(46, "leerplanschemaprofiel_get"),
+(47, "leerdoelencohortberoepstaak_get"),
+(48, "ECTScohortberoepstaak_get"),
+(49, "leerplanschema_check_get"),
+(50, "millerniveaus_get"),
+(51, "millerniveau_get"),
+(52, "modules_get"),
+(53, "module_get"),
+(54, "module_post"),
+(55, "module_put"),
+(56, "module_delete"),
+(57, "modulefunctions_get"),
+(58, "modulefunction_post"),
+(59, "modulefunction_delete"),
+(60, "opleidingsprofiel_get"),
+(61, "opleidingsprofiel_put"),
+(62, "opleidingsprofielcohorten_get"),
+(63, "opleidingsprofielcohort_post"),
+(64, "opleidingsprofielberoepstaken_get"),
+(65, "opleidingsprofielberoepstaken_check"),
+(66, "opleidingsprofielprofessionals_get"),
+(67, "opleidingsprofielleerlijnen_get"),
+(68, "opleidingsprofielberoepstaak_post"),
+(69, "opleidingsprofielberoepstaak_delete"),
+(70, "opleidingsprofielprofessional_post"),
+(71, "opleidingsprofielprofessional_delete"),
+(72, "organisaties_get"),
+(73, "organisatie_get"),
+(74, "organisatie_post"),
+(75, "organisatie_put"),
+(76, "organisatie_delete"),
+(77, "organisatiedocenten_get"),
+(78, "organisatiedocent_put"),
+(79, "organisatiecursussen_get"),
+(80, "organisatiecursus_post"),
+(81, "organisatieopleidingsprofielen_get"),
+(82, "organisatieopleidingsprofiel_post"),
+(83, "organisatieberoepstaken_get"),
+(84, "professionals_get"),
+(85, "professional_get"),
+(86, "professionaltypes_get"),
+(87, "professional_find"),
+(88, "role_get"),
+(89, "role_post"),
+(90, "role_put"),
+(91, "role_delete"),
+(92, "rolemodules_get"),
+(93, "rolemodule_post"),
+(94, "rolemodule_delete"),
+(95, "toetselement_get"),
+(96, "toetselement_put"),
+(97, "toetselement_delete"),
+(98, "toetsmatrijs_get"),
+(99, "toetsvorm_get"),
+(100, "ects_get"),
+(101, "calcprofiel_get"),
+(102, "toets_get"),
+(103, "toets_put"),
+(104, "toets_delete"),
+(105, "toetsbeoordelingselement_post"),
+(106, "toetsbeoordelingselementen_get"),
+(107, "users_get"),
+(108, "user_delete"),
+(109, "user_put"),
+(110, "roles_get"),
+(111,"userrole_get");
+
+--
+-- Gegevens worden geÃ«xporteerd voor tabel "module"
+--
+
+INSERT INTO "module" ("id", "name") VALUES
+(1, "beheer_beoordelingselement"),
+(2, "beheer_cursusberoepstaak"),
+(3, "beheer_opleidingsprofielberoepstaak"),
+(4, "beheer_cohort"),
+(5, "beheer_organisatiecursus"),
+(6, "beheer_cursus"),
+(7, "beheer_organisatiedocent"),
+(8, "beheer_docent"),
+(9, "beheer_leerdoel"),
+(10, "beheer_leerlijn"),
+(11, "beheer_autorisatie"),
+(12, "beheer_organisatie-opleidingsprofiel"),
+(13, "beheer_opleidingsprofiel"),
+(14, "beheer_organisatie"),
+(15, "beheer_cursussentoets"),
+(16, "beheer_toets"),
+(17, "read_toets"),
+(18, "beheer_leerdoelentoetselement"),
+(19, "beheer_toetselement"),
+(20, "read_domeinpubliek");
+
+--
+-- Gegevens worden geÃ«xporteerd voor tabel "role"
+--
+
+INSERT INTO "role" ("id", "name") VALUES
+(1, "publiek"),
+(2, "admin"),
+(3, "cursusleider"),
+(4, "cursuscommissie"),
+(5, "curriculumcommissie"),
+(6, "developer");
 
 --
 -- Gegevens worden geëxporteerd voor tabel "user"
