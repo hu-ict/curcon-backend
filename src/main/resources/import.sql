@@ -1,22 +1,20 @@
- INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (1, "Onthouden", "");
-INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (2, "Begrijpen", "");
-INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (3, "Toepassen", "");
-INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (4, "Analyseren", "");
-INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (5, "Evalueren", "");
-INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (6, "Creëren", "");
+INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (1, 'Onthouden', '');
+INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (2, 'Begrijpen', '');
+INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (3, 'Toepassen', '');
+INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (4, 'Analyseren', '');
+INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (5, 'Evalueren', '');
+INSERT INTO "bloomniveau" ("id", "niveau", "omschrijving") VALUES (6, 'Creëren', '');
 
-INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (1, "Weten", "Kennistoets");
-INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (2, "Toepassen", "Toepassen van kennis in schriftelijke casus / opdracht");
-INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (3, "Tonen", "Beoordeling in realistische voorspelbare situatie (simulatie/project)");
-INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (4, "Doen", "Beoordeling in echte beroepssituaties");
+INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (1, 'Weten', 'Kennistoets');
+INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (2, 'Toepassen', 'Toepassen van kennis in schriftelijke casus / opdracht');
+INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (3, 'Tonen', 'Beoordeling in realistische voorspelbare situatie (simulatie/project)');
+INSERT INTO "millerniveau" ("id", "niveau", "omschrijving") VALUES (4, 'Doen', 'Beoordeling in echte beroepssituaties');
 
-
-INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (1, "Beheren", "Het beheersbaar laten verlopen van alle activiteiten gericht op het proces van ontwikkeling, ingebruikname en gebruik van ict-systemen.");
-INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (2, "Analyseren", "Het analyseren van processen, producten en informatiestromen  in hun onderlinge samenhang en de context van de omgeving.");
-INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (3, "Adviseren", "Het adviseren over de herinrichting van processen en/of informatiestromen  en voor een nieuw te ontwikkelen of aan te schaffen ict-systeem op basis van een analyse en in overleg met stakeholders.");
-INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (4, "Ontwerpen", "Het ontwerpen van een ict-systeem op basis van specificaties en binnen vooraf gestelde kaders.");
-INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (5, "Realiseren", "Het realiseren van een ict-systeem op basis van een ontwerp en binnen gestelde kaders.");
-
+INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (1, 'Beheren', 'Het beheersbaar laten verlopen van alle activiteiten gericht op het proces van ontwikkeling, ingebruikname en gebruik van ict-systemen.');
+INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (2, 'Analyseren', 'Het analyseren van processen, producten en informatiestromen  in hun onderlinge samenhang en de context van de omgeving.');
+INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (3, 'Adviseren', 'Het adviseren over de herinrichting van processen en/of informatiestromen  en voor een nieuw te ontwikkelen of aan te schaffen ict-systeem op basis van een analyse en in overleg met stakeholders.');
+INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (4, 'Ontwerpen', 'Het ontwerpen van een ict-systeem op basis van specificaties en binnen vooraf gestelde kaders.');
+INSERT INTO "activiteit" ("id", "naam", "omschrijving") VALUES (5, 'Realiseren', 'Het realiseren van een ict-systeem op basis van een ontwerp en binnen gestelde kaders.');
 
 --INSERT INTO activiteit (id, naam, omschrijving) VALUES (6, 'Leiderschap', 'neem initiatief en vervul een leidende rol in een team om de gestelde doelen te bereiken.'));
 --INSERT INTO activiteit (id, naam, omschrijving) VALUES (7, 'Samenwerken', 'draag actief bij aan het product of het resultaat van het team.'));
@@ -38,6 +36,7 @@ INSERT INTO architectuurlaag (id, naam, omschrijving) VALUES (2, 'Bedrijfsproces
 INSERT INTO architectuurlaag (id, naam, omschrijving) VALUES (3, 'Infrastructuur', 'Infrastructuur betreft het geheel aan ict-systemen waarmee bedrijfsprocessen  gefaciliteerd worden. Het gaat hier om beschikbaar stellen, beschikbaar houden en configureren van de traditionele hardware-infrastructuur, maar zeker ook de software-infrastructuur.');
 INSERT INTO architectuurlaag (id, naam, omschrijving) VALUES (4, 'Software', 'Software betreft het ontwikkelen van diverse soorten software. Dit betreft software die na oplevering wordt opgenomen in een ict-infrastructuur.');
 INSERT INTO architectuurlaag (id, naam, omschrijving) VALUES (5, 'Hardware interfacing', 'Hardware interfacing is van toepassing wanneer software interactie aangaat met beschikbare hardware. Hierbij gaat het om situaties waarbij in de software expliciet rekening gehouden moet worden met mogelijkheden en beperkingen van de beschikbare hardware. Gekozen is voor ‘computersysteem’ als generieke, overkoepelende term. Afhankelijk van de context kan dit nader gespecificeerd worden in‘embedded systeem’, ‘industrial automation’, ‘virtueel systeem’ e.d.');
+
 INSERT INTO beroepstaak (id, activiteit_id, architectuurlaag_id, beschrijving, niveau) VALUES (1, 1, 1, 'Vanaf de start van product- of dienstontwikkeling rekening houden met productverantwoording, productcontext, continuïteit en overdracht naar de opdrachtgever en/of gebruikersomgeving.', 3);
 INSERT INTO beroepstaak (id, activiteit_id, architectuurlaag_id, beschrijving, niveau) VALUES (2, 1, 1, 'Het toepassen van versiebeheer en het inrichten en configureren van een samenwerkingsomgeving bij de realisatie van ict- en/of digitale mediaproducten,  rekening houdend met onderhoudbaarheid en daarvoor beschikbare middelen.', 2);
 INSERT INTO beroepstaak (id, activiteit_id, architectuurlaag_id, beschrijving, niveau) VALUES (3, 1, 1, 'Het inrichten en onderhouden van de eigen werkomgeving voor analyse, ontwerp en realisatie van ict- en/of digitale mediaproducten m.b.v. een gangbare tool. Het overdragen van een gedefinieerde versie van het eindproduct, inclusief productverantwoording, aan een opdrachtgever.', 1);
@@ -113,6 +112,7 @@ INSERT INTO beroepstaak (id, activiteit_id, architectuurlaag_id, beschrijving, n
 INSERT INTO beroepstaak (id, activiteit_id, architectuurlaag_id, beschrijving, niveau) VALUES (73, 5, 5, 'Een compleet computersysteem verwezenlijken, inclusief netwerk, hardware en systeemsoftware. Een acceptatieprocedure opstellen en uitvoeren, bijv. in een virtuele omgeving, inclusief aspecten als timing, resourcegebruik en performance.', 3);
 INSERT INTO beroepstaak (id, activiteit_id, architectuurlaag_id, beschrijving, niveau) VALUES (74, 5, 5, 'Een eenvoudig computersysteem inrichten en de koppelingen met hardwarecomponenten realiseren via software. Driversoftware schrijven en testen. Een protocol implementeren  en testen.', 2);
 INSERT INTO beroepstaak (id, activiteit_id, architectuurlaag_id, beschrijving, niveau) VALUES (75, 5, 5, 'Software schrijven voor een eenvoudig, gegeven computersysteem, voorzien van actuatoren en sensoren.', 1);
+
 INSERT INTO professionalskill (id, activiteit_id, code, beschrijving, niveau) VALUES (1, 6, 'CPO', 'Creatief problemen oplossen', 'T');
 INSERT INTO professionalskill (id, activiteit_id, code, beschrijving, niveau) VALUES (2, 7, 'OD', 'Onderzoek doen', 'T');
 INSERT INTO professionalskill (id, activiteit_id, code, beschrijving, niveau) VALUES (3, 8, 'LSC', 'Leiderschap, Samenwerken, Communicatie', 'T');
@@ -130,16 +130,19 @@ INSERT INTO professionalskill (id, activiteit_id, code, beschrijving, niveau) VA
 INSERT INTO professionalskill (id, activiteit_id, code, beschrijving, niveau) VALUES (15, 10, 'LPO', 'Leren & Persoonlijke Ontwikkeling', 'S');
 
 INSERT INTO "organisatie" ("id", "naam") VALUES (1, "Hogeschool Utrecht I-ICT");
+
 INSERT INTO "docent" ("id", "naam", "organisatie_id") VALUES (1, "Berend Wilkens", 1);
 INSERT INTO "docent" ("id", "naam", "organisatie_id") VALUES (2, "Leo Pruijt", 1);
 INSERT INTO "docent" ("id", "naam", "organisatie_id") VALUES (3, "Dan Greve", 1);
 INSERT INTO "docent" ("id", "naam", "organisatie_id") VALUES (4, "Jeroen Weber", 1);
 INSERT INTO "docent" ("id", "naam", "organisatie_id") VALUES (5, "Rik Jansen", 1);
 INSERT INTO "docent" ("id", "naam", "organisatie_id") VALUES (6, "Rik Boss", 1);
+
 INSERT INTO "opleidingsprofiel" ("id", "naam", "organisatie_id") VALUES (1, "Business IT and Management", 1);
 INSERT INTO "opleidingsprofiel" ("id", "naam", "organisatie_id") VALUES (2, "Software and Information Enginering", 1);
 INSERT INTO "opleidingsprofiel" ("id", "naam", "organisatie_id") VALUES (3, "System and Network Enginering", 1);
 INSERT INTO "opleidingsprofiel" ("id", "naam", "organisatie_id") VALUES (4, "Technische Informatica", 1);
+
 INSERT INTO "opleidingsprofiel_beroepstaak" values (1, 1);
 INSERT INTO "opleidingsprofiel_beroepstaak" values (1, 5);
 INSERT INTO "opleidingsprofiel_beroepstaak" values (1, 7);
@@ -158,10 +161,12 @@ INSERT INTO "opleidingsprofiel_beroepstaak" values (2, 50);
 INSERT INTO "opleidingsprofiel_beroepstaak" values (2, 54);
 INSERT INTO "opleidingsprofiel_beroepstaak" values (2, 55);
 INSERT INTO "opleidingsprofiel_beroepstaak" values (2, 58);
+
 INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (1, "2017", 1);
 INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (2, "2017", 2);
 INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (3, "2017", 3);
 INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (4, "2017", 4);
+
 INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (1, "TICT-V1PROG-15", 1, 5, "Programming", 1, 1);
 INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (2, "TICT-V1ICOR-15", 1, 5, "ICT and Organisation", 1, 1);
 INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (3, "TICT-V1CSN-15", 1, 5, "Computer, system and network", 1, 1);
@@ -175,6 +180,7 @@ INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode"
 INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (11, "TICT-V1PROF-15", 1, 5, "Professional Development", 2, 1);
 INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (12, "TICT-V1IDP-15", 1, 5, "Intradisciplary Project", 2, 1);
 INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (13, "TICT-V4AFST-17", 3, 30, "Afstuderen", 15, 1);
+
 INSERT INTO "cohort_cursus" values (1, 1);
 INSERT INTO "cohort_cursus" values (1, 2);
 INSERT INTO "cohort_cursus" values (1, 3);
@@ -191,12 +197,15 @@ INSERT INTO "cohort_cursus" values (2, 10);
 INSERT INTO "cohort_cursus" values (2, 11);
 INSERT INTO "cohort_cursus" values (2, 12);
 INSERT INTO "cohort_cursus" values (2, 13);
+
 INSERT INTO "leerdoel" ("id", "cursus_id", "beroepstaak_id", "professionalskill_id", "bloomniveau_id", "naam", "omschrijving", "gewicht") VALUES (1, 5, 15, 1, 6, "Servlets", "Grafische webinterfaces bouwen met behulp van het J2EE framework (servlets en Java Server Pages) en kan een J2EE frontendframework toepassen (Struts2).", 10);
 INSERT INTO "leerdoel" ("id", "cursus_id", "beroepstaak_id", "professionalskill_id", "bloomniveau_id", "naam", "omschrijving", "gewicht") VALUES (2, 5, 15, 1, 3, "Applicatieserver", "De werking van applicatieservers als Tomcat beschrijven en kan daarop webapplicatiesdeployen.", 30);
 INSERT INTO "leerdoel" ("id", "cursus_id", "beroepstaak_id", "professionalskill_id", "bloomniveau_id", "naam", "omschrijving", "gewicht") VALUES (3, 5, 15, 1, 2, "HTTP-protocol", "Het HTTP-protocol en, met behulp daarvan, de J2EE application-lifecycle beschrijven.", 20);
 INSERT INTO "leerdoel" ("id", "cursus_id", "beroepstaak_id", "professionalskill_id", "bloomniveau_id", "naam", "omschrijving", "gewicht") VALUES (4, 5, 15, 1, 6, "J2EE listeners", "Kan J2EE listeners toepassen en kan diverse framework-toevoegingen (datavalidatie, AJAX-componenten, Struts2 technologiestack, internationalisatie) gebruiken en beschrijven.", 20);
 INSERT INTO "leerdoel" ("id", "cursus_id", "beroepstaak_id", "professionalskill_id", "bloomniveau_id", "naam", "omschrijving", "gewicht") VALUES (5, 5, 60, 1, 6, "ORM", "Gegevens vastleggen in databases vanuit OO-systemen, gebaseerd op OO principes.", 20);
+
 INSERT INTO "opleidingsprofiel_professionalskill" values (1, 1) ;
+
 INSERT INTO "cursus_beroepstaak" VALUES (1, 57);
 INSERT INTO "cursus_beroepstaak" VALUES (1, 60);
 INSERT INTO "cursus_beroepstaak" VALUES (3, 39);
@@ -212,12 +221,15 @@ INSERT INTO "cursus_beroepstaak" VALUES (6, 51);
 INSERT INTO "cursus_beroepstaak" VALUES (7, 57);
 INSERT INTO "cursus_beroepstaak" VALUES (7, 60);
 INSERT INTO "cursus_professionalskill" values (1, 1) ;
+
 INSERT INTO "toets" ("id", "gewicht", "millerniveau_id", "naam", "cursus_id") values (1, 50, 1, "Theorietentamen", 5);
 INSERT INTO "toets" ("id", "gewicht", "millerniveau_id", "naam", "cursus_id") values (2, 50, 2, "Praktijkopdracht", 5);
+
 INSERT INTO "beoordelingselement" ("id", "gewicht", "naam", "omschrijving", "toets_id")  values (1, 10, "Vraag 1", "", 1);
 INSERT INTO "beoordelingselement" ("id", "gewicht", "naam", "omschrijving", "toets_id")  values (2, 10, "Vraag 2", "", 1);
 INSERT INTO "beoordelingselement" ("id", "gewicht", "naam", "omschrijving", "toets_id")  values (3, 10, "Vraag 3", "", 1);
 INSERT INTO "beoordelingselement" ("id", "gewicht", "naam", "omschrijving", "toets_id")  values (4, 10, "Projectvoorstel", "", 2);
+
 INSERT INTO "toetselement" ("id", "gewicht", "beoordelingselement_id", "bloomniveau_id", "leerdoel_id") VALUES (1, 20, 1, 2, 1);
 INSERT INTO "toetselement" ("id", "gewicht", "beoordelingselement_id", "bloomniveau_id", "leerdoel_id") VALUES (2, 20, 1, 2, 2);
 INSERT INTO "toetselement" ("id", "gewicht", "beoordelingselement_id", "bloomniveau_id", "leerdoel_id") VALUES (3, 20, 2, 2, 3);
@@ -227,169 +239,152 @@ INSERT INTO "toetselement" ("id", "gewicht", "beoordelingselement_id", "bloomniv
 
 
 --Authorisatie gedeelte
-INSERT INTO "function" ("id", "name") VALUES
-(1, "beoordelingselement_get"),
-(2, "beoordelingselement_put"),
-(3, "beoordelingselement_delete"),
-(4, "beoordelingselement_getlist"),
-(5, "beroepstaak_get"),
-(6, "beroepstaken_get"),
-(7, "beroepstaaktypes_get"),
-(8, "beroepstaak_find"),
-(9, "cohort_get"),
-(10, "cohort_put"),
-(11, "cohortcursussen_get"),
-(12, "cohortcursus_post"),
-(13, "cohortcursus_delete"),
-(14, "cursus_get"),
-(15, "cursus_put"),
-(16, "cursus_delete"),
-(17, "cursusleerdoelen_get"),
-(18, "cursusleerdoel_post"),
-(19, "cursustoetsen_get"),
-(20, "cursustoets_post"),
-(21, "cursusberoepstaken_get"),
-(22, "cursusberoepstaak_post"),
-(23, "cursusberoepstaak_delete"),
-(24, "cursusprofessionals_get"),
-(25, "cursusprofessional_post"),
-(26, "cursusprofessional_delete"),
-(27, "cursuschecks_get"),
-(28, "docent_get"),
-(29, "docent_put"),
-(30, "functions_get"),
-(31, "function_get"),
-(32, "function_post"),
-(33, "function_put"),
-(34, "function_delete"),
-(35, "leerdoel_get"),
-(36, "leerdoel_put"),
-(37, "leerdoel_delete"),
-(38, "leerdoeltoetselementen_get"),
-(39, "leerdoeltoetselement_post"),
-(40, "leerlijn_get"),
-(41, "leerlijn_put"),
-(42, "leerlijn_delete"),
-(43, "leerlijntrefwoorden_get"),
-(44, "leerlijntrefwoorden_post"),
-(45, "leerplanschema_get"),
-(46, "leerplanschemaprofiel_get"),
-(47, "leerdoelencohortberoepstaak_get"),
-(48, "ECTScohortberoepstaak_get"),
-(49, "leerplanschema_check_get"),
-(50, "millerniveaus_get"),
-(51, "millerniveau_get"),
-(52, "modules_get"),
-(53, "module_get"),
-(54, "module_post"),
-(55, "module_put"),
-(56, "module_delete"),
-(57, "modulefunctions_get"),
-(58, "modulefunction_post"),
-(59, "modulefunction_delete"),
-(60, "opleidingsprofiel_get"),
-(61, "opleidingsprofiel_put"),
-(62, "opleidingsprofielcohorten_get"),
-(63, "opleidingsprofielcohort_post"),
-(64, "opleidingsprofielberoepstaken_get"),
-(65, "opleidingsprofielberoepstaken_check"),
-(66, "opleidingsprofielprofessionals_get"),
-(67, "opleidingsprofielleerlijnen_get"),
-(68, "opleidingsprofielberoepstaak_post"),
-(69, "opleidingsprofielberoepstaak_delete"),
-(70, "opleidingsprofielprofessional_post"),
-(71, "opleidingsprofielprofessional_delete"),
-(72, "organisaties_get"),
-(73, "organisatie_get"),
-(74, "organisatie_post"),
-(75, "organisatie_put"),
-(76, "organisatie_delete"),
-(77, "organisatiedocenten_get"),
-(78, "organisatiedocent_put"),
-(79, "organisatiecursussen_get"),
-(80, "organisatiecursus_post"),
-(81, "organisatieopleidingsprofielen_get"),
-(82, "organisatieopleidingsprofiel_post"),
-(83, "organisatieberoepstaken_get"),
-(84, "professionals_get"),
-(85, "professional_get"),
-(86, "professionaltypes_get"),
-(87, "professional_find"),
-(88, "role_get"),
-(89, "role_post"),
-(90, "role_put"),
-(91, "role_delete"),
-(92, "rolemodules_get"),
-(93, "rolemodule_post"),
-(94, "rolemodule_delete"),
-(95, "toetselement_get"),
-(96, "toetselement_put"),
-(97, "toetselement_delete"),
-(98, "toetsmatrijs_get"),
-(99, "toetsvorm_get"),
-(100, "ects_get"),
-(101, "calcprofiel_get"),
-(102, "toets_get"),
-(103, "toets_put"),
-(104, "toets_delete"),
-(105, "toetsbeoordelingselement_post"),
-(106, "toetsbeoordelingselementen_get"),
-(107, "users_get"),
-(108, "user_delete"),
-(109, "user_put"),
-(110, "roles_get"),
-(111,"userrole_get");
 
---
--- Gegevens worden geÃ«xporteerd voor tabel "module"
---
-
-INSERT INTO "module" ("id", "name") VALUES
-(1, "beheer_beoordelingselement"),
-(2, "beheer_cursusberoepstaak"),
-(3, "beheer_opleidingsprofielberoepstaak"),
-(4, "beheer_cohort"),
-(5, "beheer_organisatiecursus"),
-(6, "beheer_cursus"),
-(7, "beheer_organisatiedocent"),
-(8, "beheer_docent"),
-(9, "beheer_leerdoel"),
-(10, "beheer_leerlijn"),
-(11, "beheer_autorisatie"),
-(12, "beheer_organisatie-opleidingsprofiel"),
-(13, "beheer_opleidingsprofiel"),
-(14, "beheer_organisatie"),
-(15, "beheer_cursussentoets"),
-(16, "beheer_toets"),
-(17, "read_toets"),
-(18, "beheer_leerdoelentoetselement"),
-(19, "beheer_toetselement"),
-(20, "read_domeinpubliek");
-
---
--- Gegevens worden geÃ«xporteerd voor tabel "role"
---
-
-INSERT INTO "role" ("id", "name") VALUES
-(1, "publiek"),
-(2, "admin"),
-(3, "cursusleider"),
-(4, "cursuscommissie"),
-(5, "curriculumcommissie"),
-(6, "developer");
-
---
--- Gegevens worden geëxporteerd voor tabel "user"
---
-
-INSERT INTO "useraccount" ("username", "role_id") VALUES
-("jan.testgebruiker@gmail.com", 6),
-("luccah06071@gmail.com", 6),
-("redouan.bouzid96@gmail.com", 6);
 
 --
 -- Gegevens worden geëxporteerd voor tabel "function_module"
 --
+
+INSERT INTO "function" ("id,"name") VALUES (3,'beoordelingselement_delete');
+INSERT INTO "function" ("id,"name") VALUES (4,'beoordelingselement_getlist');
+INSERT INTO "function" ("id,"name") VALUES (5,'beroepstaak_get');
+INSERT INTO "function" ("id,"name") VALUES (6,'beroepstaken_get');
+INSERT INTO "function" ("id,"name") VALUES (7,'beroepstaaktypes_get');
+INSERT INTO "function" ("id,"name") VALUES (8,'beroepstaak_find');
+INSERT INTO "function" ("id,"name") VALUES (9,'cohort_get');
+INSERT INTO "function" ("id,"name") VALUES (10,'cohort_put');
+INSERT INTO "function" ("id,"name") VALUES (11,'cohortcursussen_get');
+INSERT INTO "function" ("id,"name") VALUES (12,'cohortcursus_post');
+INSERT INTO "function" ("id,"name") VALUES (13,'cohortcursus_delete');
+INSERT INTO "function" ("id,"name") VALUES (14,'cursus_get');
+INSERT INTO "function" ("id,"name") VALUES (15,'cursus_put');
+INSERT INTO "function" ("id,"name") VALUES (16,'cursus_delete');
+INSERT INTO "function" ("id,"name") VALUES (17,'cursusleerdoelen_get');
+INSERT INTO "function" ("id,"name") VALUES (18,'cursusleerdoel_post');
+INSERT INTO "function" ("id,"name") VALUES (19,'cursustoetsen_get');
+INSERT INTO "function" ("id,"name") VALUES (20,'cursustoets_post');
+INSERT INTO "function" ("id,"name") VALUES (21,'cursusberoepstaken_get');
+INSERT INTO "function" ("id,"name") VALUES (22,'cursusberoepstaak_post');
+INSERT INTO "function" ("id,"name") VALUES (23,'cursusberoepstaak_delete');
+INSERT INTO "function" ("id,"name") VALUES (24,'cursusprofessionals_get');
+INSERT INTO "function" ("id,"name") VALUES (25,'cursusprofessional_post');
+INSERT INTO "function" ("id,"name") VALUES (26,'cursusprofessional_delete');
+INSERT INTO "function" ("id,"name") VALUES (27,'cursuschecks_get');
+INSERT INTO "function" ("id,"name") VALUES (28,'docent_get');
+INSERT INTO "function" ("id,"name") VALUES (30,'functions_get');
+INSERT INTO "function" ("id,"name") VALUES (31,'function_get');
+INSERT INTO "function" ("id,"name") VALUES (32,'function_post');
+INSERT INTO "function" ("id,"name") VALUES (33,'function_put');
+INSERT INTO "function" ("id,"name") VALUES (34,'function_delete');
+INSERT INTO "function" ("id,"name") VALUES (35,'leerdoel_get');
+INSERT INTO "function" ("id,"name") VALUES (36,'leerdoel_put');
+INSERT INTO "function" ("id,"name") VALUES (37,'leerdoel_delete');
+INSERT INTO "function" ("id,"name") VALUES (38,'leerdoeltoetselementen_get');
+INSERT INTO "function" ("id,"name") VALUES (39,'leerdoeltoetselement_post');
+INSERT INTO "function" ("id,"name") VALUES (40,'leerlijn_get');
+INSERT INTO "function" ("id,"name") VALUES (41,'leerlijn_put');
+INSERT INTO "function" ("id,"name") VALUES (42,'leerlijn_delete');
+INSERT INTO "function" ("id,"name") VALUES (43,'leerlijntrefwoorden_get');
+INSERT INTO "function" ("id,"name") VALUES (44,'leerlijntrefwoorden_post');
+INSERT INTO "function" ("id,"name") VALUES (45,'leerplanschema_get');
+INSERT INTO "function" ("id,"name") VALUES (46,'leerplanschemaprofiel_get');
+INSERT INTO "function" ("id,"name") VALUES (47,'leerdoelencohortberoepstaak_get');
+INSERT INTO "function" ("id,"name") VALUES (48,'ECTScohortberoepstaak_get');
+INSERT INTO "function" ("id,"name") VALUES (49,'leerplanschema_check_get');
+INSERT INTO "function" ("id,"name") VALUES (50,'millerniveaus_get');
+INSERT INTO "function" ("id,"name") VALUES (51,'millerniveau_get');
+INSERT INTO "function" ("id,"name") VALUES (52,'modules_get');
+INSERT INTO "function" ("id,"name") VALUES (53,'module_get');
+INSERT INTO "function" ("id,"name") VALUES (54,'module_post');
+INSERT INTO "function" ("id,"name") VALUES (55,'module_put');
+INSERT INTO "function" ("id,"name") VALUES (56,'module_delete');
+INSERT INTO "function" ("id,"name") VALUES (57,'modulefunctions_get');
+INSERT INTO "function" ("id,"name") VALUES (58,'modulefunction_post');
+INSERT INTO "function" ("id,"name") VALUES (59,'modulefunction_delete');
+INSERT INTO "function" ("id,"name") VALUES (60,'opleidingsprofiel_get');
+INSERT INTO "function" ("id,"name") VALUES (61,'opleidingsprofiel_put');
+INSERT INTO "function" ("id,"name") VALUES (62,'opleidingsprofielcohorten_get');
+INSERT INTO "function" ("id,"name") VALUES (63,'opleidingsprofielcohort_post');
+INSERT INTO "function" ("id,"name") VALUES (64,'opleidingsprofielberoepstaken_get');
+INSERT INTO "function" ("id,"name") VALUES (65,'opleidingsprofielberoepstaken_check');
+INSERT INTO "function" ("id,"name") VALUES (66,'opleidingsprofielprofessionals_get');
+INSERT INTO "function" ("id,"name") VALUES (67,'opleidingsprofielleerlijnen_get');
+INSERT INTO "function" ("id,"name") VALUES (68,'opleidingsprofielberoepstaak_post');
+INSERT INTO "function" ("id,"name") VALUES (69,'opleidingsprofielberoepstaak_delete');
+INSERT INTO "function" ("id,"name") VALUES (70,'opleidingsprofielprofessional_post');
+INSERT INTO "function" ("id,"name") VALUES (71,'opleidingsprofielprofessional_delete');
+INSERT INTO "function" ("id,"name") VALUES (72,'organisaties_get');
+INSERT INTO "function" ("id,"name") VALUES (73,'organisatie_get');
+INSERT INTO "function" ("id,"name") VALUES (74,'organisatie_post');
+INSERT INTO "function" ("id,"name") VALUES (75,'organisatie_put');
+INSERT INTO "function" ("id,"name") VALUES (76,'organisatie_delete');
+INSERT INTO "function" ("id,"name") VALUES (77,'organisatiedocenten_get');
+INSERT INTO "function" ("id,"name") VALUES (79,'organisatiecursussen_get');
+INSERT INTO "function" ("id,"name") VALUES (80,'organisatiecursus_post');
+INSERT INTO "function" ("id,"name") VALUES (81,'organisatieopleidingsprofielen_get');
+INSERT INTO "function" ("id,"name") VALUES (82,'organisatieopleidingsprofiel_post');
+INSERT INTO "function" ("id,"name") VALUES (83,'organisatieberoepstaken_get');
+INSERT INTO "function" ("id,"name") VALUES (84,'professionals_get');
+INSERT INTO "function" ("id,"name") VALUES (85,'professional_get');
+INSERT INTO "function" ("id,"name") VALUES (86,'professionaltypes_get');
+INSERT INTO "function" ("id,"name") VALUES (87,'professional_find');
+INSERT INTO "function" ("id,"name") VALUES (88,'role_get');
+INSERT INTO "function" ("id,"name") VALUES (89,'role_post');
+INSERT INTO "function" ("id,"name") VALUES (90,'role_put');
+INSERT INTO "function" ("id,"name") VALUES (91,'role_delete');
+INSERT INTO "function" ("id,"name") VALUES (92,'rolemodules_get');
+INSERT INTO "function" ("id,"name") VALUES (93,'rolemodule_post');
+INSERT INTO "function" ("id,"name") VALUES (94,'rolemodule_delete');
+INSERT INTO "function" ("id,"name") VALUES (95,'toetselement_get');
+INSERT INTO "function" ("id,"name") VALUES (96,'toetselement_put');
+INSERT INTO "function" ("id,"name") VALUES (97,'toetselement_delete');
+INSERT INTO "function" ("id,"name") VALUES (98,'toetsmatrijs_get');
+INSERT INTO "function" ("id,"name") VALUES (99,'toetsvorm_get');
+INSERT INTO "function" ("id,"name") VALUES (100,'ects_get');
+INSERT INTO "function" ("id,"name") VALUES (101,'calcprofiel_get');
+INSERT INTO "function" ("id,"name") VALUES (102,'toets_get');
+INSERT INTO "function" ("id,"name") VALUES (103,'toets_put');
+INSERT INTO "function" ("id,"name") VALUES (104,'toets_delete');
+INSERT INTO "function" ("id,"name") VALUES (105,'toetsbeoordelingselement_post');
+INSERT INTO "function" ("id,"name") VALUES (106,'toetsbeoordelingselementen_get');
+INSERT INTO "function" ("id,"name") VALUES (107,'users_get');
+INSERT INTO "function" ("id,"name") VALUES (108,'user_delete');
+INSERT INTO "function" ("id,"name") VALUES (109,'user_put');
+INSERT INTO "function" ("id,"name") VALUES (110,'roles_get');
+INSERT INTO "function" ("id,"name") VALUES (111,'userrole_get');
+INSERT INTO "function" ("id,"name") VALUES (1,'beoordelingselement_gets');
+INSERT INTO "function" ("id,"name") VALUES (29,'docent_put');
+INSERT INTO "function" ("id,"name") VALUES (78,'organisatiedocent_post');
+INSERT INTO "function" ("id,"name") VALUES (2,'beoordelingselement_put');
+
+INSERT INTO "module" ("id,"name") VALUES (3,'beheer_opleidingsprofielberoepstaak');
+INSERT INTO "module" ("id,"name") VALUES (4,'beheer_cohort');
+INSERT INTO "module" ("id,"name") VALUES (5,'beheer_organisatiecursus');
+INSERT INTO "module" ("id,"name") VALUES (6,'beheer_cursus');
+INSERT INTO "module" ("id,"name") VALUES (7,'beheer_organisatiedocent');
+INSERT INTO "module" ("id,"name") VALUES (8,'beheer_docent');
+INSERT INTO "module" ("id,"name") VALUES (9,'beheer_leerdoel');
+INSERT INTO "module" ("id,"name") VALUES (10,'beheer_leerlijn');
+INSERT INTO "module" ("id,"name") VALUES (11,'beheer_autorisatie');
+INSERT INTO "module" ("id,"name") VALUES (12,'beheer_organisatie-opleidingsprofiel');
+INSERT INTO "module" ("id,"name") VALUES (13,'beheer_opleidingsprofiel');
+INSERT INTO "module" ("id,"name") VALUES (14,'beheer_organisatie');
+INSERT INTO "module" ("id,"name") VALUES (15,'beheer_cursussentoets');
+INSERT INTO "module" ("id,"name") VALUES (16,'beheer_toets');
+INSERT INTO "module" ("id,"name") VALUES (17,'read_toets');
+INSERT INTO "module" ("id,"name") VALUES (18,'beheer_leerdoelentoetselement');
+INSERT INTO "module" ("id,"name") VALUES (19,'beheer_toetselement');
+INSERT INTO "module" ("id,"name") VALUES (20,'read_domeinpubliek');
+INSERT INTO "module" ("id,"name") VALUES (2,'beheer_cursusberoepstaak_EDITED');
+INSERT INTO "module" ("id,"name") VALUES (1,'b_beoordelingselement');
+INSERT INTO "module" ("id,"name") VALUES (137,'super_adminbeheer');
+
+INSERT INTO "role" ("id,"name") VALUES (1'publiek');
+INSERT INTO "role" ("id,"name") VALUES (2,'admin');
+INSERT INTO "role" ("id,"name") VALUES (3,'cursusleider');
+INSERT INTO "role" ("id,"name") VALUES (4,'cursuscommissie');
+INSERT INTO "role" ("id,"name") VALUES (5,'curriculumcommissie');
+INSERT INTO "role" ("id,"name") VALUES (6,'developer');
 
 INSERT INTO "function_module" ("module_id", "function_id") VALUES
 (1, 3),
@@ -502,7 +497,10 @@ INSERT INTO "function_module" ("module_id", "function_id") VALUES
 (20, 4),
 (20, 110),
 (20, 53),
-(20,111);
+(20,111),
+(2,23),
+(137,91),
+(137,108);
 
 
 --
@@ -557,3 +555,8 @@ INSERT INTO "module_role" ("role_id", "module_id") VALUES
 (6, 17),
 (6, 18),
 (6, 19);
+
+INSERT INTO "useraccount" ("username", "role_id") VALUES
+("jan.testgebruiker@gmail.com", 6),
+("luccah06071@gmail.com", 6),
+("redouan.bouzid96@gmail.com", 6);
