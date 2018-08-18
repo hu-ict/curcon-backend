@@ -129,7 +129,7 @@ INSERT INTO "professionalskill" (id, activiteit_id, code, beschrijving, niveau) 
 INSERT INTO "professionalskill" (id, activiteit_id, code, beschrijving, niveau) VALUES (14, 9, 'POKe', 'Planning, Organisatie, Kwaliteitsbewustzijn & Ethiek', 'S');
 INSERT INTO "professionalskill" (id, activiteit_id, code, beschrijving, niveau) VALUES (15, 10, 'LPO', 'Leren & Persoonlijke Ontwikkeling', 'S');
 
-INSERT INTO "organisatie" ("id", "naam") VALUES (1, "Hogeschool Utrecht I-ICT");
+INSERT INTO "organisatie" ("id", "naam") VALUES (1, 'Hogeschool Utrecht I-ICT');
 
 INSERT INTO "docent" ("id", "naam", "organisatie_id") VALUES (1, 'Berend Wilkens', 1);
 INSERT INTO "docent" ("id", "naam", "organisatie_id") VALUES (2, 'Leo Pruijt', 1);
@@ -162,12 +162,12 @@ INSERT INTO "opleidingsprofiel_beroepstaak" values (2, 54);
 INSERT INTO "opleidingsprofiel_beroepstaak" values (2, 55);
 INSERT INTO "opleidingsprofiel_beroepstaak" values (2, 58);
 
-INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (1, "2017", 1);
-INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (2, "2017", 2);
-INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (3, "2017", 3);
-INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (4, "2017", 4);
+INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (1, 2017, 1);
+INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (2, 2017, 2);
+INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (3, 2017, 3);
+INSERT INTO "cohort" ("id", "jaar", "opleidingsprofiel_id") VALUES (4, 2017, 4);
 
-INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (1, 'TICT-V1PROG-15', 1, 5, 'Programming' 1, 1);
+INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (1, 'TICT-V1PROG-15', 1, 5, 'Programming', 1, 1);
 INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (2, 'TICT-V1ICOR-15', 1, 5, 'ICT and Organisation', 1, 1);
 INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (3, 'TICT-V1CSN-15', 1, 5, 'Computer, system and network', 1, 1);
 INSERT INTO "cursus" ("id", "cursuscode", "docent_id", "ects", "naam", "periode", "organisatie_id") VALUES (4, 'TICT-V1MOD-15', 1, 5, 'Modelling', 2, 1);
@@ -379,7 +379,7 @@ INSERT INTO "module" ("id","name") VALUES (2,'beheer_cursusberoepstaak_EDITED');
 INSERT INTO "module" ("id","name") VALUES (1,'b_beoordelingselement');
 INSERT INTO "module" ("id","name") VALUES (137,'super_adminbeheer');
 
-INSERT INTO "role" ("id","name") VALUES (1'publiek');
+INSERT INTO "role" ("id","name") VALUES (1,'publiek');
 INSERT INTO "role" ("id","name") VALUES (2,'admin');
 INSERT INTO "role" ("id","name") VALUES (3,'cursusleider');
 INSERT INTO "role" ("id","name") VALUES (4,'cursuscommissie');
@@ -498,7 +498,6 @@ INSERT INTO "function_module" ("module_id", "function_id") VALUES
 (20, 110),
 (20, 53),
 (20,111),
-(2,23),
 (137,91),
 (137,108);
 
@@ -557,6 +556,6 @@ INSERT INTO "module_role" ("role_id", "module_id") VALUES
 (6, 19);
 
 INSERT INTO "useraccount" ("username", "role_id") VALUES
-("jan.testgebruiker@gmail.com", 6),
-("luccah06071@gmail.com", 6),
-("redouan.bouzid96@gmail.com", 6);
+('jan.testgebruiker@gmail.com', 6),
+('luccah06071@gmail.com', 6),
+('redouan.bouzid96@gmail.com', 6);
