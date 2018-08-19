@@ -26,6 +26,7 @@ import nl.hu.curcon.dto.ToetsElementDto;
 import nl.hu.curcon.dto.post.LeerdoelPostDto;
 import nl.hu.curcon.dto.post.ToetsElementPostDto;
 import nl.hu.curcon.service.LeerdoelService;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/leerdoelen")
@@ -33,12 +34,18 @@ import nl.hu.curcon.service.LeerdoelService;
 public class LeerdoelRestService {
 	@Autowired
 	LeerdoelService leerdoelService;
+	@Autowired
+	FunctionChecker functionChecker;
 
 	@GET
 	@Path("/{leerdoelId}")
 	@Transactional
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response find(@PathParam("leerdoelId") int leerdoelId) {
+		if (!functionChecker.functionInUser("leerdoel_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		LeerdoelDto dto = leerdoelService.find(leerdoelId);
 		if (dto != null) {
 			return Response.ok(dto).build();
@@ -53,6 +60,10 @@ public class LeerdoelRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Wijzigt een leerdoel op basis van Id.")
 	public Response update(@PathParam("leerdoelId") int leerdoelId, LeerdoelPostDto leerdoelDto) {
+		if (!functionChecker.functionInUser("leerdoel_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (leerdoelService.update(leerdoelId, leerdoelDto)) {
 			return Response.status(200).build();
 		} else {
@@ -65,6 +76,10 @@ public class LeerdoelRestService {
 	@Transactional
 	@ApiOperation(value = "Verwijdert een leerdoel.")
 	public Response delete(@PathParam("leerdoelId") int leerdoelId) {
+		if (!functionChecker.functionInUser("leerdoel_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		LeerdoelDto dto = leerdoelService.find(leerdoelId);
 		if (dto != null) {
 			leerdoelService.delete(dto.getId());
@@ -81,6 +96,10 @@ public class LeerdoelRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft alle toetselementen bij een leerdoel.")
 	public Response findToetElementenByLeerdoel(@PathParam("leerdoelId") int leerdoelId) {
+		if (!functionChecker.functionInUser("leerdoeltoetselementen_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<ToetsElementDto> list = leerdoelService.getToetslementenByLeerdoel(leerdoelId);
 		if (list != null) {
 			return Response.ok(list).build();
@@ -94,6 +113,10 @@ public class LeerdoelRestService {
 	@Path("/{leerdoelId}/toetselementen")
 	@ApiOperation(value = "Maakt een nieuw toetselement bij een leerdoel.")
 	public Response createToetElementByLeerdoel(@PathParam("leerdoelId") int leerdoelId, ToetsElementPostDto toetsElementDto) {
+		if (!functionChecker.functionInUser("leerdoeltoetselement_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int toetsElementId = leerdoelService.createToetsElementByLeerdoel(leerdoelId, toetsElementDto);
 		if (toetsElementId == 0) {
 			return Response.status(404).build();

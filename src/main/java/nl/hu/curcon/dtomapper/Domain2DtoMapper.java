@@ -1,6 +1,8 @@
 package nl.hu.curcon.dtomapper;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
@@ -9,33 +11,41 @@ import nl.hu.curcon.domain.BloomNiveau;
 import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Docent;
+import nl.hu.curcon.domain.Function;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.Leerlijn;
 import nl.hu.curcon.domain.MillerNiveau;
+import nl.hu.curcon.domain.Module;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
 import nl.hu.curcon.domain.Periode;
 import nl.hu.curcon.domain.ProfessionalSkill;
+import nl.hu.curcon.domain.Role;
 import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.domain.ToetsPlanning;
 import nl.hu.curcon.domain.Trefwoord;
+import nl.hu.curcon.domain.User;
 import nl.hu.curcon.domain.hboi.BeroepsTaak;
 import nl.hu.curcon.dto.BeoordelingsElementDto;
 import nl.hu.curcon.dto.BloomNiveauDto;
 import nl.hu.curcon.dto.CohortDto;
 import nl.hu.curcon.dto.CursusDto;
 import nl.hu.curcon.dto.DocentDto;
+import nl.hu.curcon.dto.FunctionDto;
 import nl.hu.curcon.dto.HRefDto;
 import nl.hu.curcon.dto.LeerdoelDto;
 import nl.hu.curcon.dto.LeerlijnDto;
 import nl.hu.curcon.dto.MillerNiveauDto;
+import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dto.OpleidingsProfielDto;
 import nl.hu.curcon.dto.OrganisatieDto;
 import nl.hu.curcon.dto.PeriodeDto;
+import nl.hu.curcon.dto.RoleDto;
 import nl.hu.curcon.dto.ToetsDto;
 import nl.hu.curcon.dto.ToetsElementDto;
 import nl.hu.curcon.dto.ToetsPlanningDto;
+import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.competence.BeroepsTaakDto;
 import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
 import nl.hu.curcon.dto.competence.TrefwoordDto;
@@ -280,6 +290,55 @@ public class Domain2DtoMapper {
 		ToetsPlanningDto dto = new ToetsPlanningDto();
 		dto.setId(toetsPlanning.getId());
 		return dto;
+	}
+	
+	public static UserDto map(User user) {
+		if (user == null) { return null; }
+		UserDto dto = new UserDto();
+		dto.setUsername(user.getUsername());
+
+		//HRefDto hRefDtoOP = new HRefDto();
+		
+		//hRefDtoOP.setHRef(MyApplication.getBaseUrl() + "roles/" + user.getRole().getId());
+		//dto.setRole(hRefDtoOP);
+		dto.setRole(Domain2DtoMapperLink.mapLink(user.getRole()));
+		dto.setHRef(Domain2DtoMapperHRef.mapHRef(user));
+		return dto;
+	}
+	public static RoleDto map(Role role) {
+		if (role == null) { return null; }
+		RoleDto dto = new RoleDto();
+		dto.setId(role.getId());
+		dto.setName(role.getName());
+
+		HRefDto hRefDtoOP = new HRefDto();
+		hRefDtoOP.setHRef(MyApplication.getBaseUrl() + "roles/" + role.getId()+"/modules");
+		dto.setModules(hRefDtoOP);
+		dto.setHRef(Domain2DtoMapperHRef.mapHRef(role));
+		return dto;
+	}
+	public static ModuleDto map(Module module) {
+		if (module == null) { return null; }
+		ModuleDto dto = new ModuleDto();
+		dto.setId(module.getId());
+		dto.setName(module.getName());
+
+		HRefDto hRefDtoOP = new HRefDto();
+		hRefDtoOP.setHRef(MyApplication.getBaseUrl() + "modules/" + module.getId()+"/functions");
+		dto.setFunctions(hRefDtoOP);
+		dto.setHRef(Domain2DtoMapperHRef.mapHRef(module));
+		return dto;
+	}
+	
+	public static FunctionDto map(Function function) {
+		if (function == null) { 
+			return null;
+		}
+		FunctionDto fto = new FunctionDto();
+		fto.setId(function.getId());
+		fto.setName((function.getName()));
+		fto.setHRef(Domain2DtoMapperHRef.mapHRef(function));
+		return fto;
 	}
 
 }

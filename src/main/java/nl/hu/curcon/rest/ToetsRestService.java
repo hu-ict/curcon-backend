@@ -25,6 +25,7 @@ import nl.hu.curcon.dto.ToetsDto;
 import nl.hu.curcon.dto.post.BeoordelingsElementPostDto;
 import nl.hu.curcon.dto.post.ToetsPostDto;
 import nl.hu.curcon.service.ToetsService;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/toetsen")
@@ -32,6 +33,8 @@ import nl.hu.curcon.service.ToetsService;
 public class ToetsRestService {
     @Autowired
     ToetsService toetsService;
+	@Autowired
+	FunctionChecker functionChecker;
 
 	@GET
 	@Path("/{toetsId}")
@@ -39,6 +42,10 @@ public class ToetsRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft een toets op basis van zijn id")
 	public Response find(@PathParam("toetsId") int toetsId) {
+		if (!functionChecker.functionInUser("toets_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		ToetsDto dto = toetsService.find(toetsId);
 		if (dto != null) {
 			return Response.ok(dto).build();
@@ -53,6 +60,10 @@ public class ToetsRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Doet een update op een bestaande toets.")
 	public Response update(@PathParam("toetsId") int toetsId, ToetsPostDto toetsDto) {
+		if (!functionChecker.functionInUser("toets_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (toetsService.update(toetsId, toetsDto)) {
 			return Response.status(200).build();
 		} else {
@@ -65,6 +76,10 @@ public class ToetsRestService {
 	@Transactional
 	@ApiOperation(value="Verwijderd een toets met zijn beoordelingselementen.")
 	public Response delete(@PathParam("toetsId") int toetsId) {
+		if (!functionChecker.functionInUser("toets_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		ToetsDto dto = toetsService.find(toetsId);
 		if (dto == null) {
 			return Response.status(404).build();
@@ -81,6 +96,10 @@ public class ToetsRestService {
 	@Transactional
 	@ApiOperation(value = "Maakt een nieuwe beoordelingselement aan binnen een toets.")
 	public Response createBeoordelingselementByToets(@PathParam("toetsId") int toetsId, BeoordelingsElementPostDto beoordelingsElementPostDto) {
+		if (!functionChecker.functionInUser("toetsbeoordelingselement_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int beoordelingsElementId = toetsService.createBeoordelingsElementByToets(toetsId, beoordelingsElementPostDto);
 		if (beoordelingsElementId > 0) {
 			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl())
@@ -99,6 +118,10 @@ public class ToetsRestService {
 	@Transactional
 	@ApiOperation(value = "Geeft een lijst met alle trefwoorden binnen een leerlijn.")
 	public Response findBeoordelingsElementenByToets(@PathParam("toetsId") int toetsId) {
+		if (!functionChecker.functionInUser("toetsbeoordelingselementen_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<BeoordelingsElementDto> list = toetsService.findBeoordelingsElementenByToets(toetsId);
 		if (list != null) {
 			return Response.ok(list).build();

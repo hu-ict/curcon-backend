@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MyApplication extends ResourceConfig {
 //	public static String BASE_URL = "http://curcon-huict.rhcloud.com/rest/";
-	public static String BASE_URL = "http://localhost:8080/curcon/rest/";
+	public static String BASE_URL = "https://curcon-backend.herokuapp.com/rest/";
 	private static String baseUrl = null;
 
 	public static String getBaseUrl() {

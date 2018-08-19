@@ -13,8 +13,8 @@ public class Bootstrap extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         BeanConfig beanConfig = new BeanConfig();
-//        beanConfig.setHost("localhost:8080");
-//        beanConfig.setBasePath("/curcon/rest/");
+      beanConfig.setHost("https://curcon-backend.herokuapp.com");
+      beanConfig.setBasePath("/rest/");
         beanConfig.setHost("localhost:8080");
         beanConfig.setBasePath("/curcon/rest/");
         beanConfig.setContact("berend.wilkens@hu.nl");

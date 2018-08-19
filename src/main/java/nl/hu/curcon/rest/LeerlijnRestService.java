@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -25,6 +26,7 @@ import nl.hu.curcon.dto.competence.TrefwoordDto;
 import nl.hu.curcon.dto.post.LeerlijnPostDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
 import nl.hu.curcon.service.LeerlijnService;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/leerlijnen")
@@ -32,11 +34,17 @@ import nl.hu.curcon.service.LeerlijnService;
 public class LeerlijnRestService {
     @Autowired
     LeerlijnService leerlijnService;
+	@Autowired
+	FunctionChecker functionChecker;
 
 	@GET
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public LeerlijnDto find(@PathParam("id") int id) {
+		if (!functionChecker.functionInUser("leerlijn_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return leerlijnService.find(id);
 	}
 
@@ -44,12 +52,20 @@ public class LeerlijnRestService {
 	@Path("/{id}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public LeerlijnDto update(LeerlijnPostDto leerlijnDto) {
+		if (!functionChecker.functionInUser("leerlijn_put")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return leerlijnService.update(leerlijnDto);
 	}
 
 	@DELETE
 	@Path("/{id}")
 	public void delete(@PathParam("id") int id) {
+		if (!functionChecker.functionInUser("leerlijn_delete")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		leerlijnService.delete(id);
 	}
 	
@@ -58,6 +74,10 @@ public class LeerlijnRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public List<TrefwoordDto> findTrefwoordenByLeerlijn(@PathParam("leerlijnId") int leerlijnId) {
+		if (!functionChecker.functionInUser("leerlijntrefwoorden_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return leerlijnService.findTrefwoordenByLeerlijn(leerlijnId);
 	}
 
@@ -67,6 +87,10 @@ public class LeerlijnRestService {
 	@Transactional
 	@ApiOperation(value = "Maakt een nieuw trefwoord aan binnen een leerlijn.")
 	public Response createTrefwoordByLeerlijn(@PathParam("leerlijnId") int leerlijnId, TrefwoordPostDto trefwoordDto) {
+		if (!functionChecker.functionInUser("leerlijntrefwoord_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int trefwoordId = leerlijnService.createTrefwoordByLeerlijn(leerlijnId, trefwoordDto);
 		if (trefwoordId > 0) {
 			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl())

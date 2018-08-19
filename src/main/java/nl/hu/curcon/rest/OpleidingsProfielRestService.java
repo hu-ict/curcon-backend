@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -31,6 +32,7 @@ import nl.hu.curcon.dto.post.CohortPostDto;
 import nl.hu.curcon.dto.post.IdPostDto;
 import nl.hu.curcon.dto.post.OpleidingsProfielPostDto;
 import nl.hu.curcon.service.OpleidingsProfielService;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/opleidingsprofielen")
@@ -38,6 +40,8 @@ import nl.hu.curcon.service.OpleidingsProfielService;
 public class OpleidingsProfielRestService {
 	@Autowired
 	OpleidingsProfielService opleidingsProfielService;
+	@Autowired
+	FunctionChecker functionChecker;
 
 	@GET
 	@Path("/{opleidingsProfielId}")
@@ -45,6 +49,10 @@ public class OpleidingsProfielRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(hidden = false, value = "Geeft een opleidingsprofielen op basis van zijn id.")
 	public OpleidingsProfielDto find(@PathParam("opleidingsProfielId") int id) {
+		if (!functionChecker.functionInUser("opleidingsprofiel_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return opleidingsProfielService.find(id);
 	}
 
@@ -55,6 +63,10 @@ public class OpleidingsProfielRestService {
 	@ApiOperation(hidden = false, value = "Wijzigt een opleidingsprofiel.")
 	public Response update(@PathParam("opleidingsProfielId") int opleidingsProfielId,
 			OpleidingsProfielPostDto opleidingsProfielDto) {
+		if (!functionChecker.functionInUser("opleidingsprofiel_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (!opleidingsProfielService.update(opleidingsProfielId, opleidingsProfielDto)) {
 			return Response.status(404).build();
 		} else {
@@ -68,6 +80,10 @@ public class OpleidingsProfielRestService {
 	@Transactional
 	@ApiOperation(value = "Geeft alle cohorten binnen een opleidingsprofiel.")
 	public Response findCohortenByOpleidingsProfiel(@PathParam("opleidingsProfielId") int opleidingsProfielId) {
+		if (!functionChecker.functionInUser("opleidingsprofielcohorten_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<CohortDto> list = opleidingsProfielService.findCohortenByOpleidingsProfiel(opleidingsProfielId);
 		if (list != null) {
 			return Response.ok(list).build();
@@ -83,6 +99,10 @@ public class OpleidingsProfielRestService {
 	@ApiOperation(value = "Maakt een nieuw cohort binnen een opleidingsprofielen aan.")
 	public Response createCohortByOpleidingsProfiel(@PathParam("opleidingsProfielId") int opleidingsProfielId,
 			CohortPostDto cohortDto) {
+		if (!functionChecker.functionInUser("opleidingsprofielcohort_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int cohortId = opleidingsProfielService.createCohortByOpleidingsProfiel(opleidingsProfielId, cohortDto);
 		UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("/cohorten/" + cohortId);
 		URI uri = builder.build();
@@ -95,6 +115,10 @@ public class OpleidingsProfielRestService {
 	@Transactional
 	@ApiOperation(value = "Geeft de eindkwalificaties op het gebied van de HBO-i beroepstaken voor een opleidingsprofiel.")
 	public Response findBeroepsTakenByOpleidingsProfiel(@PathParam("opleidingsProfielId") int opleidingsProfielId) {
+		if (!functionChecker.functionInUser("opleidingsprofielberoepstaken_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<BeroepsTaakDto> list = opleidingsProfielService.findBeroepsTakenByOpleidingsProfiel(opleidingsProfielId);
 		if (list != null) {
 			return Response.ok(list).build();
@@ -109,6 +133,10 @@ public class OpleidingsProfielRestService {
 	@Transactional
 	@ApiOperation(value = "Geeft de validatie van eindkwalificaties op het gebied van de HBO-i beroepstaken voor een opleidingsprofiel.")
 	public Response validateBeroepsTakenByOpleidingsProfiel(@PathParam("opleidingsProfielId") int opleidingsProfielId) {
+		if (!functionChecker.functionInUser("opleidingsprofielberoepstaken_check")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		OpleidingBeroepsTaakValidatieDto opleidingBeroepsTaakValidatieDto = opleidingsProfielService.validateBeroepsTakenByOpleidingsProfiel(opleidingsProfielId);
 		if (opleidingBeroepsTaakValidatieDto != null) {
 			return Response.ok(opleidingBeroepsTaakValidatieDto).build();
@@ -124,6 +152,10 @@ public class OpleidingsProfielRestService {
 	@ApiOperation(value = "Geeft de eindkwalificaties op het gebied van professionalSkill voor een opleidingsprofiel.")
 	public Response findProfessionalSkillsByOpleidingsProfiel(
 			@PathParam("opleidingsProfielId") int opleidingsProfielId) {
+		if (!functionChecker.functionInUser("opleidingsprofielprofessionals_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<ProfessionalSkillDto> list = opleidingsProfielService
 				.findProfessionalSkillsByOpleidingsProfiel(opleidingsProfielId);
 		if (list != null) {
@@ -139,6 +171,10 @@ public class OpleidingsProfielRestService {
 	@Transactional
 	@ApiOperation(value = "Geeft de leerlijnen binnen een opleidingsprofiel.")
 	public Response findLeerlijnenByOpleidingsProfiel(@PathParam("opleidingsProfielId") int opleidingsProfielId) {
+		if (!functionChecker.functionInUser("opleidingsprofielleerlijnen_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<LeerlijnDto> list = opleidingsProfielService.findLeerlijnenByOpleidingsProfiel(opleidingsProfielId);
 		if (list != null) {
 			return Response.ok(list).build();
@@ -154,11 +190,15 @@ public class OpleidingsProfielRestService {
 	@ApiOperation(value = "Voegt een nieuwe beroepstaak aan een opleidingsprofiel toe. [LINK]")
 	public Response addBeroepsTaakToOpleidingsprofiel(@PathParam("opleidingsProfielId") int opleidingsProfielId,
 			IdPostDto dto) { 
-		String s = "opleidingsProfielId: ["+opleidingsProfielId+"] dto: ["+dto.getId()+"]";
+		if (!functionChecker.functionInUser("opleidingsprofielberoepstaak_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
+		//String s = "opleidingsProfielId: ["+opleidingsProfielId+"] dto: ["+dto.getId()+"]";
 		if (opleidingsProfielService.addBeroepsTaakToOpleidingsProfiel(opleidingsProfielId, dto.getId())) {
-			return Response.ok(s+" true").build();
+			return Response.ok().build();
 		} else {
-			return Response.ok(s+" false").build();
+			return Response.status(404).build();
 		}
 	}
 
@@ -168,6 +208,10 @@ public class OpleidingsProfielRestService {
 	@ApiOperation(value = "Verwijderd een beroepsTaak van een opleidingsprofiel. [LINK]")
 	public Response removeBeroepsTaakFromOpleidingsprofiel(@PathParam("opleidingsProfielId") int opleidingsProfielId,
 			@PathParam("beroepstaakId") int beroepstaakId) {
+		if (!functionChecker.functionInUser("opleidingsprofielberoepstaak_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (opleidingsProfielService.removeBeroepsTaakFromOpleidingsProfiel(opleidingsProfielId, beroepstaakId)) {
 			return Response.ok().build();
 		} else {
@@ -182,11 +226,16 @@ public class OpleidingsProfielRestService {
 	@ApiOperation(value = "Voegt een nieuwe professionalSkills aan een opleidingsprofiel toe. [LINK]")
 	public Response addProfessionalSkillsIdToOpleidingsprofiel(@PathParam("opleidingsProfielId") int opleidingsProfielId,
 			IdPostDto dto) { 
-		String s = "opleidingsProfielId: ["+opleidingsProfielId+"] dto: ["+dto.getId()+"]";
+		if (!functionChecker.functionInUser("opleidingsprofielprofessional_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
+		//String s = "opleidingsProfielId: ["+opleidingsProfielId+"] dto: ["+dto.getId()+"]";
 		if (opleidingsProfielService.addProfessionalSkillsToOpleidingsProfiel(opleidingsProfielId, dto.getId())) {
-			return Response.ok(s+" true").build();
+			return Response.ok().build();
 		} else {
-			return Response.ok(s+" false").build();
+			return Response.status(404).build();
+			//return Response.ok(s+" false").build();
 		}
 	}
 
@@ -196,6 +245,10 @@ public class OpleidingsProfielRestService {
 	@ApiOperation(value = "Verwijderd een professionalSkills van een opleidingsprofiel. [LINK]")
 	public Response removeProfessionalSkillsIdFromOpleidingsprofiel(@PathParam("opleidingsProfielId") int opleidingsProfielId,
 			@PathParam("professionalSkillsId") int professionalSkillsId) {
+		if (!functionChecker.functionInUser("opleidingsprofielprofessional_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (opleidingsProfielService.removeProfessionalSkillsFromOpleidingsProfiel(opleidingsProfielId, professionalSkillsId)) {
 			return Response.ok().build();
 		} else {

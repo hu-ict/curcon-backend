@@ -1,2 +1,2 @@
 # curcon-backend
-CurCon Java backend
+Java backend for curcon app

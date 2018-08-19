@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -31,6 +32,7 @@ import nl.hu.curcon.dto.post.DocentPostDto;
 import nl.hu.curcon.dto.post.OpleidingsProfielPostDto;
 import nl.hu.curcon.dto.post.OrganisatiePostDto;
 import nl.hu.curcon.service.OrganisatieService;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/organisaties")
@@ -38,11 +40,17 @@ import nl.hu.curcon.service.OrganisatieService;
 public class OrganisatieRestService {
 	@Autowired
 	OrganisatieService organisatieService;
-
+	@Autowired
+	FunctionChecker functionChecker;
+	
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft een lijst met alle organisaties.")
 	public List<OrganisatieDto> findAll() {
+		if (!functionChecker.functionInUser("organisaties_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return organisatieService.findAll();
 	}
 
@@ -51,6 +59,10 @@ public class OrganisatieRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft een bepaalde organisatie.")
 	public Response find(@PathParam("organisatieId") int organisatieId) {
+		if (!functionChecker.functionInUser("organisatie_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		OrganisatieDto dto = organisatieService.find(organisatieId);
 		if (dto != null) {
 			return Response.ok(dto).build();
@@ -63,6 +75,10 @@ public class OrganisatieRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Maakt een nieuwe organisatie aan.")
 	public Response create(OrganisatiePostDto organisatieDto) {
+		if (!functionChecker.functionInUser("organisatie_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int organisatieId = organisatieService.create(organisatieDto);
 		if (organisatieId > 0) {
 			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("organisaties/" + organisatieId);
@@ -78,6 +94,10 @@ public class OrganisatieRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Wijzigd de naam van een organisatie.")
 	public Response update(@PathParam("organisatieId") int organisatieId, OrganisatiePostDto organisatieDto) {
+		if (!functionChecker.functionInUser("organisatie_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (organisatieService.update(organisatieId, organisatieDto)) {
 			return Response.status(200).build();
 		} else {
@@ -89,6 +109,10 @@ public class OrganisatieRestService {
 	@Path("/{organisatieId}")
 	@ApiOperation(hidden = true, value = "Verwijdert een complete organisatie, inclussief alle docenten, cursussen en opleidingsprofielen.")
 	public Response delete(@PathParam("organisatieId") int organisatieId) {
+		if (!functionChecker.functionInUser("organisatie_delete")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (organisatieService.delete(organisatieId)) {
 			return Response.status(200).build();
 		} else {
@@ -101,6 +125,10 @@ public class OrganisatieRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft een lijst met alle docenten binnen een organisatie.")
 	public Response findDocentenByOrganisatie(@PathParam("organisatieId") int organisatieId) {
+		if (!functionChecker.functionInUser("organisatiedocenten_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<DocentDto> list = organisatieService.findDocentenByOrganisatie(organisatieId);
 		if (list != null) {
 			return Response.ok(list).build();
@@ -114,6 +142,10 @@ public class OrganisatieRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Maakt een nieuwe docent aan binnen een organisatie.")
 	public Response createDocentByOrganisatie(@PathParam("organisatieId") int organisatieId, DocentPostDto docentDto) {
+		if (!functionChecker.functionInUser("organisatiedocent_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int docentId = organisatieService.createDocentByOrganisatie(organisatieId, docentDto);
 		if (docentId > 0) {
 			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("/docenten/" + docentId);
@@ -130,6 +162,10 @@ public class OrganisatieRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft een lijst met alle cursussen binnen een organisatie.")
 	public Response findCursussenByOrganisatie(@PathParam("organisatieId") int organisatieId) {
+		if (!functionChecker.functionInUser("organisatiecursussen_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<CursusDto> list = organisatieService.findCursussenByOrganisatie(organisatieId);
 		if (list != null) {
 			return Response.ok(list).build();
@@ -143,6 +179,10 @@ public class OrganisatieRestService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Maakt een nieuwe cursus aan binnen een organisatie.")
 	public Response createCursusByOrganisatie(@PathParam("organisatieId") int organisatieId, CursusPostDto cursusDto) {
+		if (!functionChecker.functionInUser("organisatiecursus_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int cursusId = organisatieService.createCursusByOrganisatie(organisatieId, cursusDto);
 		if (cursusId > 0) {
 			UriBuilder builder = UriBuilder.fromPath(MyApplication.getBaseUrl()).path("/cursussen/" + cursusId);
@@ -158,6 +198,10 @@ public class OrganisatieRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Geeft een lijst met alle opleidingsprofielen binnen een organisatie.")
 	public Response findOpleidingsProfielenByOrganisatie(@PathParam("organisatieId") int organisatieId) {
+		if (!functionChecker.functionInUser("organisatieopleidingsprofielen_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<OpleidingsProfielDto> list = organisatieService.findOpleidingsProfielenByOrganisatie(organisatieId);
 		if (list != null) {
 			return Response.ok(list).build();
@@ -172,6 +216,10 @@ public class OrganisatieRestService {
 	@ApiOperation(value = "Maakt een nieuw opleidingsprofiel binnen een organisatie aan.")
 	public Response createOpleidingsProfielByOrganisatie(@PathParam("organisatieId") int organisatieId,
 			OpleidingsProfielPostDto opleidingsProfielDto) {
+		if (!functionChecker.functionInUser("organisatieopleidingsprofiel_post")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		int opleidingsProfielId = organisatieService.createOpleidingsProfielByOrganisatie(organisatieId,
 				opleidingsProfielDto);
 		if (opleidingsProfielId > 0) {
@@ -190,6 +238,10 @@ public class OrganisatieRestService {
 	@Transactional
 	@ApiOperation(value = "Geeft een lijst met alle BeroepsTaken binnen een organisatie.")
 	public Response findBeroepsTaakByOrganisatie(@PathParam("organisatieId") int organisatieId) {
+		if (!functionChecker.functionInUser("organisatieberoepstaken_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<BeroepsTaakDto> list = organisatieService.findBeroepsTakenByOrganisatie(organisatieId);
 		if (list != null) {
 			return Response.ok(list).build();

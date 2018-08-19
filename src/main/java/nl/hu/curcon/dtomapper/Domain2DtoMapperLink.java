@@ -11,6 +11,7 @@ import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.MillerNiveau;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.ProfessionalSkill;
+import nl.hu.curcon.domain.Role;
 import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.domain.Trefwoord;
 import nl.hu.curcon.domain.hboi.BeroepsTaak;
@@ -125,6 +126,15 @@ public class Domain2DtoMapperLink {
 		LinkDto dto = new LinkDto();
 		dto.setId(domain.getId());
 		dto.setNaam(domain.getNaam());
+		dto.setHRef(Domain2DtoMapperHRef.mapHRef(domain));
+		return dto;
+	}
+
+	public static LinkDto mapLink(Role domain) {
+		if (domain == null) {return null;}
+		LinkDto dto = new LinkDto();
+		dto.setId(domain.getId());
+		dto.setNaam(domain.getName());
 		dto.setHRef(Domain2DtoMapperHRef.mapHRef(domain));
 		return dto;
 	}

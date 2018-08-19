@@ -5,12 +5,12 @@ import java.io.IOException;
 import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.transaction.UserTransaction;
+import javax.ws.rs.ext.Provider;
+
 
 public class ConnectionFilter implements Filter {
-
 	@Override
 	public void destroy() {
-
 	}
 
 	@Resource
@@ -31,6 +31,5 @@ public class ConnectionFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-
 	}
 }

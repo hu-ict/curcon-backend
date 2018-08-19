@@ -7,31 +7,43 @@ import nl.hu.curcon.domain.BloomNiveau;
 import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Docent;
+import nl.hu.curcon.domain.Function;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.Leerlijn;
+import nl.hu.curcon.domain.Module;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
 import nl.hu.curcon.domain.Periode;
 import nl.hu.curcon.domain.ProfessionalSkill;
+import nl.hu.curcon.domain.Role;
 import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.domain.ToetsPlanning;
 import nl.hu.curcon.domain.Trefwoord;
+import nl.hu.curcon.domain.User;
 import nl.hu.curcon.dto.BloomNiveauDto;
+import nl.hu.curcon.dto.FunctionDto;
+import nl.hu.curcon.dto.ModuleDto;
 import nl.hu.curcon.dto.PeriodeDto;
+import nl.hu.curcon.dto.RoleDto;
 import nl.hu.curcon.dto.ToetsPlanningDto;
+import nl.hu.curcon.dto.UserDto;
 import nl.hu.curcon.dto.competence.ProfessionalSkillDto;
 import nl.hu.curcon.dto.post.BeoordelingsElementPostDto;
 import nl.hu.curcon.dto.post.CohortPostDto;
 import nl.hu.curcon.dto.post.CursusPostDto;
 import nl.hu.curcon.dto.post.DocentPostDto;
+import nl.hu.curcon.dto.post.FunctionPostDto;
 import nl.hu.curcon.dto.post.LeerdoelPostDto;
 import nl.hu.curcon.dto.post.LeerlijnPostDto;
+import nl.hu.curcon.dto.post.ModulePostDto;
 import nl.hu.curcon.dto.post.OpleidingsProfielPostDto;
 import nl.hu.curcon.dto.post.OrganisatiePostDto;
+import nl.hu.curcon.dto.post.RolePutDto;
 import nl.hu.curcon.dto.post.ToetsElementPostDto;
 import nl.hu.curcon.dto.post.ToetsPostDto;
 import nl.hu.curcon.dto.post.TrefwoordPostDto;
+import nl.hu.curcon.dto.post.UserPostDto;
 
 /**
  * @author berend.wilkens, 30 mei 2017
@@ -137,6 +149,52 @@ public class Dto2DomainMapper {
 		domain.setNaam(dto.getNaam());
 		domain.setGewicht(dto.getGewicht());
 		domain.setOmschrijving(dto.getOmschrijving());
+		return domain;
+	}
+	public User map(UserDto dto) {
+		User domain = new User();
+		domain.setUsername(dto.getUsername());
+		return domain;
+	}
+	public Role map(RoleDto dto) {
+		Role domain = new Role();
+		domain.setName(dto.getName());;
+		return domain;
+	}
+	public Module map(ModuleDto dto) {
+		Module domain = new Module();
+		domain.setName(dto.getName());
+
+		return domain;
+	}
+	public Function map(FunctionDto dto) {
+		Function domain = new Function();
+		domain.setName(dto.getName());
+		return domain;
+	}
+
+	public Module map(ModulePostDto dto) {
+		Module domain = new Module();
+		domain.setName(dto.getName());
+
+		return domain;
+	}
+
+	public Function map(FunctionPostDto dto) {
+		Function domain = new Function();
+		domain.setName(dto.getName());
+
+		return domain;
+	}
+
+	public Role map(RolePutDto dto) {
+		Role domain = new Role();
+		domain.setName(dto.getName());
+		return domain;
+	}
+	public User map(UserPostDto dto) {
+		User domain = new User();
+		domain.setUsername(dto.getUsername());
 		return domain;
 	}
 }

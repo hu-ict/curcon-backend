@@ -101,9 +101,9 @@ public class ProfessionalSkillServiceImpl extends GenericService implements Prof
 		// voor de eigen handelingen. Zorg dat jouw gedrag passend is binnen de
 		// waarden, normen, cultuur, behoeften, prioriteiten en doelstellingen
 		// van de organisatie en maatschappij waarin je werk en leeft."));
-
+ //TODO DIt is lelijk en stond hier hardcoded met verkeerde values..
 		professionalSkillTypesDto.getActiviteiten()
-				.add(new ActiviteitDto(6, "LPO", "Leren & Persoonlijke Ontwikkeling"));
+				.add(new ActiviteitDto(6, "CPO", "Creatief problemen oplossen"));
 		professionalSkillTypesDto.getActiviteiten()
 				.add(new ActiviteitDto(7, "OD", "Onderzoek doen"));
 		professionalSkillTypesDto.getActiviteiten()

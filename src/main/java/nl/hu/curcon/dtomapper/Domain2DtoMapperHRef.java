@@ -7,15 +7,19 @@ import nl.hu.curcon.domain.BloomNiveau;
 import nl.hu.curcon.domain.Cohort;
 import nl.hu.curcon.domain.Cursus;
 import nl.hu.curcon.domain.Docent;
+import nl.hu.curcon.domain.Function;
 import nl.hu.curcon.domain.Leerdoel;
 import nl.hu.curcon.domain.Leerlijn;
 import nl.hu.curcon.domain.MillerNiveau;
+import nl.hu.curcon.domain.Module;
 import nl.hu.curcon.domain.OpleidingsProfiel;
 import nl.hu.curcon.domain.Organisatie;
 import nl.hu.curcon.domain.ProfessionalSkill;
+import nl.hu.curcon.domain.Role;
 import nl.hu.curcon.domain.Toets;
 import nl.hu.curcon.domain.ToetsElement;
 import nl.hu.curcon.domain.Trefwoord;
+import nl.hu.curcon.domain.User;
 import nl.hu.curcon.domain.hboi.BeroepsTaak;
 import nl.hu.curcon.rest.MyApplication;
 
@@ -98,6 +102,26 @@ public class Domain2DtoMapperHRef {
 	public static String mapHRef(Leerlijn domain) {
 		if (domain == null) {return null;}
 		return MyApplication.getBaseUrl() + "leerlijnen/" + domain.getId();
+	}
+	
+	public static String mapHRef(User domain) {
+		if (domain == null) {return null;}
+		return MyApplication.getBaseUrl() + "users/" + domain.getUsername();
+	}
+
+	public static String mapHRef(Role domain) {
+		if (domain == null) {return null;}
+		return MyApplication.getBaseUrl() + "roles/" + domain.getId();
+	}
+
+	public static String mapHRef(Module domain) {
+		if (domain == null) {return null;}
+		return MyApplication.getBaseUrl() + "modules/" + domain.getId();
+	}
+
+	public static String mapHRef(Function domain) {
+		if (domain == null) {return null;}
+		return MyApplication.getBaseUrl() + "functions/" + domain.getId();
 	}
 
 

@@ -18,6 +18,7 @@ import io.swagger.annotations.ApiOperation;
 import nl.hu.curcon.dto.DocentDto;
 import nl.hu.curcon.dto.post.DocentPostDto;
 import nl.hu.curcon.service.DocentService;
+import nl.hu.curcon.filter.FunctionChecker;
 
 /**
  * @author berend.wilkens, 12 apr. 2017
@@ -30,13 +31,19 @@ public class DocentRestService {
 
     @Autowired
     DocentService docentService;
-
+    @Autowired
+    FunctionChecker functionChecker;
+    
 	@GET
 	@Path("/{docentId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
 	@ApiOperation(value = "Geeft een docent op basis van id.")
-	public Response find(@PathParam("docentId") int id) {
+	public Response find(@PathParam("docentId") int id)  {
+		if (!functionChecker.functionInUser("docent_get")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		DocentDto dto = docentService.find(id);
 		if (dto != null) {
 			return Response.ok(dto).build();
@@ -51,6 +58,10 @@ public class DocentRestService {
 	@Transactional
 	@ApiOperation(value = "Wijzigt een docent.")
 	public Response update(@PathParam("docentId") int docentId, DocentPostDto docentDto) {
+		if (!functionChecker.functionInUser("docent_put")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		if (docentService.update(docentId, docentDto)) {
 			return Response.status(200).build();
 		} else {

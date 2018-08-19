@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -21,6 +22,7 @@ import nl.hu.curcon.dto.LeerplanSchemaDto;
 import nl.hu.curcon.dto.check.EctsGewichtNiveauDto;
 import nl.hu.curcon.dto.check.ProfielDto;
 import nl.hu.curcon.service.LeerplanSchemaService;
+import nl.hu.curcon.filter.FunctionChecker;
 
 @Component
 @Path("/leerplanschemas")
@@ -28,12 +30,18 @@ import nl.hu.curcon.service.LeerplanSchemaService;
 public class LeerplanSchemaRestService {
 	@Autowired
 	LeerplanSchemaService leerplanSchemaService;
-
+	@Autowired
+	FunctionChecker functionChecker;
+	
 	@GET
 	@Path("/{cohortId}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public LeerplanSchemaDto find(@PathParam("cohortId") int cohortId) {
+		if (!functionChecker.functionInUser("leerplanschema_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return leerplanSchemaService.find(cohortId);
 	}
 	
@@ -43,6 +51,10 @@ public class LeerplanSchemaRestService {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft een berekend opleidingsprofiel voor een cohort.")
 	public ProfielDto findProfiel(@PathParam("cohortId") int cohortId) {
+		if (!functionChecker.functionInUser("leerplanschemaprofiel_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return leerplanSchemaService.getCalcProfile(cohortId);
 	}
 	
@@ -51,6 +63,10 @@ public class LeerplanSchemaRestService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public List<LeerdoelOverzichtDto> findLeerdoelenByCohortAndBeroepsTaak(@PathParam("cohortId") int cohortId, @PathParam("activiteitId") int activiteitId, @PathParam("architectuurlaagId") int architectuurlaagId) {
+		if (!functionChecker.functionInUser("leerdoelencohortberoepstaak_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return leerplanSchemaService.findLeerdoelenByCohortAndBeroepsTaak(cohortId, activiteitId, architectuurlaagId);
 	}
 	
@@ -60,6 +76,10 @@ public class LeerplanSchemaRestService {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft voor elke periode het ECTS gewicht voor een bepaalde beroepstaak.")
 	public Map<Integer, Map<Integer, EctsGewichtNiveauDto>> calcEctsGewichtByCohortAndBeroepsTaak(@PathParam("cohortId") int cohortId, @PathParam("activiteitId") int activiteitId, @PathParam("architectuurlaagId") int architectuurlaagId) {
+		if (!functionChecker.functionInUser("ECTScohortberoepstaak_get")) {
+			//Niet Geauthoriseerd
+			throw new WebApplicationException(Response.status(403).build());
+		}
 		return leerplanSchemaService.calcEctsGewichtByCohortAndBeroepsTaak(cohortId, activiteitId, architectuurlaagId);
 	}
 	
@@ -69,6 +89,10 @@ public class LeerplanSchemaRestService {
 	@Transactional
 	@ApiOperation(hidden = false, value = "Geeft eventuele inconsistenties in het leerplanschema.")
 	public Response checkProfiel(@PathParam("cohortId") int cohortId) {
+		if (!functionChecker.functionInUser("leerplanschema_check")) {
+			//Niet Geauthoriseerd
+			return Response.status(403).build();
+		}
 		List<String> list = leerplanSchemaService.checkProfiel(cohortId);
 		if (list != null) {
 			return Response.ok(list).build();
